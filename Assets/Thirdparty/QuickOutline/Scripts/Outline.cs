@@ -96,26 +96,7 @@ public class Outline : MonoBehaviour
     // Cache renderers
     renderers = GetComponentsInChildren<Renderer>();
 
-    // Instantiate outline materials only if the current materials are not the same as the cached materials
-    if (renderers.Length > 0)
-    {
-      Material[] materials = renderers[0].sharedMaterials;
-
-      if (materials.Length == 1)
-      {
-        if (materials[0].name == "OutlineFill (Instance)")
-        {
-          return;
-        }
-      }
-      else if (materials.Length == 2)
-      {
-        if (materials[0].name == "OutlineMask (Instance)" && materials[1].name == "OutlineFill (Instance)")
-        {
-          return;
-        }
-      }
-    }
+    // Instantiate outline materials
     outlineMaskMaterial = Instantiate(Resources.Load<Material>(@"Materials/OutlineMask"));
     outlineFillMaterial = Instantiate(Resources.Load<Material>(@"Materials/OutlineFill"));
 
@@ -133,6 +114,10 @@ public class Outline : MonoBehaviour
   {
     foreach (var renderer in renderers)
     {
+      if (renderer.sharedMaterials.Length >= 3)
+      {
+        return;
+      }
 
       // Append outline shaders
       List<Material> materials = renderer.sharedMaterials.ToList();
