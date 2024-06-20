@@ -4,10 +4,12 @@ using UnityEngine;
 public class PanelManager : MonoBehaviour
 {
     [SerializeField]
-    float rotationDegrees = 90.0f;
+    float rotationRate = 1.0f;
+
     Transform panelTransform;
     delegate void State();
     State currentState;
+    private int rotatedAmount;
 
     void Start()
     {
@@ -24,19 +26,28 @@ public class PanelManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.A))
         {
-            RotatePanel(new Vector3(0, rotationDegrees, 0));
+            currentState = () => RotatePanel(new Vector3(0, -rotationRate, 0));
         }
         else if (Input.GetKeyDown(KeyCode.D))
         {
-            RotatePanel(new Vector3(0, rotationDegrees, 0));
+            currentState = () => RotatePanel(new Vector3(0, rotationRate, 0));
         }
     }
-    async void RotatePanel(Vector3 direction)
+
+    // smooth rotation
+    void RotatePanel(Vector3 direction)
     {
-        for (int i = 0; i < 4; i++)
+        // increment the rotation amount
+        rotatedAmount += (int)rotationRate;
+
+        // if it has rotated 90 degrees, reset the rotation amount and switch out of this state
+        if (rotatedAmount >= 90)
         {
-            RotatePanel(direction);
-            await Task.Delay(1000);
+            rotatedAmount = 0;
+            currentState = RotateOnInput;
         }
+
+        // if it hasnt rotated 90 degrees, rotate the panel
+        panelTransform.Rotate(direction);
     }
 }

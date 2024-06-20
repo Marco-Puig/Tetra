@@ -12,6 +12,8 @@ using System.Linq;
 using UnityEngine;
 
 [DisallowMultipleComponent]
+[ExecuteInEditMode]
+
 public class Outline : MonoBehaviour
 {
   private static HashSet<Mesh> registeredMeshes = new HashSet<Mesh>();
@@ -169,18 +171,26 @@ public class Outline : MonoBehaviour
 
   void OnDestroy()
   {
-
     // Destroy material instances
-    Destroy(outlineMaskMaterial);
-    Destroy(outlineFillMaterial);
+    // if in edit mode, otherwise they are destroyed by the editor
+    if (Application.isEditor)
+    {
+      DestroyImmediate(outlineMaskMaterial);
+      DestroyImmediate(outlineFillMaterial);
+    }
+    else
+    {
+      Destroy(outlineMaskMaterial);
+      Destroy(outlineFillMaterial);
+    }
   }
 
   void Bake()
   {
     // Generate smooth normals for each mesh
-    var bakedMeshes = new HashSet<Mesh>();
+    HashSet<Mesh> bakedMeshes = new HashSet<Mesh>();
 
-    foreach (var meshFilter in GetComponentsInChildren<MeshFilter>())
+    foreach (MeshFilter meshFilter in GetComponentsInChildren<MeshFilter>())
     {
       // Skip duplicates
       if (!bakedMeshes.Add(meshFilter.sharedMesh))
