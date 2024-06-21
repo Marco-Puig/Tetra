@@ -11,7 +11,8 @@ public class CubeTest : MonoBehaviour
     public delegate void State();
     public State currentState;
     int cubeSide = 0;
-    int time = 0;
+    float time = 0;
+    public float dropRate = 0.5f;
 
     // Get Cube Position
     void Start()
@@ -219,7 +220,7 @@ public class CubeTest : MonoBehaviour
         HandleCubeSides();
 
         // move cube down every second
-        if (time * Time.deltaTime >= 10)
+        if (time * Time.deltaTime >= 10 * dropRate)
         {
             //Debug.Log("Moving Cube Down");
             cubeTransform.localPosition += Vector3.down;

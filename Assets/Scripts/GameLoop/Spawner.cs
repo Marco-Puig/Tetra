@@ -12,6 +12,7 @@ public class Spawner : MonoBehaviour
 
     void SpawnShape()
     {
+        // get all shapes that are currently dropping
         GameObject[] spawnedShapes = GameObject.FindGameObjectsWithTag("Shape");
 
         // if no shapes are dropping, spawn a new shape
@@ -24,6 +25,7 @@ public class Spawner : MonoBehaviour
 
         // spawn shape at spawner position
         shapeIndex = Random.Range(0, shapes.Length);
-        Instantiate(shapes[shapeIndex], transform.position, Quaternion.identity);
+        GameObject currentShape = Instantiate(shapes[shapeIndex], transform.position, Quaternion.identity);
+        currentShape.transform.SetParent(transform);
     }
 }
