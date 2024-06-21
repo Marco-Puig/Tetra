@@ -10,7 +10,7 @@ public class CubeTest : MonoBehaviour
     Material cubeMat;
     public delegate void State();
     public State currentState;
-    int cubeSide = 0;
+    static int cubeSide = 0;
     float time = 0;
     public float dropRate = 0.5f;
 
