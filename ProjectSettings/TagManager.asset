@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Visual
   - Ground
+  - Shape
   layers:
   - Default
   - TransparentFX

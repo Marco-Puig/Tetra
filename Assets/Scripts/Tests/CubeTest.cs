@@ -5,25 +5,26 @@ using UnityEngine;
 
 public class CubeTest : MonoBehaviour
 {
+    public GameObject cubeVisual;
     Transform cubeTransform;
     Material cubeMat;
-    delegate void State();
-    State currentState;
+    public delegate void State();
+    public State currentState;
     int cubeSide = 0;
+    int time = 0;
 
     // Get Cube Position
     void Start()
     {
         cubeTransform = GetComponent<Transform>();
         cubeMat = GetComponent<Renderer>().material;
-        currentState = MoveCube;
+        currentState = DropCube;
     }
 
     // Move Cube
     void Update()
     {
         currentState.Invoke();
-        HandleCubeSides();
     }
 
     // Command Pattern for Handing Cube Movement - Emulating DPad GB-Like Movement
@@ -183,7 +184,7 @@ public class CubeTest : MonoBehaviour
     void HandleCubeSides()
     {
         // key code a - left side of the cube and key code d - right side of the cube
-        if (Input.GetKeyUp(KeyCode.A))
+        if (Input.GetKeyDown(KeyCode.A))
         {
             cubeSide--;
             if (cubeSide < 0)
@@ -191,7 +192,7 @@ public class CubeTest : MonoBehaviour
                 cubeSide = 3;
             }
         }
-        else if (Input.GetKeyUp(KeyCode.D))
+        else if (Input.GetKeyDown(KeyCode.D))
         {
             cubeSide++;
             if (cubeSide > 3)
@@ -204,9 +205,35 @@ public class CubeTest : MonoBehaviour
     // if collides with Visual object, destroy Visual object
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Visual")
+        currentState = StopCube;
+        Destroy(cubeVisual);
+    }
+
+    // Drop Cube
+    public void DropCube()
+    {
+        // you are able to move the cube while it drops
+        MoveCube();
+
+        // handle cube sides
+        HandleCubeSides();
+
+        // move cube down every second
+        if (time * Time.deltaTime >= 10)
         {
-            Destroy(other.gameObject);
+            //Debug.Log("Moving Cube Down");
+            cubeTransform.localPosition += Vector3.down;
+            cubeVisual.transform.localPosition += Vector3.up;
+            time = 0;
         }
+        else
+        {
+            time++;
+        }
+    }
+
+    void StopCube()
+    {
+        // stop cube from moving
     }
 }
