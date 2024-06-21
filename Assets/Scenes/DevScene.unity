@@ -229,7 +229,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 96643362}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1, y: -3, z: 1}
+  m_LocalPosition: {x: -1, y: -5, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -244,7 +244,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 96643362}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
@@ -313,7 +313,7 @@ GameObject:
   - component: {fileID: 214808301}
   m_Layer: 0
   m_Name: Floor8
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -443,7 +443,59 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationRate: 1
+--- !u!21 &257027447
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: OutlineFill (Instance)
+  m_Shader: {fileID: 4800000, guid: 4e76d4023d7e0411297c670f878973e2, type: 3}
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs: []
+    m_Ints: []
+    m_Floats:
+    - _OutlineWidth: 10
+    - _ZTest: 8
+    m_Colors:
+    - _OutlineColor: {r: 0, g: 1, b: 0.8604498, a: 1}
+  m_BuildTextureStacks: []
 --- !u!21 &281393234
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: OutlineMask (Instance)
+  m_Shader: {fileID: 4800000, guid: 341b058cd7dee4f5cba5cc59a513619e, type: 3}
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs: []
+    m_Ints: []
+    m_Floats:
+    - _ZTest: 8
+    m_Colors: []
+  m_BuildTextureStacks: []
+--- !u!21 &288316679
 Material:
   serializedVersion: 8
   m_ObjectHideFlags: 0
@@ -719,7 +771,7 @@ GameObject:
   - component: {fileID: 528440892}
   m_Layer: 0
   m_Name: Floor3
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -861,31 +913,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!21 &592762960
-Material:
-  serializedVersion: 8
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: OutlineMask (Instance)
-  m_Shader: {fileID: 4800000, guid: 341b058cd7dee4f5cba5cc59a513619e, type: 3}
-  m_ValidKeywords: []
-  m_InvalidKeywords: []
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs: []
-    m_Ints: []
-    m_Floats:
-    - _ZTest: 8
-    m_Colors: []
-  m_BuildTextureStacks: []
 --- !u!4 &602977453 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3827242381564538453, guid: cb833cc8aa6a01b40b501a4af30a46d6, type: 3}
@@ -1051,7 +1078,7 @@ GameObject:
   - component: {fileID: 745050012}
   m_Layer: 0
   m_Name: Floor6
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1184,33 +1211,6 @@ Material:
     - _ZTest: 8
     m_Colors: []
   m_BuildTextureStacks: []
---- !u!21 &754998858
-Material:
-  serializedVersion: 8
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: OutlineFill (Instance)
-  m_Shader: {fileID: 4800000, guid: 4e76d4023d7e0411297c670f878973e2, type: 3}
-  m_ValidKeywords: []
-  m_InvalidKeywords: []
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs: []
-    m_Ints: []
-    m_Floats:
-    - _OutlineWidth: 10
-    - _ZTest: 8
-    m_Colors:
-    - _OutlineColor: {r: 0, g: 1, b: 0.8745098, a: 1}
-  m_BuildTextureStacks: []
 --- !u!1 &793221359
 GameObject:
   m_ObjectHideFlags: 0
@@ -1225,7 +1225,7 @@ GameObject:
   - component: {fileID: 793221360}
   m_Layer: 0
   m_Name: Floor5
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1372,7 +1372,7 @@ GameObject:
   - component: {fileID: 898872091}
   m_Layer: 0
   m_Name: Floor7
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1580,7 +1580,7 @@ GameObject:
   - component: {fileID: 969662599}
   m_Layer: 0
   m_Name: Floor4
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1677,7 +1677,7 @@ GameObject:
   - component: {fileID: 1098924776}
   m_Layer: 0
   m_Name: Floor2
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2082,7 +2082,7 @@ GameObject:
   - component: {fileID: 1727279544}
   m_Layer: 0
   m_Name: Floor1
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2478,7 +2478,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2055861895}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2, z: 0}
+  m_LocalPosition: {x: 0, y: 4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2498,7 +2498,7 @@ GameObject:
   - component: {fileID: 2057761531}
   m_Layer: 0
   m_Name: Floors
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2566,7 +2566,7 @@ GameObject:
   - component: {fileID: 2068731347}
   m_Layer: 0
   m_Name: Floor9
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2714,33 +2714,37 @@ PrefabInstance:
       propertyPath: m_Name
       value: VisualCube
       objectReference: {fileID: 0}
+    - target: {fileID: 713059580, guid: cb833cc8aa6a01b40b501a4af30a46d6, type: 3}
+      propertyPath: m_TagString
+      value: Visual
+      objectReference: {fileID: 0}
     - target: {fileID: 713059581, guid: cb833cc8aa6a01b40b501a4af30a46d6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2
+      value: -4
       objectReference: {fileID: 0}
     - target: {fileID: 713059582, guid: cb833cc8aa6a01b40b501a4af30a46d6, type: 3}
       propertyPath: m_Size.x
-      value: 0.7752107
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 713059582, guid: cb833cc8aa6a01b40b501a4af30a46d6, type: 3}
       propertyPath: m_Size.y
-      value: 0.7986624
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 713059582, guid: cb833cc8aa6a01b40b501a4af30a46d6, type: 3}
       propertyPath: m_Size.z
-      value: 0.72919214
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 713059582, guid: cb833cc8aa6a01b40b501a4af30a46d6, type: 3}
       propertyPath: m_Center.x
-      value: -0.022634953
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 713059582, guid: cb833cc8aa6a01b40b501a4af30a46d6, type: 3}
       propertyPath: m_Center.y
-      value: 0.012156963
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 713059582, guid: cb833cc8aa6a01b40b501a4af30a46d6, type: 3}
       propertyPath: m_Center.z
-      value: 0.0008453727
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 713059582, guid: cb833cc8aa6a01b40b501a4af30a46d6, type: 3}
       propertyPath: m_IsTrigger
@@ -2753,11 +2757,11 @@ PrefabInstance:
     - target: {fileID: 713059583, guid: cb833cc8aa6a01b40b501a4af30a46d6, type: 3}
       propertyPath: m_Materials.Array.data[1]
       value: 
-      objectReference: {fileID: 592762960}
+      objectReference: {fileID: 288316679}
     - target: {fileID: 713059583, guid: cb833cc8aa6a01b40b501a4af30a46d6, type: 3}
       propertyPath: m_Materials.Array.data[2]
       value: 
-      objectReference: {fileID: 754998858}
+      objectReference: {fileID: 257027447}
     - target: {fileID: 713059583, guid: cb833cc8aa6a01b40b501a4af30a46d6, type: 3}
       propertyPath: m_Materials.Array.data[3]
       value: 
@@ -2960,7 +2964,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3827242381564538451, guid: cb833cc8aa6a01b40b501a4af30a46d6, type: 3}
       propertyPath: m_Materials.Array.size
-      value: 7
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3827242381564538451, guid: cb833cc8aa6a01b40b501a4af30a46d6, type: 3}
       propertyPath: m_Materials.Array.data[1]
@@ -2973,7 +2977,7 @@ PrefabInstance:
     - target: {fileID: 3827242381564538451, guid: cb833cc8aa6a01b40b501a4af30a46d6, type: 3}
       propertyPath: m_Materials.Array.data[3]
       value: 
-      objectReference: {fileID: 1922967871}
+      objectReference: {fileID: 2128851016}
     - target: {fileID: 3827242381564538451, guid: cb833cc8aa6a01b40b501a4af30a46d6, type: 3}
       propertyPath: m_Materials.Array.data[4]
       value: 
@@ -2981,7 +2985,7 @@ PrefabInstance:
     - target: {fileID: 3827242381564538451, guid: cb833cc8aa6a01b40b501a4af30a46d6, type: 3}
       propertyPath: m_Materials.Array.data[5]
       value: 
-      objectReference: {fileID: 1922967871}
+      objectReference: {fileID: 2128851016}
     - target: {fileID: 3827242381564538451, guid: cb833cc8aa6a01b40b501a4af30a46d6, type: 3}
       propertyPath: m_Materials.Array.data[6]
       value: 
@@ -3104,7 +3108,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &3827242382085708550
+--- !u!114 &3827242382085708555
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3117,7 +3121,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   outlineMode: 0
-  outlineColor: {r: 0, g: 1, b: 0.8745098, a: 1}
+  outlineColor: {r: 0, g: 1, b: 0.8604498, a: 1}
   outlineWidth: 10
   precomputeOutline: 0
   bakeKeys: []

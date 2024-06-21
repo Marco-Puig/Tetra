@@ -200,4 +200,13 @@ public class CubeTest : MonoBehaviour
             }
         }
     }
+
+    // if collides with Visual object, destroy Visual object
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Visual")
+        {
+            Destroy(other.gameObject);
+        }
+    }
 }
