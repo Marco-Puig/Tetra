@@ -1,19 +1,20 @@
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class CubeVisual : MonoBehaviour
 {
-    // if collides with another object
+    public float moveDistance = 1.0f;
     private void OnTriggerEnter(Collider other)
     {
-        // move up visual cube
-        if (other.gameObject.tag != "Ground")
-            transform.position = new Vector3(transform.position.x, Mathf.Clamp(transform.position.y + 1f, transform.position.y + 1f, 10), transform.position.z);
+        transform.position = new Vector3(transform.position.x, other.transform.position.y + moveDistance, transform.position.z);
     }
-
     private void OnTriggerExit(Collider other)
     {
-        // move down visual cube
-        if (other.gameObject.tag != "Ground")
-            transform.position = new Vector3(transform.position.x, Mathf.Clamp(transform.position.y - 1f, -1, 10), transform.position.z);
+        Wait(() => transform.position = new Vector3(transform.position.x, transform.position.y - moveDistance, transform.position.z));
+    }
+    private async void Wait(System.Action action)
+    {
+        await Task.Delay(100);
+        action.Invoke();
     }
 }

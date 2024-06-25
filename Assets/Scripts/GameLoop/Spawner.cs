@@ -27,5 +27,8 @@ public class Spawner : MonoBehaviour
         shapeIndex = Random.Range(0, shapes.Length);
         GameObject currentShape = Instantiate(shapes[shapeIndex], transform.position, Quaternion.identity);
         currentShape.transform.SetParent(transform);
+
+        // ensure shape is facing forward initially
+        currentShape.transform.localRotation = Quaternion.Euler(0, 0, 0);
     }
 }

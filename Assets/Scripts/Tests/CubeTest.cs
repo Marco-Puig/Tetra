@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.InteropServices;
 using UnityEngine;
 
 public class CubeTest : MonoBehaviour
@@ -12,7 +9,7 @@ public class CubeTest : MonoBehaviour
     public State currentState;
     static int cubeSide = 0;
     float time = 0;
-    public float dropRate = 0.5f;
+    float dropRate = 0.3f;
 
     // Get Cube Position
     void Start()
@@ -26,6 +23,7 @@ public class CubeTest : MonoBehaviour
     void Update()
     {
         currentState.Invoke();
+        HandleOpacity();
     }
 
     // Command Pattern for Handing Cube Movement - Emulating DPad GB-Like Movement
@@ -64,20 +62,6 @@ public class CubeTest : MonoBehaviour
 
     Vector3 GetFrontSideDirection()
     {
-        // Set opacity depending on which z layer the cubes
-        switch (cubeTransform.localPosition.z)
-        {
-            case -1.0f:
-                cubeMat.color = new Color(cubeMat.color.r, cubeMat.color.g, cubeMat.color.b, 0.4f);
-                break;
-            case 0.0f:
-                cubeMat.color = new Color(cubeMat.color.r, cubeMat.color.g, cubeMat.color.b, 0.7f);
-                break;
-            case 1.0f:
-                cubeMat.color = new Color(cubeMat.color.r, cubeMat.color.g, cubeMat.color.b, 1.0f);
-                break;
-        }
-
         if (Input.GetKeyUp(KeyCode.RightArrow))
             return Vector3.right;
         if (Input.GetKeyUp(KeyCode.LeftArrow))
@@ -91,20 +75,6 @@ public class CubeTest : MonoBehaviour
 
     Vector3 GetRightSideDirection()
     {
-        // Set opacity depending on which x layer the cubes
-        switch (cubeTransform.localPosition.x)
-        {
-            case -1.0f:
-                cubeMat.color = new Color(cubeMat.color.r, cubeMat.color.g, cubeMat.color.b, 1.0f);
-                break;
-            case 0.0f:
-                cubeMat.color = new Color(cubeMat.color.r, cubeMat.color.g, cubeMat.color.b, 0.7f);
-                break;
-            case 1.0f:
-                cubeMat.color = new Color(cubeMat.color.r, cubeMat.color.g, cubeMat.color.b, 0.4f);
-                break;
-        }
-
         if (Input.GetKeyUp(KeyCode.RightArrow))
             return Vector3.forward;
         if (Input.GetKeyUp(KeyCode.LeftArrow))
@@ -118,19 +88,6 @@ public class CubeTest : MonoBehaviour
 
     Vector3 GetBackSideDirection()
     {
-        // Set opacity depending on which z layer the cubes
-        switch (cubeTransform.localPosition.z)
-        {
-            case -1.0f:
-                cubeMat.color = new Color(cubeMat.color.r, cubeMat.color.g, cubeMat.color.b, 1.0f);
-                break;
-            case 0.0f:
-                cubeMat.color = new Color(cubeMat.color.r, cubeMat.color.g, cubeMat.color.b, 0.7f);
-                break;
-            case 1.0f:
-                cubeMat.color = new Color(cubeMat.color.r, cubeMat.color.g, cubeMat.color.b, 0.4f);
-                break;
-        }
         if (Input.GetKeyUp(KeyCode.RightArrow))
             return Vector3.left;
         if (Input.GetKeyUp(KeyCode.LeftArrow))
@@ -144,20 +101,6 @@ public class CubeTest : MonoBehaviour
 
     Vector3 GetLeftSideDirection()
     {
-        // Set opacity depending on which x layer the cubes
-        switch (cubeTransform.localPosition.x)
-        {
-            case -1.0f:
-                cubeMat.color = new Color(cubeMat.color.r, cubeMat.color.g, cubeMat.color.b, 0.4f);
-                break;
-            case 0.0f:
-                cubeMat.color = new Color(cubeMat.color.r, cubeMat.color.g, cubeMat.color.b, 0.7f);
-                break;
-            case 1.0f:
-                cubeMat.color = new Color(cubeMat.color.r, cubeMat.color.g, cubeMat.color.b, 1.0f);
-                break;
-        }
-
         if (Input.GetKeyUp(KeyCode.RightArrow))
             return Vector3.back;
         if (Input.GetKeyUp(KeyCode.LeftArrow))
@@ -206,6 +149,11 @@ public class CubeTest : MonoBehaviour
     // if collides with Visual object, destroy Visual object
     private void OnTriggerEnter(Collider other)
     {
+        if (!other.gameObject.CompareTag("Visual") && currentState != StopCube)
+        {
+            transform.position += Vector3.up;
+        }
+
         currentState = StopCube;
         Destroy(cubeVisual);
     }
@@ -236,5 +184,88 @@ public class CubeTest : MonoBehaviour
     void StopCube()
     {
         // stop cube from moving
+    }
+
+    void HandleOpacity()
+    {
+        switch (cubeSide)
+        {
+            case 0:
+                HandleFrontSideOpacity();
+                break;
+            case 1:
+                HandleRightSideOpacity();
+                break;
+            case 2:
+                HandleBackSideOpacity();
+                break;
+            case 3:
+                HandleLeftSideOpacity();
+                break;
+        }
+    }
+
+    void HandleFrontSideOpacity()
+    {
+        switch (cubeTransform.localPosition.z)
+        {
+            case -1.0f:
+                cubeMat.color = new Color(cubeMat.color.r, cubeMat.color.g, cubeMat.color.b, 0.4f);
+                break;
+            case 0.0f:
+                cubeMat.color = new Color(cubeMat.color.r, cubeMat.color.g, cubeMat.color.b, 0.7f);
+                break;
+            case 1.0f:
+                cubeMat.color = new Color(cubeMat.color.r, cubeMat.color.g, cubeMat.color.b, 1.0f);
+                break;
+        }
+    }
+
+    void HandleRightSideOpacity()
+    {
+        switch (cubeTransform.localPosition.x)
+        {
+            case -1.0f:
+                cubeMat.color = new Color(cubeMat.color.r, cubeMat.color.g, cubeMat.color.b, 1.0f);
+                break;
+            case 0.0f:
+                cubeMat.color = new Color(cubeMat.color.r, cubeMat.color.g, cubeMat.color.b, 0.7f);
+                break;
+            case 1.0f:
+                cubeMat.color = new Color(cubeMat.color.r, cubeMat.color.g, cubeMat.color.b, 0.4f);
+                break;
+        }
+    }
+
+    void HandleBackSideOpacity()
+    {
+        switch (cubeTransform.localPosition.z)
+        {
+            case -1.0f:
+                cubeMat.color = new Color(cubeMat.color.r, cubeMat.color.g, cubeMat.color.b, 1.0f);
+                break;
+            case 0.0f:
+                cubeMat.color = new Color(cubeMat.color.r, cubeMat.color.g, cubeMat.color.b, 0.7f);
+                break;
+            case 1.0f:
+                cubeMat.color = new Color(cubeMat.color.r, cubeMat.color.g, cubeMat.color.b, 0.4f);
+                break;
+        }
+    }
+
+    void HandleLeftSideOpacity()
+    {
+        switch (cubeTransform.localPosition.x)
+        {
+            case -1.0f:
+                cubeMat.color = new Color(cubeMat.color.r, cubeMat.color.g, cubeMat.color.b, 0.4f);
+                break;
+            case 0.0f:
+                cubeMat.color = new Color(cubeMat.color.r, cubeMat.color.g, cubeMat.color.b, 0.7f);
+                break;
+            case 1.0f:
+                cubeMat.color = new Color(cubeMat.color.r, cubeMat.color.g, cubeMat.color.b, 1.0f);
+                break;
+        }
     }
 }
