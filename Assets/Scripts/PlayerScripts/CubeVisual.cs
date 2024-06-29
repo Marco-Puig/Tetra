@@ -4,6 +4,7 @@ using UnityEngine;
 public class CubeVisual : MonoBehaviour
 {
     public float moveDistance = 1.0f;
+    int time = 1000;
     private void OnTriggerEnter(Collider other)
     {
         transform.position = new Vector3(transform.position.x, other.transform.position.y + moveDistance, transform.position.z);
@@ -14,7 +15,13 @@ public class CubeVisual : MonoBehaviour
     }
     private async void Wait(System.Action action)
     {
-        await Task.Delay(100);
+        if (!Input.anyKey)
+        {
+            await Task.Delay(time);
+        }
+
         action.Invoke();
     }
+
+
 }
