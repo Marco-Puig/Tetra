@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 using UnityEngine;
 
-public class Layer : MonoBehaviour
+public class LayerManager : MonoBehaviour
 {
     public GameObject[] piecesInLayer;
     byte count = 0;
@@ -24,7 +24,8 @@ public class Layer : MonoBehaviour
                 // if the layer is complete
                 if (count == piecesInLayer.Length)
                 {
-                    Debug.Log("Layer Complete");
+                    Debug.Log("Layer Cleared");
+                    // send info to panel manager to update score
                     CleanRow();
                     break;
                 }
@@ -32,11 +33,13 @@ public class Layer : MonoBehaviour
         }
     }
 
-    void CleanRow()
+    async void CleanRow()
     {
         foreach (GameObject piece in piecesInLayer)
         {
-            Destroy(piece); // TODO: dont destoy the piece but whats inside them
+            piece.GetComponent<LayerPiece>().clearingRow = true;
+            await Task.Delay(1000); // wait for piece to clear
+            piece.GetComponent<LayerPiece>().clearingRow = false;
         }
     }
 }

@@ -6,6 +6,9 @@ public class PanelManager : MonoBehaviour
     [SerializeField]
     float rotationRate = 1.0f;
 
+    [HideInInspector]
+    public int score = 0;
+
     Transform panelTransform;
     delegate void State();
     State currentState;
