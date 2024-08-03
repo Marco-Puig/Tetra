@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class CubeTest : MonoBehaviour
 {
-    public GameObject cubeVisual;
     Transform cubeTransform;
     Material cubeMat;
     public delegate void State();
@@ -149,13 +148,21 @@ public class CubeTest : MonoBehaviour
     // if collides with Visual object, destroy Visual object
     private void OnTriggerEnter(Collider other)
     {
-        if (!other.gameObject.CompareTag("Visual") && currentState != StopCube)
+        // if cube is not stopped
+        if (currentState != StopCube && !other.gameObject.CompareTag("Layer"))
         {
-            transform.position += Vector3.up;
-        }
+            currentState = StopCube;
 
-        currentState = StopCube;
-        Destroy(cubeVisual);
+            if (other.gameObject.CompareTag("Visual"))
+            {
+                // destroy visual object
+                Destroy(other.gameObject);
+            }
+            else
+            {
+                transform.position += Vector3.up;
+            }
+        }
     }
 
     // Drop Cube
@@ -172,7 +179,7 @@ public class CubeTest : MonoBehaviour
         {
             //Debug.Log("Moving Cube Down");
             cubeTransform.localPosition += Vector3.down;
-            cubeVisual.transform.localPosition += Vector3.up;
+            //cubeVisual.transform.localPosition += Vector3.up;
             time = 0;
         }
         else

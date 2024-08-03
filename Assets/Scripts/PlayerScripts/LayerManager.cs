@@ -7,7 +7,8 @@ public class LayerManager : MonoBehaviour
     byte count = 0;
     void LateUpdate()
     {
-        CheckRow();
+        if (!(piecesInLayer.Length > 0))
+            CheckRow();
     }
 
     async void CheckRow()
