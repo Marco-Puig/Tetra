@@ -191,6 +191,9 @@ public class CubeTest : MonoBehaviour
     void StopCube()
     {
         // stop cube from moving
+
+        // stop spawning visual cube for it
+        GetComponent<CubeVisual>().enabled = false;
     }
 
     void HandleOpacity()

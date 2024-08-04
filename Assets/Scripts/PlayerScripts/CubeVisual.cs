@@ -1,16 +1,54 @@
+using System;
 using UnityEngine;
 
 public class CubeVisual : MonoBehaviour
 {
     [SerializeField] GameObject visualCubePrefab;
+    private GameObject visualCube;
 
     void Start()
     {
-        CreateVisualCube(Vector3.down);
+        // get the ball rolling, calculate visual position and where to spawn so there is a visual off rip
+        CalculateVisualPosition();
+    }
+
+    void Update()
+    {
+        if (Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.UpArrow) || Input.GetKeyUp(KeyCode.DownArrow))
+        {
+            CalculateVisualPosition();
+        }
+    }
+
+    void CalculateVisualPosition()
+    {
+        // use raycast to spawn visual on cube the visual is on
+        RaycastHit hit;
+
+        if (Physics.Raycast(transform.position, Vector3.down, out hit, 6))
+        {
+            // ignore if tag is "Visual" or "Layer"
+            if (hit.collider.gameObject.CompareTag("Visual")) //|| hit.collider.gameObject.CompareTag("Layer"))
+            {
+                return;
+            }
+
+            CreateVisualCube(new Vector3(transform.position.x, (float)Math.Ceiling(hit.point.y), transform.position.z));
+        }
+
+        Debug.Log(hit.point);
+        Debug.DrawLine(transform.position, hit.point, Color.red, 6);
     }
 
     void CreateVisualCube(Vector3 position)
     {
-        GameObject visualCube = Instantiate(visualCubePrefab, position, Quaternion.identity);
+        // clean up previous visual cube
+        if (visualCube != null)
+        {
+            Destroy(visualCube);
+        }
+
+        visualCube = Instantiate(visualCubePrefab, position, Quaternion.identity);
+        visualCube.transform.parent = transform.parent;
     }
 }
