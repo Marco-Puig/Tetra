@@ -4,6 +4,7 @@ using UnityEngine;
 public class CubeVisual : MonoBehaviour
 {
     [SerializeField] GameObject visualCubePrefab;
+    [SerializeField] LayerMask layerMask;
     private GameObject visualCube;
 
     void Start()
@@ -25,10 +26,10 @@ public class CubeVisual : MonoBehaviour
         // use raycast to spawn visual on cube the visual is on
         RaycastHit hit;
 
-        if (Physics.Raycast(transform.position, Vector3.down, out hit, 6))
+        if (Physics.Raycast(transform.position, Vector3.down, out hit, 6, layerMask))
         {
-            // ignore if tag is "Visual" or "Layer"
-            if (hit.collider.gameObject.CompareTag("Visual")) //|| hit.collider.gameObject.CompareTag("Layer"))
+            // ignore if tag is "Visual" 
+            if (hit.collider.gameObject.CompareTag("Visual"))
             {
                 return;
             }

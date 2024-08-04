@@ -163,6 +163,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   visualCubePrefab: {fileID: 2493405104913831159, guid: cfcda6da71e059e49b99523065eaf933, type: 3}
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 55
 --- !u!114 &3827242382085708539
 MonoBehaviour:
   m_ObjectHideFlags: 0
