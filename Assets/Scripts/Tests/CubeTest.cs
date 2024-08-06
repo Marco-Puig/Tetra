@@ -115,13 +115,13 @@ public class CubeTest : MonoBehaviour
         {
             if (Physics.Raycast(cubeTransform.position, Vector3.right, out hit, 1.0f, layerMask))
                 return Vector3.zero;
-            return Vector3.right;
+            return Vector3.left;
         }
         if (Input.GetKeyUp(KeyCode.DownArrow))
         {
             if (Physics.Raycast(cubeTransform.position, Vector3.left, out hit, 1.0f, layerMask))
                 return Vector3.zero;
-            return Vector3.left;
+            return Vector3.right;
         }
         return Vector3.zero;
 
@@ -180,13 +180,13 @@ public class CubeTest : MonoBehaviour
         {
             if (Physics.Raycast(cubeTransform.position, Vector3.left, out hit, 1.0f, layerMask))
                 return Vector3.zero;
-            return Vector3.left;
+            return Vector3.right;
         }
         if (Input.GetKeyUp(KeyCode.DownArrow))
         {
             if (Physics.Raycast(cubeTransform.position, Vector3.right, out hit, 1.0f, layerMask))
                 return Vector3.zero;
-            return Vector3.right;
+            return Vector3.left;
         }
         return Vector3.zero;
     }

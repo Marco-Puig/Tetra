@@ -27,7 +27,7 @@ public class CubeVisual : MonoBehaviour
     async void CalculateVisualPosition()
     {
         if (start)
-            await Task.Delay(100);
+            await Task.Delay(100); // wait for old visual to be destroyed before creating new one
 
         // use raycast to spawn visual on cube the visual is on
         RaycastHit hit;
