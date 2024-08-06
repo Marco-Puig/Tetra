@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class CubeVisual : MonoBehaviour
@@ -6,11 +7,13 @@ public class CubeVisual : MonoBehaviour
     [SerializeField] GameObject visualCubePrefab;
     [SerializeField] LayerMask layerMask;
     private GameObject visualCube;
+    bool start = true;
 
     void Start()
     {
         // get the ball rolling, calculate visual position and where to spawn so there is a visual off rip
         CalculateVisualPosition();
+        start = false;
     }
 
     void Update()
@@ -21,8 +24,11 @@ public class CubeVisual : MonoBehaviour
         }
     }
 
-    void CalculateVisualPosition()
+    async void CalculateVisualPosition()
     {
+        if (start)
+            await Task.Delay(100);
+
         // use raycast to spawn visual on cube the visual is on
         RaycastHit hit;
 
