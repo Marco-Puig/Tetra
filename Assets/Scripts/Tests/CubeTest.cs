@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.AI;
 
 public class CubeTest : MonoBehaviour
 {
@@ -9,6 +10,8 @@ public class CubeTest : MonoBehaviour
     static int cubeSide = 0;
     float time = 0;
     float dropRate = 0.3f;
+
+    public LayerMask layerMask;
 
     // Get Cube Position
     void Start()
@@ -53,7 +56,7 @@ public class CubeTest : MonoBehaviour
             // facing left side
             case 3:
                 return GetLeftSideDirection();
-            // if nothing, then return default (null)
+            // if nothing, then dont move (this case wont be triggered if cubside is working properly)
             default:
                 return Vector3.zero;
         }
@@ -61,53 +64,130 @@ public class CubeTest : MonoBehaviour
 
     Vector3 GetFrontSideDirection()
     {
+        // ray cast to see if there is another cube next to it
+        RaycastHit hit;
+
         if (Input.GetKeyUp(KeyCode.RightArrow))
+        {
+            if (Physics.Raycast(cubeTransform.position, Vector3.right, out hit, 1.0f, layerMask))
+                return Vector3.zero;
             return Vector3.right;
+        }
         if (Input.GetKeyUp(KeyCode.LeftArrow))
+        {
+            if (Physics.Raycast(cubeTransform.position, Vector3.left, out hit, 1.0f, layerMask))
+                return Vector3.zero;
             return Vector3.left;
+        }
         if (Input.GetKeyUp(KeyCode.UpArrow))
+        {
+            if (Physics.Raycast(cubeTransform.position, Vector3.back, out hit, 1.0f, layerMask))
+                return Vector3.zero;
             return Vector3.forward;
+        }
         if (Input.GetKeyUp(KeyCode.DownArrow))
+        {
+            if (Physics.Raycast(cubeTransform.position, Vector3.forward, out hit, 1.0f, layerMask))
+                return Vector3.zero;
             return Vector3.back;
+        }
         return Vector3.zero;
     }
 
     Vector3 GetRightSideDirection()
     {
+        // ray cast to see if there is another cube next to it
+        RaycastHit hit;
+
         if (Input.GetKeyUp(KeyCode.RightArrow))
+        {
+            if (Physics.Raycast(cubeTransform.position, Vector3.back, out hit, 1.0f, layerMask))
+                return Vector3.zero;
             return Vector3.forward;
+        }
         if (Input.GetKeyUp(KeyCode.LeftArrow))
+        {
+            if (Physics.Raycast(cubeTransform.position, Vector3.forward, out hit, 1.0f, layerMask))
+                return Vector3.zero;
             return Vector3.back;
+        }
         if (Input.GetKeyUp(KeyCode.UpArrow))
-            return Vector3.left;
-        if (Input.GetKeyUp(KeyCode.DownArrow))
+        {
+            if (Physics.Raycast(cubeTransform.position, Vector3.right, out hit, 1.0f, layerMask))
+                return Vector3.zero;
             return Vector3.right;
+        }
+        if (Input.GetKeyUp(KeyCode.DownArrow))
+        {
+            if (Physics.Raycast(cubeTransform.position, Vector3.left, out hit, 1.0f, layerMask))
+                return Vector3.zero;
+            return Vector3.left;
+        }
         return Vector3.zero;
+
     }
 
     Vector3 GetBackSideDirection()
     {
+        // ray cast to see if there is another cube next to it
+        RaycastHit hit;
+
         if (Input.GetKeyUp(KeyCode.RightArrow))
+        {
+            if (Physics.Raycast(cubeTransform.position, Vector3.left, out hit, 1.0f, layerMask))
+                return Vector3.zero;
             return Vector3.left;
+        }
         if (Input.GetKeyUp(KeyCode.LeftArrow))
+        {
+            if (Physics.Raycast(cubeTransform.position, Vector3.right, out hit, 1.0f, layerMask))
+                return Vector3.zero;
             return Vector3.right;
+        }
         if (Input.GetKeyUp(KeyCode.UpArrow))
+        {
+            if (Physics.Raycast(cubeTransform.position, Vector3.forward, out hit, 1.0f, layerMask))
+                return Vector3.zero;
             return Vector3.back;
+        }
         if (Input.GetKeyUp(KeyCode.DownArrow))
+        {
+            if (Physics.Raycast(cubeTransform.position, Vector3.back, out hit, 1.0f, layerMask))
+                return Vector3.zero;
             return Vector3.forward;
+        }
         return Vector3.zero;
     }
 
     Vector3 GetLeftSideDirection()
     {
+        // ray cast to see if there is another cube next to it
+        RaycastHit hit;
+
         if (Input.GetKeyUp(KeyCode.RightArrow))
+        {
+            if (Physics.Raycast(cubeTransform.position, Vector3.forward, out hit, 1.0f, layerMask))
+                return Vector3.zero;
             return Vector3.back;
+        }
         if (Input.GetKeyUp(KeyCode.LeftArrow))
+        {
+            if (Physics.Raycast(cubeTransform.position, Vector3.back, out hit, 1.0f, layerMask))
+                return Vector3.zero;
             return Vector3.forward;
+        }
         if (Input.GetKeyUp(KeyCode.UpArrow))
-            return Vector3.right;
-        if (Input.GetKeyUp(KeyCode.DownArrow))
+        {
+            if (Physics.Raycast(cubeTransform.position, Vector3.left, out hit, 1.0f, layerMask))
+                return Vector3.zero;
             return Vector3.left;
+        }
+        if (Input.GetKeyUp(KeyCode.DownArrow))
+        {
+            if (Physics.Raycast(cubeTransform.position, Vector3.right, out hit, 1.0f, layerMask))
+                return Vector3.zero;
+            return Vector3.right;
+        }
         return Vector3.zero;
     }
 
@@ -148,20 +228,22 @@ public class CubeTest : MonoBehaviour
     // if collides with Visual object, destroy Visual object
     private void OnTriggerEnter(Collider other)
     {
-        // if cube is not stopped
-        if (currentState != StopCube && !other.gameObject.CompareTag("Layer"))
+        // destroy visual if it is hit
+        if (other.gameObject.CompareTag("Visual"))
         {
-            currentState = StopCube;
+            Destroy(other.gameObject);
+        }
 
-            if (other.gameObject.CompareTag("Visual"))
-            {
-                // destroy visual object
-                Destroy(other.gameObject);
-            }
-            else
-            {
-                transform.position += Vector3.up;
-            }
+        // if cube is not stopped
+        if (currentState != StopCube && !other.gameObject.CompareTag("Layer") && !other.gameObject.CompareTag("Visual"))
+        {
+            // destroy visual
+            GameObject visualCube = GameObject.FindGameObjectWithTag("Visual");
+            if (visualCube != null) Destroy(visualCube);
+
+            // stop cube from moving
+            transform.position += Vector3.up;
+            currentState = StopCube;
         }
     }
 
@@ -177,9 +259,7 @@ public class CubeTest : MonoBehaviour
         // move cube down every second
         if (time * Time.deltaTime >= 10 * dropRate)
         {
-            //Debug.Log("Moving Cube Down");
             cubeTransform.localPosition += Vector3.down;
-            //cubeVisual.transform.localPosition += Vector3.up;
             time = 0;
         }
         else
@@ -278,4 +358,5 @@ public class CubeTest : MonoBehaviour
                 break;
         }
     }
+
 }

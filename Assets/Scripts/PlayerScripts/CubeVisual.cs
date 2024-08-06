@@ -37,7 +37,7 @@ public class CubeVisual : MonoBehaviour
             CreateVisualCube(new Vector3(transform.position.x, (float)Math.Ceiling(hit.point.y), transform.position.z));
         }
 
-        Debug.Log(hit.point);
+        // Debug.Log(hit.point);
         Debug.DrawLine(transform.position, hit.point, Color.red, 6);
     }
 

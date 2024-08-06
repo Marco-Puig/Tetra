@@ -1,13 +1,13 @@
-using System.Threading.Tasks;
 using UnityEngine;
-
-public class PanelManager : MonoBehaviour
+using TMPro;
+using System.Threading.Tasks;
+public class PanelManager : MonoBehaviour // panel manager is a game manager but for a player instance
 {
     [SerializeField]
     float rotationRate = 1.0f;
 
-    [HideInInspector]
-    public int score = 0;
+    [HideInInspector] int score = 0;
+    [SerializeField] TMP_Text scoreText;
 
     Transform panelTransform;
     delegate void State();
@@ -52,5 +52,15 @@ public class PanelManager : MonoBehaviour
 
         // if it hasnt rotated 90 degrees, rotate the panel
         panelTransform.Rotate(direction);
+    }
+
+    public async void UpdateScore()
+    {
+        for (int i = 0; i < 100; i++)
+        {
+            score++;
+            scoreText.text = "Score " + score.ToString();
+            await Task.Delay(5 * (int)(1 + Time.deltaTime));
+        }
     }
 }

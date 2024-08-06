@@ -3,44 +3,37 @@ using UnityEngine;
 
 public class LayerManager : MonoBehaviour
 {
-    public GameObject[] piecesInLayer;
-    byte count = 0;
-    void LateUpdate()
+    [SerializeField] GameObject[] piecesInLayer;
+    [SerializeField] PanelManager panelManager;
+
+    void Update()
     {
-        if (!(piecesInLayer.Length > 0))
-            CheckRow();
+        CheckRow();
     }
 
-    async void CheckRow()
+    void CheckRow()
     {
-        // wait every few ticks to check if the layer is complete
-        await Task.Delay(1000);
-
         foreach (GameObject piece in piecesInLayer)
         {
-            if (piece.GetComponent<LayerPiece>().isInPiece)
+            if (!piece.GetComponent<LayerPiece>().isInPiece)
             {
-                count++;
-
-                // if the layer is complete
-                if (count == piecesInLayer.Length)
-                {
-                    Debug.Log("Layer Cleared");
-                    // send info to panel manager to update score
-                    CleanRow();
-                    break;
-                }
+                // if a piece is not in the layer, dont continue on to clear the row
+                return;
             }
         }
+
+        // Clear row
+        CleanRow();
+
+        // send info to panel manager to update score
+        panelManager.UpdateScore();
     }
 
-    async void CleanRow()
+    void CleanRow()
     {
         foreach (GameObject piece in piecesInLayer)
         {
             piece.GetComponent<LayerPiece>().clearingRow = true;
-            await Task.Delay(1000); // wait for piece to clear
-            piece.GetComponent<LayerPiece>().clearingRow = false;
         }
     }
 }
