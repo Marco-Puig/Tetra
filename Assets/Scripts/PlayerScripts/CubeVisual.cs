@@ -1,5 +1,6 @@
 using System;
 using System.Threading.Tasks;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class CubeVisual : MonoBehaviour
@@ -21,6 +22,15 @@ public class CubeVisual : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.UpArrow) || Input.GetKeyUp(KeyCode.DownArrow))
         {
             CalculateVisualPosition();
+        }
+
+        // ensure that the visual shares the same rotation as the player cube
+        if (visualCube != null)
+        {
+            if (visualCube.transform.rotation != transform.rotation)
+            {
+                visualCube.transform.rotation = transform.rotation;
+            }
         }
     }
 

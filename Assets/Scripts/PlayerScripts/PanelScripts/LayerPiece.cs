@@ -17,10 +17,10 @@ public class LayerPiece : MonoBehaviour
                 Destroy(other.gameObject);
 
                 // once cleared, stop clear action
-                isInPiece = false;
+                clearingRow = false;
 
                 // once cleared, stop clear action
-                clearingRow = false;
+                isInPiece = false;
             }
         }
     }
@@ -38,9 +38,9 @@ public class LayerPiece : MonoBehaviour
     {
         if (shapeInPiece == null)
         {
-            Debug.LogError("Shape in piece is null"); //shouldnt happen if all pieces are in layer to even start clearing in the first place
             return;
         }
         shapeInPiece.transform.position += Vector3.down;
+        Debug.Log("new Piece location: " + shapeInPiece.transform.position);
     }
 }

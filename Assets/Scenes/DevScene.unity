@@ -1088,6 +1088,7 @@ MonoBehaviour:
   - {fileID: 788317592}
   - {fileID: 1609269075}
   - {fileID: 1964588965}
+  handlingClearedRow: 0
 --- !u!1 &275681690
 GameObject:
   m_ObjectHideFlags: 0
@@ -4792,7 +4793,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1193947555
 Transform:
   m_ObjectHideFlags: 0
@@ -8963,6 +8964,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shapes:
   - {fileID: 3827242381564538449, guid: cb833cc8aa6a01b40b501a4af30a46d6, type: 3}
+  panelManager: {fileID: 225871417}
 --- !u!1 &2057761530
 GameObject:
   m_ObjectHideFlags: 0

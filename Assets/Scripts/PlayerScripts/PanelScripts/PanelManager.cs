@@ -69,10 +69,10 @@ public class PanelManager : MonoBehaviour // panel manager is a game manager but
     public async void HandleClearedRow(int layerAffectedIndex)
     {
         handlingClearedRow = true;
-        await Task.Delay(1000); // wait for row to be cleared before moving pieces down
+        await Task.Delay(500); // wait for row to be cleared before moving pieces down
 
         // move all pieces in layers above the cleared row down
-        for (int i = layerAffectedIndex + 1; i < layers.Length; i++)
+        for (int i = layers.Length; i > layerAffectedIndex + 1; i--)
         {
             layers[i].GetComponent<LayerManager>().MoveDown();
         }

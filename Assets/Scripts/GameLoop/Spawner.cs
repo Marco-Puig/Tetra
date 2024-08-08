@@ -4,7 +4,7 @@ public class Spawner : MonoBehaviour
 {
     public GameObject[] shapes;
     int shapeIndex;
-    PanelManager panelManager;
+    [SerializeField] PanelManager panelManager;
 
     private void Update()
     {
