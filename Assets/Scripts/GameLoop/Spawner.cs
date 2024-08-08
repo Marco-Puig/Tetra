@@ -4,6 +4,7 @@ public class Spawner : MonoBehaviour
 {
     public GameObject[] shapes;
     int shapeIndex;
+    PanelManager panelManager;
 
     private void Update()
     {
@@ -18,8 +19,8 @@ public class Spawner : MonoBehaviour
         // if no shapes are dropping, spawn a new shape
         foreach (GameObject shape in spawnedShapes)
         {
-            // if a shape is still dropping, return
-            if (shape.GetComponent<CubeTest>().currentState == shape.GetComponent<CubeTest>().DropCube)
+            // if a shape is still dropping and isnt in the process of being destroyed via roll clear, return
+            if (shape.GetComponent<CubeTest>().currentState == shape.GetComponent<CubeTest>().DropCube && !panelManager.handlingClearedRow)
                 return;
         }
 

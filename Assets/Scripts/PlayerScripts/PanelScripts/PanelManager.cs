@@ -8,11 +8,13 @@ public class PanelManager : MonoBehaviour // panel manager is a game manager but
 
     [HideInInspector] int score = 0;
     [SerializeField] TMP_Text scoreText;
+    [SerializeField] GameObject[] layers;
 
     Transform panelTransform;
     delegate void State();
     State currentState;
     private int rotatedAmount;
+    public bool handlingClearedRow = false;
 
     void Start()
     {
@@ -62,5 +64,18 @@ public class PanelManager : MonoBehaviour // panel manager is a game manager but
             scoreText.text = "Score " + score.ToString();
             await Task.Delay(5 * (int)(1 + Time.deltaTime));
         }
+    }
+
+    public async void HandleClearedRow(int layerAffectedIndex)
+    {
+        handlingClearedRow = true;
+        await Task.Delay(1000); // wait for row to be cleared before moving pieces down
+
+        // move all pieces in layers above the cleared row down
+        for (int i = layerAffectedIndex + 1; i < layers.Length; i++)
+        {
+            layers[i].GetComponent<LayerManager>().MoveDown();
+        }
+        handlingClearedRow = false;
     }
 }

@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.AI;
 
 public class CubeTest : MonoBehaviour
 {
@@ -81,13 +80,13 @@ public class CubeTest : MonoBehaviour
         }
         if (Input.GetKeyUp(KeyCode.UpArrow))
         {
-            if (Physics.Raycast(cubeTransform.position, Vector3.back, out hit, 1.0f, layerMask))
+            if (Physics.Raycast(cubeTransform.position, Vector3.forward, out hit, 1.0f, layerMask))
                 return Vector3.zero;
             return Vector3.forward;
         }
         if (Input.GetKeyUp(KeyCode.DownArrow))
         {
-            if (Physics.Raycast(cubeTransform.position, Vector3.forward, out hit, 1.0f, layerMask))
+            if (Physics.Raycast(cubeTransform.position, Vector3.back, out hit, 1.0f, layerMask))
                 return Vector3.zero;
             return Vector3.back;
         }
@@ -101,25 +100,25 @@ public class CubeTest : MonoBehaviour
 
         if (Input.GetKeyUp(KeyCode.RightArrow))
         {
-            if (Physics.Raycast(cubeTransform.position, Vector3.back, out hit, 1.0f, layerMask))
+            if (Physics.Raycast(cubeTransform.position, Vector3.forward, out hit, 1.0f, layerMask))
                 return Vector3.zero;
             return Vector3.forward;
         }
         if (Input.GetKeyUp(KeyCode.LeftArrow))
         {
-            if (Physics.Raycast(cubeTransform.position, Vector3.forward, out hit, 1.0f, layerMask))
+            if (Physics.Raycast(cubeTransform.position, Vector3.back, out hit, 1.0f, layerMask))
                 return Vector3.zero;
             return Vector3.back;
         }
         if (Input.GetKeyUp(KeyCode.UpArrow))
         {
-            if (Physics.Raycast(cubeTransform.position, Vector3.right, out hit, 1.0f, layerMask))
+            if (Physics.Raycast(cubeTransform.position, Vector3.left, out hit, 1.0f, layerMask))
                 return Vector3.zero;
             return Vector3.left;
         }
         if (Input.GetKeyUp(KeyCode.DownArrow))
         {
-            if (Physics.Raycast(cubeTransform.position, Vector3.left, out hit, 1.0f, layerMask))
+            if (Physics.Raycast(cubeTransform.position, Vector3.right, out hit, 1.0f, layerMask))
                 return Vector3.zero;
             return Vector3.right;
         }
@@ -146,13 +145,13 @@ public class CubeTest : MonoBehaviour
         }
         if (Input.GetKeyUp(KeyCode.UpArrow))
         {
-            if (Physics.Raycast(cubeTransform.position, Vector3.forward, out hit, 1.0f, layerMask))
+            if (Physics.Raycast(cubeTransform.position, Vector3.back, out hit, 1.0f, layerMask))
                 return Vector3.zero;
             return Vector3.back;
         }
         if (Input.GetKeyUp(KeyCode.DownArrow))
         {
-            if (Physics.Raycast(cubeTransform.position, Vector3.back, out hit, 1.0f, layerMask))
+            if (Physics.Raycast(cubeTransform.position, Vector3.forward, out hit, 1.0f, layerMask))
                 return Vector3.zero;
             return Vector3.forward;
         }
@@ -166,25 +165,25 @@ public class CubeTest : MonoBehaviour
 
         if (Input.GetKeyUp(KeyCode.RightArrow))
         {
-            if (Physics.Raycast(cubeTransform.position, Vector3.forward, out hit, 1.0f, layerMask))
+            if (Physics.Raycast(cubeTransform.position, Vector3.back, out hit, 1.0f, layerMask))
                 return Vector3.zero;
             return Vector3.back;
         }
         if (Input.GetKeyUp(KeyCode.LeftArrow))
         {
-            if (Physics.Raycast(cubeTransform.position, Vector3.back, out hit, 1.0f, layerMask))
+            if (Physics.Raycast(cubeTransform.position, Vector3.forward, out hit, 1.0f, layerMask))
                 return Vector3.zero;
             return Vector3.forward;
         }
         if (Input.GetKeyUp(KeyCode.UpArrow))
         {
-            if (Physics.Raycast(cubeTransform.position, Vector3.left, out hit, 1.0f, layerMask))
+            if (Physics.Raycast(cubeTransform.position, Vector3.right, out hit, 1.0f, layerMask))
                 return Vector3.zero;
             return Vector3.right;
         }
         if (Input.GetKeyUp(KeyCode.DownArrow))
         {
-            if (Physics.Raycast(cubeTransform.position, Vector3.right, out hit, 1.0f, layerMask))
+            if (Physics.Raycast(cubeTransform.position, Vector3.left, out hit, 1.0f, layerMask))
                 return Vector3.zero;
             return Vector3.left;
         }
