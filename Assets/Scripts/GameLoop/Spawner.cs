@@ -20,7 +20,7 @@ public class Spawner : MonoBehaviour
         foreach (GameObject shape in spawnedShapes)
         {
             // if a shape is still dropping and isnt in the process of being destroyed via roll clear, return
-            if (shape.GetComponent<CubeTest>().currentState == shape.GetComponent<CubeTest>().DropCube && !panelManager.handlingClearedRow)
+            if (shape.GetComponent<CubeTest>().currentState == shape.GetComponent<CubeTest>().DropCube)
                 return;
         }
 

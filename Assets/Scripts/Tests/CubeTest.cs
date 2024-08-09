@@ -267,7 +267,7 @@ public class CubeTest : MonoBehaviour
         }
     }
 
-    void StopCube()
+    public void StopCube()
     {
         // stop cube from moving
 

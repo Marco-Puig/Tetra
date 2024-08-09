@@ -14,7 +14,6 @@ public class PanelManager : MonoBehaviour // panel manager is a game manager but
     delegate void State();
     State currentState;
     private int rotatedAmount;
-    public bool handlingClearedRow = false;
 
     void Start()
     {
@@ -66,16 +65,12 @@ public class PanelManager : MonoBehaviour // panel manager is a game manager but
         }
     }
 
-    public async void HandleClearedRow(int layerAffectedIndex)
+    public void HandleClearedRow(int layerAffectedIndex)
     {
-        handlingClearedRow = true;
-        await Task.Delay(500); // wait for row to be cleared before moving pieces down
-
         // move all pieces in layers above the cleared row down
-        for (int i = layers.Length; i > layerAffectedIndex + 1; i--)
+        for (int i = layerAffectedIndex + 1; i < layers.Length; i++)
         {
-            layers[i].GetComponent<LayerManager>().MoveDown();
+            layers[i].GetComponent<LayerManager>().MoveDownPieces();
         }
-        handlingClearedRow = false;
     }
 }

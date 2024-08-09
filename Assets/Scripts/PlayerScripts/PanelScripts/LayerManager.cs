@@ -40,11 +40,14 @@ public class LayerManager : MonoBehaviour
         panelManager.HandleClearedRow(layerIndex); // move all layers above down, but have panel manager handle it since it tracks all layers
     }
 
-    public void MoveDown() // move all pieces in the layer down
+    public void MoveDownPieces() // move all pieces in the layer down
     {
         foreach (GameObject piece in piecesInLayer)
         {
-            piece.GetComponent<LayerPiece>().MoveDown();
+            if (piece.GetComponent<LayerPiece>().isInPiece)
+            {
+                piece.GetComponent<LayerPiece>().MoveDownShape();
+            }
         }
     }
 }
