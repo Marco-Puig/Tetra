@@ -50,13 +50,11 @@ public class LayerPiece : MonoBehaviour
         }
 
         // if cube is already dropping, dont do anything
-        if (shapeInPiece.GetComponent<CubeTest>().currentState == shapeInPiece.GetComponent<CubeTest>().DropCube)
+        if (shapeInPiece.GetComponent<CubeTest>().currentState != shapeInPiece.GetComponent<CubeTest>().DropCubeNoInput)
         {
-            return;
+            // drop cube state so it moves down
+            shapeInPiece.GetComponent<CubeTest>().currentState = shapeInPiece.GetComponent<CubeTest>().DropCubeNoInput;
         }
-
-        // drop cube state so it moves down
-        shapeInPiece.GetComponent<CubeTest>().currentState = shapeInPiece.GetComponent<CubeTest>().DropCube;
     }
 
     // public method to ensure shape abides by grid

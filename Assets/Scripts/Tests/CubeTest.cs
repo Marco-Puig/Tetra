@@ -206,22 +206,26 @@ public class CubeTest : MonoBehaviour
     void HandleCubeSides()
     {
         // key code a - left side of the cube and key code d - right side of the cube
-        if (Input.GetKeyDown(KeyCode.A))
+        if (Input.GetKeyUp(KeyCode.A))
         {
             cubeSide--;
             if (cubeSide < 0)
             {
                 cubeSide = 3;
             }
+            Debug.Log("Cube Side: " + cubeSide);
         }
-        else if (Input.GetKeyDown(KeyCode.D))
+        else if (Input.GetKeyUp(KeyCode.D))
         {
             cubeSide++;
             if (cubeSide > 3)
             {
                 cubeSide = 0;
             }
+            Debug.Log("Cube Side: " + cubeSide);
         }
+
+
     }
 
     // if collides with Visual object, destroy Visual object
@@ -252,6 +256,23 @@ public class CubeTest : MonoBehaviour
         // you are able to move the cube while it drops
         MoveCube();
 
+        // handle cube sides
+        HandleCubeSides();
+
+        // move cube down every second
+        if (time * Time.deltaTime >= 10 * dropRate)
+        {
+            cubeTransform.localPosition += Vector3.down;
+            time = 0;
+        }
+        else
+        {
+            time++;
+        }
+    }
+
+    public void DropCubeNoInput()
+    {
         // handle cube sides
         HandleCubeSides();
 
