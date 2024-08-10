@@ -14,6 +14,7 @@ public class PanelManager : MonoBehaviour // panel manager is a game manager but
     delegate void State();
     State currentState;
     private int rotatedAmount;
+    GameObject fallingShape;
 
     void Start()
     {
@@ -24,17 +25,33 @@ public class PanelManager : MonoBehaviour // panel manager is a game manager but
     void Update()
     {
         currentState.Invoke();
+        FindFallingShape();
     }
 
     void RotateOnInput()
     {
-        if (Input.GetKeyDown(KeyCode.A))
+        if (Input.GetKeyUp(KeyCode.A))
         {
             currentState = () => RotatePanel(new Vector3(0, -rotationRate, 0));
         }
-        else if (Input.GetKeyDown(KeyCode.D))
+        else if (Input.GetKeyUp(KeyCode.D))
         {
             currentState = () => RotatePanel(new Vector3(0, rotationRate, 0));
+        }
+    }
+
+    void FindFallingShape()
+    {
+        // find the falling cube
+        GameObject[] cubes = GameObject.FindGameObjectsWithTag("Shape");
+
+        foreach (GameObject cube in cubes)
+        {
+            if (cube.GetComponent<CubeTest>().currentState == cube.GetComponent<CubeTest>().DropCube)
+            {
+                fallingShape = cube;
+                break;
+            }
         }
     }
 
@@ -49,6 +66,7 @@ public class PanelManager : MonoBehaviour // panel manager is a game manager but
         {
             rotatedAmount = 0;
             currentState = RotateOnInput;
+            fallingShape.GetComponent<CubeTest>().HandleCubeSides((int)direction.y);  // handle cube sides
         }
 
         // if it hasnt rotated 90 degrees, rotate the panel
@@ -57,6 +75,7 @@ public class PanelManager : MonoBehaviour // panel manager is a game manager but
 
     public async void UpdateScore()
     {
+        // score count up animation
         for (int i = 0; i < 100; i++)
         {
             score++;

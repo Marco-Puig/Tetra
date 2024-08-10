@@ -6,7 +6,7 @@ public class CubeTest : MonoBehaviour
     Material cubeMat;
     public delegate void State();
     public State currentState;
-    static int cubeSide = 0;
+    static int panelSide = 0;
     float time = 0;
     float dropRate = 0.3f;
 
@@ -41,7 +41,7 @@ public class CubeTest : MonoBehaviour
 
     Vector3 GetMoveDirection()
     {
-        switch (cubeSide)
+        switch (panelSide)
         {
             // facing front side
             case 0:
@@ -100,25 +100,25 @@ public class CubeTest : MonoBehaviour
 
         if (Input.GetKeyUp(KeyCode.RightArrow))
         {
-            if (Physics.Raycast(cubeTransform.position, Vector3.forward, out hit, 1.0f, layerMask))
+            if (Physics.Raycast(cubeTransform.position, Vector3.right, out hit, 1.0f, layerMask))
                 return Vector3.zero;
             return Vector3.forward;
         }
         if (Input.GetKeyUp(KeyCode.LeftArrow))
         {
-            if (Physics.Raycast(cubeTransform.position, Vector3.back, out hit, 1.0f, layerMask))
+            if (Physics.Raycast(cubeTransform.position, Vector3.left, out hit, 1.0f, layerMask))
                 return Vector3.zero;
             return Vector3.back;
         }
         if (Input.GetKeyUp(KeyCode.UpArrow))
         {
-            if (Physics.Raycast(cubeTransform.position, Vector3.left, out hit, 1.0f, layerMask))
+            if (Physics.Raycast(cubeTransform.position, Vector3.forward, out hit, 1.0f, layerMask))
                 return Vector3.zero;
             return Vector3.left;
         }
         if (Input.GetKeyUp(KeyCode.DownArrow))
         {
-            if (Physics.Raycast(cubeTransform.position, Vector3.right, out hit, 1.0f, layerMask))
+            if (Physics.Raycast(cubeTransform.position, Vector3.back, out hit, 1.0f, layerMask))
                 return Vector3.zero;
             return Vector3.right;
         }
@@ -133,25 +133,25 @@ public class CubeTest : MonoBehaviour
 
         if (Input.GetKeyUp(KeyCode.RightArrow))
         {
-            if (Physics.Raycast(cubeTransform.position, Vector3.left, out hit, 1.0f, layerMask))
+            if (Physics.Raycast(cubeTransform.position, Vector3.right, out hit, 1.0f, layerMask))
                 return Vector3.zero;
             return Vector3.left;
         }
         if (Input.GetKeyUp(KeyCode.LeftArrow))
         {
-            if (Physics.Raycast(cubeTransform.position, Vector3.right, out hit, 1.0f, layerMask))
+            if (Physics.Raycast(cubeTransform.position, Vector3.left, out hit, 1.0f, layerMask))
                 return Vector3.zero;
             return Vector3.right;
         }
         if (Input.GetKeyUp(KeyCode.UpArrow))
         {
-            if (Physics.Raycast(cubeTransform.position, Vector3.back, out hit, 1.0f, layerMask))
+            if (Physics.Raycast(cubeTransform.position, Vector3.forward, out hit, 1.0f, layerMask))
                 return Vector3.zero;
             return Vector3.back;
         }
         if (Input.GetKeyUp(KeyCode.DownArrow))
         {
-            if (Physics.Raycast(cubeTransform.position, Vector3.forward, out hit, 1.0f, layerMask))
+            if (Physics.Raycast(cubeTransform.position, Vector3.back, out hit, 1.0f, layerMask))
                 return Vector3.zero;
             return Vector3.forward;
         }
@@ -165,25 +165,25 @@ public class CubeTest : MonoBehaviour
 
         if (Input.GetKeyUp(KeyCode.RightArrow))
         {
-            if (Physics.Raycast(cubeTransform.position, Vector3.back, out hit, 1.0f, layerMask))
+            if (Physics.Raycast(cubeTransform.position, Vector3.right, out hit, 1.0f, layerMask))
                 return Vector3.zero;
             return Vector3.back;
         }
         if (Input.GetKeyUp(KeyCode.LeftArrow))
         {
-            if (Physics.Raycast(cubeTransform.position, Vector3.forward, out hit, 1.0f, layerMask))
+            if (Physics.Raycast(cubeTransform.position, Vector3.left, out hit, 1.0f, layerMask))
                 return Vector3.zero;
             return Vector3.forward;
         }
         if (Input.GetKeyUp(KeyCode.UpArrow))
         {
-            if (Physics.Raycast(cubeTransform.position, Vector3.right, out hit, 1.0f, layerMask))
+            if (Physics.Raycast(cubeTransform.position, Vector3.forward, out hit, 1.0f, layerMask))
                 return Vector3.zero;
             return Vector3.right;
         }
         if (Input.GetKeyUp(KeyCode.DownArrow))
         {
-            if (Physics.Raycast(cubeTransform.position, Vector3.left, out hit, 1.0f, layerMask))
+            if (Physics.Raycast(cubeTransform.position, Vector3.back, out hit, 1.0f, layerMask))
                 return Vector3.zero;
             return Vector3.left;
         }
@@ -203,29 +203,19 @@ public class CubeTest : MonoBehaviour
     }
 
     // Handle Cube Sides
-    void HandleCubeSides()
+    public void HandleCubeSides(int direction)
     {
-        // key code a - left side of the cube and key code d - right side of the cube
-        if (Input.GetKeyUp(KeyCode.A))
+        panelSide += 1 * direction;
+
+        if (panelSide < 0)
         {
-            cubeSide--;
-            if (cubeSide < 0)
-            {
-                cubeSide = 3;
-            }
-            Debug.Log("Cube Side: " + cubeSide);
-        }
-        else if (Input.GetKeyUp(KeyCode.D))
-        {
-            cubeSide++;
-            if (cubeSide > 3)
-            {
-                cubeSide = 0;
-            }
-            Debug.Log("Cube Side: " + cubeSide);
+            panelSide = 3;
         }
 
-
+        if (panelSide > 3)
+        {
+            panelSide = 0;
+        }
     }
 
     // if collides with Visual object, destroy Visual object
@@ -256,9 +246,6 @@ public class CubeTest : MonoBehaviour
         // you are able to move the cube while it drops
         MoveCube();
 
-        // handle cube sides
-        HandleCubeSides();
-
         // move cube down every second
         if (time * Time.deltaTime >= 10 * dropRate)
         {
@@ -273,9 +260,6 @@ public class CubeTest : MonoBehaviour
 
     public void DropCubeNoInput()
     {
-        // handle cube sides
-        HandleCubeSides();
-
         // move cube down every second
         if (time * Time.deltaTime >= 10 * dropRate)
         {
@@ -298,7 +282,7 @@ public class CubeTest : MonoBehaviour
 
     void HandleOpacity()
     {
-        switch (cubeSide)
+        switch (panelSide)
         {
             case 0:
                 HandleFrontSideOpacity();
