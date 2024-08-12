@@ -19,8 +19,12 @@ public class Spawner : MonoBehaviour
         // if no shapes are dropping, spawn a new shape
         foreach (GameObject shape in spawnedShapes)
         {
+            // if cube isnt the main part of shape, skip
+            if (shape.GetComponent<Shape>() == null)
+                continue;
+
             // if a shape is still dropping and isnt in the process of being destroyed via roll clear, return
-            if (shape.GetComponent<CubeTest>().currentState == shape.GetComponent<CubeTest>().DropCube)
+            if (shape.GetComponent<Shape>().currentState == shape.GetComponent<Shape>().DropCube)
                 return;
         }
 

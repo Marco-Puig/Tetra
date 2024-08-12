@@ -3,11 +3,14 @@ using TMPro;
 using System.Threading.Tasks;
 public class PanelManager : MonoBehaviour // panel manager is a game manager but for a player instance
 {
+    [Header("Panel Manager")]
     [SerializeField]
     float rotationRate = 1.0f;
 
     [HideInInspector] int score = 0;
     [SerializeField] TMP_Text scoreText;
+
+    [Header("Layer Manager")]
     [SerializeField] GameObject[] layers;
 
     Transform panelTransform;
@@ -47,7 +50,11 @@ public class PanelManager : MonoBehaviour // panel manager is a game manager but
 
         foreach (GameObject cube in cubes)
         {
-            if (cube.GetComponent<CubeTest>().currentState == cube.GetComponent<CubeTest>().DropCube)
+            // if cube isnt the main part of shape, skip
+            if (cube.GetComponent<Shape>() == null)
+                continue;
+
+            if (cube.GetComponent<Shape>().currentState == cube.GetComponent<Shape>().DropCube)
             {
                 fallingShape = cube;
                 break;
@@ -66,7 +73,7 @@ public class PanelManager : MonoBehaviour // panel manager is a game manager but
         {
             rotatedAmount = 0;
             currentState = RotateOnInput;
-            fallingShape.GetComponent<CubeTest>().HandleCubeSides((int)direction.y);  // handle cube sides
+            fallingShape.GetComponent<Shape>().HandleCubeSides((int)direction.y);  // handle cube sides
         }
 
         // if it hasnt rotated 90 degrees, rotate the panel

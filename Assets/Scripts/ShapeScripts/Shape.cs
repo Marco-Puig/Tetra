@@ -1,6 +1,7 @@
 using UnityEngine;
+using UnityEngine.AI;
 
-public class CubeTest : MonoBehaviour
+public class Shape : MonoBehaviour
 {
     Transform cubeTransform;
     Material cubeMat;
@@ -11,6 +12,12 @@ public class CubeTest : MonoBehaviour
     float dropRate = 0.3f;
 
     public LayerMask layerMask;
+    public bool usesVisual = true;
+    [SerializeField] GameObject leftShapePart;
+    [SerializeField] GameObject rightShapePart;
+    [SerializeField] GameObject topShapePart;
+    [SerializeField] GameObject bottomShapePart;
+    [SerializeField] CubeVisual cubeVisual;
 
     // Get Cube Position
     void Start()
@@ -24,7 +31,7 @@ public class CubeTest : MonoBehaviour
     void Update()
     {
         currentState.Invoke();
-        HandleOpacity();
+        //HandleOpacity();
     }
 
     // Command Pattern for Handing Cube Movement - Emulating DPad GB-Like Movement
@@ -68,13 +75,17 @@ public class CubeTest : MonoBehaviour
 
         if (Input.GetKeyUp(KeyCode.RightArrow))
         {
-            if (Physics.Raycast(cubeTransform.position, Vector3.right, out hit, 1.0f, layerMask))
+            if (Physics.Raycast(cubeTransform.position, Vector3.right, out hit, 1 + (leftShapePart.transform.position.x - rightShapePart.transform.position.x), layerMask))
+                return Vector3.zero;
+            if (Physics.Raycast(rightShapePart.transform.position, Vector3.right, out hit, 1.0f, layerMask))
                 return Vector3.zero;
             return Vector3.right;
         }
         if (Input.GetKeyUp(KeyCode.LeftArrow))
         {
             if (Physics.Raycast(cubeTransform.position, Vector3.left, out hit, 1.0f, layerMask))
+                return Vector3.zero;
+            if (Physics.Raycast(leftShapePart.transform.position, Vector3.left, out hit, 1.0f, layerMask))
                 return Vector3.zero;
             return Vector3.left;
         }
@@ -100,13 +111,17 @@ public class CubeTest : MonoBehaviour
 
         if (Input.GetKeyUp(KeyCode.RightArrow))
         {
-            if (Physics.Raycast(cubeTransform.position, Vector3.right, out hit, 1.0f, layerMask))
+            if (Physics.Raycast(cubeTransform.position, Vector3.right, out hit, 1 + (leftShapePart.transform.position.x - rightShapePart.transform.position.x), layerMask))
+                return Vector3.zero;
+            if (Physics.Raycast(rightShapePart.transform.position, Vector3.right, out hit, 1.0f, layerMask))
                 return Vector3.zero;
             return Vector3.forward;
         }
         if (Input.GetKeyUp(KeyCode.LeftArrow))
         {
             if (Physics.Raycast(cubeTransform.position, Vector3.left, out hit, 1.0f, layerMask))
+                return Vector3.zero;
+            if (Physics.Raycast(leftShapePart.transform.position, Vector3.left, out hit, 1.0f, layerMask))
                 return Vector3.zero;
             return Vector3.back;
         }
@@ -133,13 +148,17 @@ public class CubeTest : MonoBehaviour
 
         if (Input.GetKeyUp(KeyCode.RightArrow))
         {
-            if (Physics.Raycast(cubeTransform.position, Vector3.right, out hit, 1.0f, layerMask))
+            if (Physics.Raycast(cubeTransform.position, Vector3.right, out hit, 1 + (leftShapePart.transform.position.x - rightShapePart.transform.position.x), layerMask))
+                return Vector3.zero;
+            if (Physics.Raycast(rightShapePart.transform.position, Vector3.right, out hit, 1.0f, layerMask))
                 return Vector3.zero;
             return Vector3.left;
         }
         if (Input.GetKeyUp(KeyCode.LeftArrow))
         {
             if (Physics.Raycast(cubeTransform.position, Vector3.left, out hit, 1.0f, layerMask))
+                return Vector3.zero;
+            if (Physics.Raycast(leftShapePart.transform.position, Vector3.left, out hit, 1.0f, layerMask))
                 return Vector3.zero;
             return Vector3.right;
         }
@@ -165,7 +184,9 @@ public class CubeTest : MonoBehaviour
 
         if (Input.GetKeyUp(KeyCode.RightArrow))
         {
-            if (Physics.Raycast(cubeTransform.position, Vector3.right, out hit, 1.0f, layerMask))
+            if (Physics.Raycast(cubeTransform.position, Vector3.right, out hit, 1 + (leftShapePart.transform.position.x - rightShapePart.transform.position.x), layerMask))
+                return Vector3.zero;
+            if (Physics.Raycast(rightShapePart.transform.position, Vector3.right, out hit, 1.0f, layerMask))
                 return Vector3.zero;
             return Vector3.back;
         }
@@ -173,17 +194,35 @@ public class CubeTest : MonoBehaviour
         {
             if (Physics.Raycast(cubeTransform.position, Vector3.left, out hit, 1.0f, layerMask))
                 return Vector3.zero;
+            if (Physics.Raycast(leftShapePart.transform.position, Vector3.left, out hit, 1.0f, layerMask))
+                return Vector3.zero;
             return Vector3.forward;
         }
         if (Input.GetKeyUp(KeyCode.UpArrow))
         {
             if (Physics.Raycast(cubeTransform.position, Vector3.forward, out hit, 1.0f, layerMask))
                 return Vector3.zero;
+            if (Physics.Raycast(leftShapePart.transform.position, Vector3.forward, out hit, 1.0f, layerMask))
+                return Vector3.zero;
+            if (Physics.Raycast(rightShapePart.transform.position, Vector3.forward, out hit, 1.0f, layerMask))
+                return Vector3.zero;
+            if (Physics.Raycast(topShapePart.transform.position, Vector3.forward, out hit, 1.0f, layerMask))
+                return Vector3.zero;
+            if (Physics.Raycast(bottomShapePart.transform.position, Vector3.forward, out hit, 1.0f, layerMask))
+                return Vector3.zero;
             return Vector3.right;
         }
         if (Input.GetKeyUp(KeyCode.DownArrow))
         {
             if (Physics.Raycast(cubeTransform.position, Vector3.back, out hit, 1.0f, layerMask))
+                return Vector3.zero;
+            if (Physics.Raycast(leftShapePart.transform.position, Vector3.back, out hit, 1.0f, layerMask))
+                return Vector3.zero;
+            if (Physics.Raycast(rightShapePart.transform.position, Vector3.back, out hit, 1.0f, layerMask))
+                return Vector3.zero;
+            if (Physics.Raycast(topShapePart.transform.position, Vector3.back, out hit, 1.0f, layerMask))
+                return Vector3.zero;
+            if (Physics.Raycast(bottomShapePart.transform.position, Vector3.back, out hit, 1.0f, layerMask))
                 return Vector3.zero;
             return Vector3.left;
         }
@@ -196,9 +235,9 @@ public class CubeTest : MonoBehaviour
         cubeTransform.localPosition += direction;
         // ensure cube is within bounds
         cubeTransform.localPosition = new Vector3(
-            Mathf.Clamp(cubeTransform.localPosition.x, -1.0f, 1.0f),
+            Mathf.Clamp(cubeTransform.localPosition.x, -3.0f, 1.0f), // TEMPORARY FIX for clamping x
             cubeTransform.localPosition.y,
-            Mathf.Clamp(cubeTransform.localPosition.z, -1.0f, 1.0f)
+            Mathf.Clamp(cubeTransform.localPosition.z, -3.0f, 2.0f)
         );
     }
 
@@ -215,28 +254,6 @@ public class CubeTest : MonoBehaviour
         if (panelSide > 3)
         {
             panelSide = 0;
-        }
-    }
-
-    // if collides with Visual object, destroy Visual object
-    private void OnTriggerEnter(Collider other)
-    {
-        // destroy visual if it is hit
-        if (other.gameObject.CompareTag("Visual"))
-        {
-            Destroy(other.gameObject);
-        }
-
-        // if cube is not stopped
-        if (currentState != StopCube && !other.gameObject.CompareTag("Layer") && !other.gameObject.CompareTag("Visual"))
-        {
-            // destroy visual
-            GameObject visualCube = GameObject.FindGameObjectWithTag("Visual");
-            if (visualCube != null) Destroy(visualCube);
-
-            // stop cube from moving
-            transform.position += Vector3.up;
-            currentState = StopCube;
         }
     }
 
@@ -277,90 +294,18 @@ public class CubeTest : MonoBehaviour
         // stop cube from moving
 
         // stop spawning visual cube for it
-        GetComponent<CubeVisual>().enabled = false;
+        if (usesVisual)
+            cubeVisual.enabled = false;
     }
 
     void HandleOpacity()
     {
-        switch (panelSide)
+        // REDO HANDLING OPACITY BASED ON DISTANCE OF CUBE TOWARDS THE CAMERA
+
+        // update all cube sides to match the main cube 
+        foreach (Transform child in transform)
         {
-            case 0:
-                HandleFrontSideOpacity();
-                break;
-            case 1:
-                HandleRightSideOpacity();
-                break;
-            case 2:
-                HandleBackSideOpacity();
-                break;
-            case 3:
-                HandleLeftSideOpacity();
-                break;
+            child.GetComponent<Renderer>().material.color = new Color(child.GetComponent<Renderer>().material.color.r, child.GetComponent<Renderer>().material.color.g, child.GetComponent<Renderer>().material.color.b, cubeMat.color.a);
         }
     }
-
-    void HandleFrontSideOpacity()
-    {
-        switch (cubeTransform.localPosition.z)
-        {
-            case -1.0f:
-                cubeMat.color = new Color(cubeMat.color.r, cubeMat.color.g, cubeMat.color.b, 0.4f);
-                break;
-            case 0.0f:
-                cubeMat.color = new Color(cubeMat.color.r, cubeMat.color.g, cubeMat.color.b, 0.7f);
-                break;
-            case 1.0f:
-                cubeMat.color = new Color(cubeMat.color.r, cubeMat.color.g, cubeMat.color.b, 1.0f);
-                break;
-        }
-    }
-
-    void HandleRightSideOpacity()
-    {
-        switch (cubeTransform.localPosition.x)
-        {
-            case -1.0f:
-                cubeMat.color = new Color(cubeMat.color.r, cubeMat.color.g, cubeMat.color.b, 1.0f);
-                break;
-            case 0.0f:
-                cubeMat.color = new Color(cubeMat.color.r, cubeMat.color.g, cubeMat.color.b, 0.7f);
-                break;
-            case 1.0f:
-                cubeMat.color = new Color(cubeMat.color.r, cubeMat.color.g, cubeMat.color.b, 0.4f);
-                break;
-        }
-    }
-
-    void HandleBackSideOpacity()
-    {
-        switch (cubeTransform.localPosition.z)
-        {
-            case -1.0f:
-                cubeMat.color = new Color(cubeMat.color.r, cubeMat.color.g, cubeMat.color.b, 1.0f);
-                break;
-            case 0.0f:
-                cubeMat.color = new Color(cubeMat.color.r, cubeMat.color.g, cubeMat.color.b, 0.7f);
-                break;
-            case 1.0f:
-                cubeMat.color = new Color(cubeMat.color.r, cubeMat.color.g, cubeMat.color.b, 0.4f);
-                break;
-        }
-    }
-
-    void HandleLeftSideOpacity()
-    {
-        switch (cubeTransform.localPosition.x)
-        {
-            case -1.0f:
-                cubeMat.color = new Color(cubeMat.color.r, cubeMat.color.g, cubeMat.color.b, 0.4f);
-                break;
-            case 0.0f:
-                cubeMat.color = new Color(cubeMat.color.r, cubeMat.color.g, cubeMat.color.b, 0.7f);
-                break;
-            case 1.0f:
-                cubeMat.color = new Color(cubeMat.color.r, cubeMat.color.g, cubeMat.color.b, 1.0f);
-                break;
-        }
-    }
-
 }

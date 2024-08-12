@@ -1,12 +1,12 @@
 using System;
 using System.Threading.Tasks;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class CubeVisual : MonoBehaviour
 {
     [SerializeField] GameObject visualCubePrefab;
     [SerializeField] LayerMask layerMask;
+
     private GameObject visualCube;
     bool start = true;
 
@@ -14,7 +14,6 @@ public class CubeVisual : MonoBehaviour
     {
         // get the ball rolling, calculate visual position and where to spawn so there is a visual off rip
         CalculateVisualPosition();
-        start = false;
     }
 
     void Update()
@@ -37,24 +36,22 @@ public class CubeVisual : MonoBehaviour
     async void CalculateVisualPosition()
     {
         if (start)
+        {
             await Task.Delay(100); // wait for old visual to be destroyed before creating new one
+            start = false; // set start to false so this block of code only runs once
+        }
 
         // use raycast to spawn visual on cube the visual is on
         RaycastHit hit;
 
-        if (Physics.Raycast(transform.position, Vector3.down, out hit, 6, layerMask))
+        // calculate visual position of where to spawn visual by raycasting down
+        if (Physics.Raycast(transform.position, Vector3.down, out hit, 7, layerMask)) // ignore visual and layer
         {
-            // ignore if tag is "Visual" 
-            if (hit.collider.gameObject.CompareTag("Visual"))
-            {
-                return;
-            }
-
             CreateVisualCube(new Vector3(transform.position.x, (float)Math.Ceiling(hit.point.y), transform.position.z));
         }
 
         // Debug.Log(hit.point);
-        Debug.DrawLine(transform.position, hit.point, Color.red, 6);
+        Debug.DrawLine(transform.position, hit.point, Color.blue, 7);
     }
 
     void CreateVisualCube(Vector3 position)
@@ -66,6 +63,17 @@ public class CubeVisual : MonoBehaviour
         }
 
         visualCube = Instantiate(visualCubePrefab, position, Quaternion.identity);
-        visualCube.transform.parent = transform.parent;
+
+        // ensure visual cube isnt a child of the parent cube
+        GameObject spawner = GameObject.FindGameObjectWithTag("Spawner");
+        visualCube.transform.parent = spawner.transform;
+    }
+
+    void OnDestroy()
+    {
+        if (visualCube != null)
+        {
+            Destroy(visualCube);
+        }
     }
 }
