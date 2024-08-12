@@ -17,7 +17,7 @@ public class Shape : MonoBehaviour
     [SerializeField] GameObject rightShapePart;
     [SerializeField] GameObject topShapePart;
     [SerializeField] GameObject bottomShapePart;
-    [SerializeField] CubeVisual cubeVisual;
+    [SerializeField] shapeVisual shapeVisual;
 
     // Get Cube Position
     void Start()
@@ -75,7 +75,7 @@ public class Shape : MonoBehaviour
 
         if (Input.GetKeyUp(KeyCode.RightArrow))
         {
-            if (Physics.Raycast(cubeTransform.position, Vector3.right, out hit, 1 + (leftShapePart.transform.position.x - rightShapePart.transform.position.x), layerMask))
+            if (Physics.Raycast(cubeTransform.position, Vector3.right, out hit, 1, layerMask))
                 return Vector3.zero;
             if (Physics.Raycast(rightShapePart.transform.position, Vector3.right, out hit, 1.0f, layerMask))
                 return Vector3.zero;
@@ -111,7 +111,7 @@ public class Shape : MonoBehaviour
 
         if (Input.GetKeyUp(KeyCode.RightArrow))
         {
-            if (Physics.Raycast(cubeTransform.position, Vector3.right, out hit, 1 + (leftShapePart.transform.position.x - rightShapePart.transform.position.x), layerMask))
+            if (Physics.Raycast(cubeTransform.position, Vector3.right, out hit, 1, layerMask))
                 return Vector3.zero;
             if (Physics.Raycast(rightShapePart.transform.position, Vector3.right, out hit, 1.0f, layerMask))
                 return Vector3.zero;
@@ -148,7 +148,7 @@ public class Shape : MonoBehaviour
 
         if (Input.GetKeyUp(KeyCode.RightArrow))
         {
-            if (Physics.Raycast(cubeTransform.position, Vector3.right, out hit, 1 + (leftShapePart.transform.position.x - rightShapePart.transform.position.x), layerMask))
+            if (Physics.Raycast(cubeTransform.position, Vector3.right, out hit, 1, layerMask))
                 return Vector3.zero;
             if (Physics.Raycast(rightShapePart.transform.position, Vector3.right, out hit, 1.0f, layerMask))
                 return Vector3.zero;
@@ -184,7 +184,7 @@ public class Shape : MonoBehaviour
 
         if (Input.GetKeyUp(KeyCode.RightArrow))
         {
-            if (Physics.Raycast(cubeTransform.position, Vector3.right, out hit, 1 + (leftShapePart.transform.position.x - rightShapePart.transform.position.x), layerMask))
+            if (Physics.Raycast(cubeTransform.position, Vector3.right, out hit, 1, layerMask))
                 return Vector3.zero;
             if (Physics.Raycast(rightShapePart.transform.position, Vector3.right, out hit, 1.0f, layerMask))
                 return Vector3.zero;
@@ -294,8 +294,10 @@ public class Shape : MonoBehaviour
         // stop cube from moving
 
         // stop spawning visual cube for it
-        if (usesVisual)
-            cubeVisual.enabled = false;
+        if (usesVisual && shapeVisual != null)
+        {
+            shapeVisual.enabled = false;
+        }
     }
 
     void HandleOpacity()

@@ -2,13 +2,13 @@ using System;
 using System.Threading.Tasks;
 using UnityEngine;
 
-public class CubeVisual : MonoBehaviour
+public class shapeVisual : MonoBehaviour
 {
-    [SerializeField] GameObject visualCubePrefab;
+    [SerializeField] GameObject visualShapePrefab;
     [SerializeField] LayerMask layerMask;
     [SerializeField] bool hasRightPiece = true;
     [SerializeField] bool hasLeftPiece = false;
-    private GameObject visualCube;
+    private GameObject visualshape;
     bool start = true;
 
     void Start()
@@ -19,17 +19,20 @@ public class CubeVisual : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.UpArrow) || Input.GetKeyUp(KeyCode.DownArrow))
+        // calculate visual position when the player cube is moved or rotated
+        if (Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.LeftArrow) ||
+        Input.GetKeyUp(KeyCode.UpArrow) || Input.GetKeyUp(KeyCode.DownArrow) ||
+        Input.GetKeyUp(KeyCode.Space))
         {
             CalculateVisualPosition();
         }
 
         // ensure that the visual shares the same rotation as the player cube
-        if (visualCube != null)
+        if (visualshape != null)
         {
-            if (visualCube.transform.rotation != transform.rotation)
+            if (visualshape.transform.rotation != transform.rotation)
             {
-                visualCube.transform.rotation = transform.rotation;
+                visualshape.transform.rotation = transform.rotation;
             }
         }
     }
@@ -57,12 +60,12 @@ public class CubeVisual : MonoBehaviour
                 // if the visual cube is not on the same level as the main shape piece, move it up
                 if (hit1.point.y < hit2.point.y)
                 {
-                    CreateVisualCube(new Vector3(transform.position.x, (float)Math.Ceiling(hit2.point.y), transform.position.z));
+                    CreateVisualshape(new Vector3(transform.position.x, (float)Math.Ceiling(hit2.point.y), transform.position.z));
                 }
                 else
                 {
                     // spawn visual cube if we are leveled correctly :)
-                    CreateVisualCube(new Vector3(transform.position.x, (float)Math.Ceiling(hit1.point.y), transform.position.z));
+                    CreateVisualshape(new Vector3(transform.position.x, (float)Math.Ceiling(hit1.point.y), transform.position.z));
                 }
             }
             // ensure that left stuck out piece of visual cube is on the same level as the main shape piece
@@ -71,19 +74,19 @@ public class CubeVisual : MonoBehaviour
                 // if the visual cube is not on the same level as the main shape piece, move it up
                 if (hit1.point.y < hit2.point.y)
                 {
-                    CreateVisualCube(new Vector3(transform.position.x, (float)Math.Ceiling(hit2.point.y), transform.position.z));
+                    CreateVisualshape(new Vector3(transform.position.x, (float)Math.Ceiling(hit2.point.y), transform.position.z));
                 }
                 else
                 {
                     // spawn visual cube if we are leveled correctly :)
-                    CreateVisualCube(new Vector3(transform.position.x, (float)Math.Ceiling(hit1.point.y), transform.position.z));
+                    CreateVisualshape(new Vector3(transform.position.x, (float)Math.Ceiling(hit1.point.y), transform.position.z));
                 }
             }
 
             // if shape has no left or right piece, spawn visual cube on the same level as the main shape piece
             if (!hasRightPiece && !hasLeftPiece)
             {
-                CreateVisualCube(new Vector3(transform.position.x, (float)Math.Ceiling(hit1.point.y), transform.position.z));
+                CreateVisualshape(new Vector3(transform.position.x, (float)Math.Ceiling(hit1.point.y), transform.position.z));
             }
 
             // draw debug lines in scene view
@@ -92,19 +95,19 @@ public class CubeVisual : MonoBehaviour
         }
     }
 
-    void CreateVisualCube(Vector3 position)
+    void CreateVisualshape(Vector3 position)
     {
         // clean up previous visual cube
-        if (visualCube != null)
+        if (visualshape != null)
         {
-            Destroy(visualCube);
+            Destroy(visualshape);
         }
 
         // spawn visual cube
-        visualCube = Instantiate(visualCubePrefab, position, Quaternion.identity);
+        visualshape = Instantiate(visualShapePrefab, position, Quaternion.identity);
 
         // ensure visual cube isnt a child of the parent cube
         GameObject spawner = GameObject.FindGameObjectWithTag("Spawner");
-        visualCube.transform.parent = spawner.transform;
+        visualshape.transform.parent = spawner.transform;
     }
 }

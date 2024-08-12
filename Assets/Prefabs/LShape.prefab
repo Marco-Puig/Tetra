@@ -171,6 +171,7 @@ GameObject:
   - component: {fileID: 3827242382085708539}
   - component: {fileID: 2797122773864788654}
   - component: {fileID: 4520818368126188351}
+  - component: {fileID: 5725007959904316700}
   m_Layer: 6
   m_Name: LShape
   m_TagString: Shape
@@ -315,7 +316,7 @@ MonoBehaviour:
   rightShapePart: {fileID: 4487403208422035399}
   topShapePart: {fileID: 2292027093635402248}
   bottomShapePart: {fileID: 3827242381564538449}
-  cubeVisual: {fileID: 4520818368126188351}
+  shapeVisual: {fileID: 4520818368126188351}
 --- !u!114 &3827242382085708539
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -356,14 +357,27 @@ MonoBehaviour:
   m_GameObject: {fileID: 3827242381564538449}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 41d416bc3edf7534793439327e7f603b, type: 3}
+  m_Script: {fileID: 11500000, guid: b530ab59c915d61409598c0367375618, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  visualCubePrefab: {fileID: 2493405104913831159, guid: 81cd7358af500154bbe89ed6184522be, type: 3}
-  stuckOutPiecePrefab: {fileID: 4487403208422035399}
+  visualShapePrefab: {fileID: 2493405104913831159, guid: 81cd7358af500154bbe89ed6184522be, type: 3}
   layerMask:
     serializedVersion: 2
     m_Bits: 119
+  hasRightPiece: 1
+  hasLeftPiece: 0
+--- !u!114 &5725007959904316700
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3827242381564538449}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04590fb33f27a66409d4c7ad360fc15e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4487403208422035399
 GameObject:
   m_ObjectHideFlags: 0
