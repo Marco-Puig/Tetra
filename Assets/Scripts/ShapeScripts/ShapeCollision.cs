@@ -16,11 +16,11 @@ public class ShapeCollision : MonoBehaviour
         }
 
         // if cube is not stopped
-        if (shape.currentState != shape.StopCube && !other.gameObject.CompareTag("Layer") && !other.gameObject.CompareTag("Visual"))
+        if (shape.currentState != shape.StopShape && !other.gameObject.CompareTag("Layer") && !other.gameObject.CompareTag("Visual"))
         {
             // destroy visual
-            GameObject visualCube = GameObject.FindGameObjectWithTag("Visual");
-            if (visualCube != null) Destroy(visualCube);
+            GameObject visualShape = GameObject.FindGameObjectWithTag("Visual");
+            if (visualShape != null) Destroy(visualShape);
 
             // stop cube from moving:
 
@@ -31,7 +31,7 @@ public class ShapeCollision : MonoBehaviour
                 transform.position += Vector3.up;
 
             // set cube to stop cube state
-            shape.currentState = shape.StopCube;
+            shape.currentState = shape.StopShape;
         }
     }
 }

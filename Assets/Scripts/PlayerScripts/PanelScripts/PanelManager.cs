@@ -54,7 +54,7 @@ public class PanelManager : MonoBehaviour // panel manager is a game manager but
             if (cube.GetComponent<Shape>() == null)
                 continue;
 
-            if (cube.GetComponent<Shape>().currentState == cube.GetComponent<Shape>().DropCube)
+            if (cube.GetComponent<Shape>().currentState == cube.GetComponent<Shape>().DropShape)
             {
                 fallingShape = cube;
                 break;
@@ -73,7 +73,7 @@ public class PanelManager : MonoBehaviour // panel manager is a game manager but
         {
             rotatedAmount = 0;
             currentState = RotateOnInput;
-            fallingShape.GetComponent<Shape>().HandleCubeSides((int)direction.y);  // handle cube sides
+            fallingShape.GetComponent<Shape>().HandleShapeSides((int)direction.y);  // handle shape sides
         }
 
         // if it hasnt rotated 90 degrees, rotate the panel

@@ -1,41 +1,42 @@
 using UnityEngine;
-using UnityEngine.AI;
 
 public class Shape : MonoBehaviour
 {
-    Transform cubeTransform;
-    Material cubeMat;
+    // Private:
+    private Transform shapeTransform;
+    private Material cubeMat;
+    private static int panelSide = 0;
+    private float time = 0;
+    private float dropRate = 0.3f;
+
+    // Public:
     public delegate void State();
     public State currentState;
-    static int panelSide = 0;
-    float time = 0;
-    float dropRate = 0.3f;
+    [HideInInspector] public bool edgeOfBounds = false;
 
+    // Inspector Variables:
     public LayerMask layerMask;
     public bool usesVisual = true;
-    [SerializeField] GameObject leftShapePart;
-    [SerializeField] GameObject rightShapePart;
-    [SerializeField] GameObject topShapePart;
-    [SerializeField] GameObject bottomShapePart;
     [SerializeField] shapeVisual shapeVisual;
+
 
     // Get Cube Position
     void Start()
     {
-        cubeTransform = GetComponent<Transform>();
+        shapeTransform = GetComponent<Transform>();
         cubeMat = GetComponent<Renderer>().material;
-        currentState = DropCube;
+        currentState = DropShape;
     }
 
     // Move Cube
     void Update()
     {
         currentState.Invoke();
-        //HandleOpacity();
+        HandleOpacity();
     }
 
-    // Command Pattern for Handing Cube Movement - Emulating DPad GB-Like Movement
-    void MoveCube()
+    // Command Pattern for Handing Shape Movement - Emulating DPad GB-Like Movement
+    void MoveShape()
     {
         Vector3 direction = GetMoveDirection();
 
@@ -46,227 +47,146 @@ public class Shape : MonoBehaviour
         }
     }
 
+    // Get Move Direction based on Panel Side
     Vector3 GetMoveDirection()
     {
-        switch (panelSide)
-        {
-            // facing front side
-            case 0:
-                return GetFrontSideDirection();
-            // facing right side
-            case 1:
-                return GetRightSideDirection();
-            // facing back side
-            case 2:
-                return GetBackSideDirection();
-            // facing left side
-            case 3:
-                return GetLeftSideDirection();
-            // if nothing, then dont move (this case wont be triggered if cubside is working properly)
-            default:
-                return Vector3.zero;
-        }
-    }
+        Vector3[][] directions = new Vector3[4][];
+        directions[0] = GetFrontSideDirection();
+        directions[1] = GetRightSideDirection();
+        directions[2] = GetBackSideDirection();
+        directions[3] = GetLeftSideDirection();
 
-    Vector3 GetFrontSideDirection()
-    {
-        // ray cast to see if there is another cube next to it
-        RaycastHit hit;
-
+        // Check for Input
         if (Input.GetKeyUp(KeyCode.RightArrow))
         {
-            if (Physics.Raycast(cubeTransform.position, Vector3.right, out hit, 1, layerMask))
-                return Vector3.zero;
-            if (Physics.Raycast(rightShapePart.transform.position, Vector3.right, out hit, 1.0f, layerMask))
-                return Vector3.zero;
-            return Vector3.right;
+            // Check if shape can move in that direction, return direction if no collision
+            if (!CheckCollision(directions[panelSide][0])) return directions[panelSide][0];
         }
+
         if (Input.GetKeyUp(KeyCode.LeftArrow))
         {
-            if (Physics.Raycast(cubeTransform.position, Vector3.left, out hit, 1.0f, layerMask))
-                return Vector3.zero;
-            if (Physics.Raycast(leftShapePart.transform.position, Vector3.left, out hit, 1.0f, layerMask))
-                return Vector3.zero;
-            return Vector3.left;
+            if (!CheckCollision(directions[panelSide][1])) return directions[panelSide][1];
         }
+
         if (Input.GetKeyUp(KeyCode.UpArrow))
         {
-            if (Physics.Raycast(cubeTransform.position, Vector3.forward, out hit, 1.0f, layerMask))
-                return Vector3.zero;
-            return Vector3.forward;
+            if (!CheckCollision(directions[panelSide][2])) return directions[panelSide][2];
         }
+
         if (Input.GetKeyUp(KeyCode.DownArrow))
         {
-            if (Physics.Raycast(cubeTransform.position, Vector3.back, out hit, 1.0f, layerMask))
-                return Vector3.zero;
-            return Vector3.back;
+            if (!CheckCollision(directions[panelSide][3])) return directions[panelSide][3];
         }
+
         return Vector3.zero;
     }
 
-    Vector3 GetRightSideDirection()
+    // All Possible Directions based on Panel Sides
+    Vector3[] GetFrontSideDirection()
     {
-        // ray cast to see if there is another cube next to it
-        RaycastHit hit;
-
-        if (Input.GetKeyUp(KeyCode.RightArrow))
-        {
-            if (Physics.Raycast(cubeTransform.position, Vector3.right, out hit, 1, layerMask))
-                return Vector3.zero;
-            if (Physics.Raycast(rightShapePart.transform.position, Vector3.right, out hit, 1.0f, layerMask))
-                return Vector3.zero;
-            return Vector3.forward;
-        }
-        if (Input.GetKeyUp(KeyCode.LeftArrow))
-        {
-            if (Physics.Raycast(cubeTransform.position, Vector3.left, out hit, 1.0f, layerMask))
-                return Vector3.zero;
-            if (Physics.Raycast(leftShapePart.transform.position, Vector3.left, out hit, 1.0f, layerMask))
-                return Vector3.zero;
-            return Vector3.back;
-        }
-        if (Input.GetKeyUp(KeyCode.UpArrow))
-        {
-            if (Physics.Raycast(cubeTransform.position, Vector3.forward, out hit, 1.0f, layerMask))
-                return Vector3.zero;
-            return Vector3.left;
-        }
-        if (Input.GetKeyUp(KeyCode.DownArrow))
-        {
-            if (Physics.Raycast(cubeTransform.position, Vector3.back, out hit, 1.0f, layerMask))
-                return Vector3.zero;
-            return Vector3.right;
-        }
-        return Vector3.zero;
-
+        return new Vector3[] { Vector3.right, Vector3.left, Vector3.forward, Vector3.back };
     }
 
-    Vector3 GetBackSideDirection()
+    Vector3[] GetRightSideDirection()
     {
-        // ray cast to see if there is another cube next to it
-        RaycastHit hit;
-
-        if (Input.GetKeyUp(KeyCode.RightArrow))
-        {
-            if (Physics.Raycast(cubeTransform.position, Vector3.right, out hit, 1, layerMask))
-                return Vector3.zero;
-            if (Physics.Raycast(rightShapePart.transform.position, Vector3.right, out hit, 1.0f, layerMask))
-                return Vector3.zero;
-            return Vector3.left;
-        }
-        if (Input.GetKeyUp(KeyCode.LeftArrow))
-        {
-            if (Physics.Raycast(cubeTransform.position, Vector3.left, out hit, 1.0f, layerMask))
-                return Vector3.zero;
-            if (Physics.Raycast(leftShapePart.transform.position, Vector3.left, out hit, 1.0f, layerMask))
-                return Vector3.zero;
-            return Vector3.right;
-        }
-        if (Input.GetKeyUp(KeyCode.UpArrow))
-        {
-            if (Physics.Raycast(cubeTransform.position, Vector3.forward, out hit, 1.0f, layerMask))
-                return Vector3.zero;
-            return Vector3.back;
-        }
-        if (Input.GetKeyUp(KeyCode.DownArrow))
-        {
-            if (Physics.Raycast(cubeTransform.position, Vector3.back, out hit, 1.0f, layerMask))
-                return Vector3.zero;
-            return Vector3.forward;
-        }
-        return Vector3.zero;
+        return new Vector3[] { Vector3.forward, Vector3.back, Vector3.left, Vector3.right };
     }
 
-    Vector3 GetLeftSideDirection()
+    Vector3[] GetBackSideDirection()
     {
-        // ray cast to see if there is another cube next to it
-        RaycastHit hit;
-
-        if (Input.GetKeyUp(KeyCode.RightArrow))
-        {
-            if (Physics.Raycast(cubeTransform.position, Vector3.right, out hit, 1, layerMask))
-                return Vector3.zero;
-            if (Physics.Raycast(rightShapePart.transform.position, Vector3.right, out hit, 1.0f, layerMask))
-                return Vector3.zero;
-            return Vector3.back;
-        }
-        if (Input.GetKeyUp(KeyCode.LeftArrow))
-        {
-            if (Physics.Raycast(cubeTransform.position, Vector3.left, out hit, 1.0f, layerMask))
-                return Vector3.zero;
-            if (Physics.Raycast(leftShapePart.transform.position, Vector3.left, out hit, 1.0f, layerMask))
-                return Vector3.zero;
-            return Vector3.forward;
-        }
-        if (Input.GetKeyUp(KeyCode.UpArrow))
-        {
-            if (Physics.Raycast(cubeTransform.position, Vector3.forward, out hit, 1.0f, layerMask))
-                return Vector3.zero;
-            if (Physics.Raycast(leftShapePart.transform.position, Vector3.forward, out hit, 1.0f, layerMask))
-                return Vector3.zero;
-            if (Physics.Raycast(rightShapePart.transform.position, Vector3.forward, out hit, 1.0f, layerMask))
-                return Vector3.zero;
-            if (Physics.Raycast(topShapePart.transform.position, Vector3.forward, out hit, 1.0f, layerMask))
-                return Vector3.zero;
-            if (Physics.Raycast(bottomShapePart.transform.position, Vector3.forward, out hit, 1.0f, layerMask))
-                return Vector3.zero;
-            return Vector3.right;
-        }
-        if (Input.GetKeyUp(KeyCode.DownArrow))
-        {
-            if (Physics.Raycast(cubeTransform.position, Vector3.back, out hit, 1.0f, layerMask))
-                return Vector3.zero;
-            if (Physics.Raycast(leftShapePart.transform.position, Vector3.back, out hit, 1.0f, layerMask))
-                return Vector3.zero;
-            if (Physics.Raycast(rightShapePart.transform.position, Vector3.back, out hit, 1.0f, layerMask))
-                return Vector3.zero;
-            if (Physics.Raycast(topShapePart.transform.position, Vector3.back, out hit, 1.0f, layerMask))
-                return Vector3.zero;
-            if (Physics.Raycast(bottomShapePart.transform.position, Vector3.back, out hit, 1.0f, layerMask))
-                return Vector3.zero;
-            return Vector3.left;
-        }
-        return Vector3.zero;
+        return new Vector3[] { Vector3.left, Vector3.right, Vector3.back, Vector3.forward };
     }
 
+    Vector3[] GetLeftSideDirection()
+    {
+        return new Vector3[] { Vector3.back, Vector3.forward, Vector3.right, Vector3.left };
+    }
+
+    // Collison detection for shape to ensure it can or cannot move on the x/z axis
+    public bool CheckCollision(Vector3 direction)
+    {
+        // make sure raycast isnt hitting the cube within the shape itself
+        int[] cubesInShape = FetchAllCubesInShape();
+
+        // iterate through all children of the shape
+        foreach (Transform child in transform)
+        {
+            // We can do this by looking for the child cubes of the shape and checking if they are colliding with anything
+            if (child.CompareTag("Shape"))
+            {
+                // check if the cube is colliding with anything
+                RaycastHit hit;
+                if (Physics.Raycast(child.position, direction, out hit, 1, layerMask))
+                {
+                    // check if cube is colliding with another cube
+
+                    return false;
+                }
+            }
+        }
+
+        // if no collision detected, return true
+        return true;
+    }
+
+    // Fetch all cubes in the shape
+    public int[] FetchAllCubesInShape()
+    {
+        // get all cubes in the shape
+        int[] cubesInShape = new int[transform.childCount];
+        int i = 0;
+
+        // iterate through all children of the shape
+        foreach (Transform child in transform)
+        {
+            // We can do this by looking for the child cubes of the shape and checking if they are colliding with anything
+            if (child.CompareTag("Shape"))
+            {
+                cubesInShape[i] = child.GetInstanceID();
+                i++;
+            }
+        }
+
+        return cubesInShape;
+    }
+
+    // Move and ensure that Shape is within bounds
     void MoveAndClamp(Vector3 direction)
     {
         // move cube
-        cubeTransform.localPosition += direction;
+        shapeTransform.localPosition += direction;
+
         // ensure cube is within bounds
-        cubeTransform.localPosition = new Vector3(
-            Mathf.Clamp(cubeTransform.localPosition.x, -3.0f, 1.0f), // TEMPORARY FIX for clamping x
-            cubeTransform.localPosition.y,
-            Mathf.Clamp(cubeTransform.localPosition.z, -3.0f, 2.0f)
+        shapeTransform.localPosition = new Vector3(
+            Mathf.Clamp(shapeTransform.localPosition.x, -3.0f, 1.0f), // TEMPORARY FIX for clamping x
+            shapeTransform.localPosition.y,
+            Mathf.Clamp(shapeTransform.localPosition.z, -3.0f, 2.0f)
         );
+
+        // check if cube is at the edge of the bounds on all sides
+        edgeOfBounds = (shapeTransform.localPosition.x == -3.0f ||
+        shapeTransform.localPosition.z == -3.0f ||
+        shapeTransform.localPosition.z == 2.0f ||
+        shapeTransform.localPosition.x == 1.0f) ? true : false;
     }
 
-    // Handle Cube Sides
-    public void HandleCubeSides(int direction)
+    // Handle Shape Sides
+    public void HandleShapeSides(int direction)
     {
-        panelSide += 1 * direction;
-
-        if (panelSide < 0)
-        {
-            panelSide = 3;
-        }
-
-        if (panelSide > 3)
-        {
-            panelSide = 0;
-        }
+        panelSide += 1 * direction; // direction is either 1 or -1, so -1 if rotating left, 1 if right rotating right
+        Mathf.Clamp(panelSide, 0, 3); // ensure panelSide is within bounds (there are 4 sides)
     }
 
-    // Drop Cube
-    public void DropCube()
+    // Drop Shape State
+    public void DropShape()
     {
         // you are able to move the cube while it drops
-        MoveCube();
+        MoveShape();
 
         // move cube down every second
         if (time * Time.deltaTime >= 10 * dropRate)
         {
-            cubeTransform.localPosition += Vector3.down;
+            shapeTransform.localPosition += Vector3.down;
             time = 0;
         }
         else
@@ -275,21 +195,24 @@ public class Shape : MonoBehaviour
         }
     }
 
-    public void DropCubeNoInput()
+    // Drop Shape State without Input State (for when rows are cleared and gravity needs to do it's job)
+    public void DropShapeNoInput()
     {
         // move cube down every second
         if (time * Time.deltaTime >= 10 * dropRate)
         {
-            cubeTransform.localPosition += Vector3.down;
+            // drop cube once every second and reset timer
+            shapeTransform.localPosition += Vector3.down;
             time = 0;
         }
         else
         {
+            // if timer hasnt reached 1 second, increment time - keep counting up
             time++;
         }
     }
 
-    public void StopCube()
+    public void StopShape()
     {
         // stop cube from moving
 

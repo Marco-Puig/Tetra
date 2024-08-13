@@ -11,7 +11,7 @@ public class LayerPiece : MonoBehaviour
         if (other.gameObject.tag == "Shape" && other.gameObject.GetComponent<Shape>() != null)
         {
             // dont do anything if shape is dropping cube
-            if (other.gameObject.GetComponent<Shape>().currentState == other.gameObject.GetComponent<Shape>().DropCube)
+            if (other.gameObject.GetComponent<Shape>().currentState == other.gameObject.GetComponent<Shape>().DropShape)
             {
                 return;
             }
@@ -21,7 +21,7 @@ public class LayerPiece : MonoBehaviour
             if (clearingRow)
             {
                 // set shape to stop cube state and destroy it
-                other.gameObject.GetComponent<Shape>().currentState = other.gameObject.GetComponent<Shape>().StopCube;
+                other.gameObject.GetComponent<Shape>().currentState = other.gameObject.GetComponent<Shape>().StopShape;
                 Destroy(other.gameObject);
 
                 // once cleared, stop clear action
@@ -50,10 +50,10 @@ public class LayerPiece : MonoBehaviour
         }
 
         // if cube is already dropping, dont do anything
-        if (shapeInPiece.GetComponent<Shape>().currentState != shapeInPiece.GetComponent<Shape>().DropCubeNoInput)
+        if (shapeInPiece.GetComponent<Shape>().currentState != shapeInPiece.GetComponent<Shape>().DropShapeNoInput)
         {
             // drop cube state so it moves down
-            shapeInPiece.GetComponent<Shape>().currentState = shapeInPiece.GetComponent<Shape>().DropCubeNoInput;
+            shapeInPiece.GetComponent<Shape>().currentState = shapeInPiece.GetComponent<Shape>().DropShapeNoInput;
         }
     }
 

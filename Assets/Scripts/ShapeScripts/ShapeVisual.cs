@@ -8,6 +8,8 @@ public class shapeVisual : MonoBehaviour
     [SerializeField] LayerMask layerMask;
     [SerializeField] bool hasRightPiece = true;
     [SerializeField] bool hasLeftPiece = false;
+    [SerializeField] GameObject rightPiece;
+    [SerializeField] GameObject leftPiece;
     private GameObject visualshape;
     bool start = true;
 
@@ -55,7 +57,7 @@ public class shapeVisual : MonoBehaviour
         if (Physics.Raycast(transform.position, Vector3.down, out hit1, 7, layerMask)) // ignore visual and layer
         {
             // ensure that right stuck out piece of visual cube is on the same level as the main shape piece
-            if (Physics.Raycast(new Vector3(transform.position.x + 1, transform.position.y, transform.position.z), Vector3.down, out hit2, 7, layerMask) && hasRightPiece) // ignore visual and layer
+            if (Physics.Raycast(new Vector3(rightPiece.transform.position.x, rightPiece.transform.position.y, rightPiece.transform.position.z), Vector3.down, out hit2, 7, layerMask) && hasRightPiece) // ignore visual and layer
             {
                 // if the visual cube is not on the same level as the main shape piece, move it up
                 if (hit1.point.y < hit2.point.y)
@@ -69,7 +71,7 @@ public class shapeVisual : MonoBehaviour
                 }
             }
             // ensure that left stuck out piece of visual cube is on the same level as the main shape piece
-            if (Physics.Raycast(new Vector3(transform.position.x - 1, transform.position.y, transform.position.z), Vector3.down, out hit2, 7, layerMask) && hasLeftPiece) // ignore visual and layer
+            if (Physics.Raycast(new Vector3(leftPiece.transform.position.x, leftPiece.transform.position.y, leftPiece.transform.position.z), Vector3.down, out hit2, 7, layerMask) && hasLeftPiece) // ignore visual and layer
             {
                 // if the visual cube is not on the same level as the main shape piece, move it up
                 if (hit1.point.y < hit2.point.y)
@@ -90,8 +92,8 @@ public class shapeVisual : MonoBehaviour
             }
 
             // draw debug lines in scene view
-            Debug.DrawLine(transform.position, hit1.point, Color.blue, 7);
-            Debug.DrawLine(transform.position, hit2.point, Color.blue, 7);
+            Debug.DrawLine(transform.position, hit1.point, Color.red, 7);
+            Debug.DrawLine(transform.position, hit2.point, Color.green, 7);
         }
     }
 
