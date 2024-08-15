@@ -7,6 +7,7 @@ public class ShapeRotator : MonoBehaviour
     void Update()
     {
         RotateShape();
+        CheckClipping();
     }
 
     void RotateShape()
@@ -40,6 +41,33 @@ public class ShapeRotator : MonoBehaviour
 
             // Check rotationSide and update the rotation of the shape accordingly
             transform.rotation = Quaternion.Euler(transform.rotation.x, 90f * rotationSide, transform.rotation.z);
+        }
+    }
+
+    // check the possibility that if shape rotates, it doesn't collide with any other shapes
+    void CheckClipping()
+    {
+        // Get all colliders attached to the shape
+        Collider[] colliders = GetComponentsInChildren<Collider>();
+
+        // Check if any of the colliders are overlapping with other colliders
+        foreach (Collider collider in colliders)
+        {
+            // Check for collisions with other colliders and if the tag is not "Shape"
+            if (collider.bounds.Intersects(GetComponent<Collider>().bounds) && collider.tag != "Shape")
+            {
+                // Shape is colliding with another shape, so undo the rotation
+                rotationSide--;
+
+                // If rotationSide is less than 0, set it to 3 since we only have 4 sides
+                rotationSide = rotationSide < 0 ? 3 : rotationSide;
+
+                // Reset the rotation of the shape
+                transform.rotation = Quaternion.Euler(transform.rotation.x, 90f * rotationSide, transform.rotation.z);
+
+                // Exit the loop since we found a collision
+                break;
+            }
         }
     }
 }

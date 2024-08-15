@@ -308,14 +308,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42cf843f7cb44a942a392f91be714359, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  edgeOfBounds: 0
   layerMask:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 320
   usesVisual: 1
-  leftShapePart: {fileID: 3827242381564538449}
-  rightShapePart: {fileID: 4487403208422035399}
-  topShapePart: {fileID: 2292027093635402248}
-  bottomShapePart: {fileID: 3827242381564538449}
   shapeVisual: {fileID: 4520818368126188351}
 --- !u!114 &3827242382085708539
 MonoBehaviour:
@@ -363,7 +360,7 @@ MonoBehaviour:
   visualShapePrefab: {fileID: 2493405104913831159, guid: 81cd7358af500154bbe89ed6184522be, type: 3}
   layerMask:
     serializedVersion: 2
-    m_Bits: 119
+    m_Bits: 375
   hasRightPiece: 1
   hasLeftPiece: 0
   rightPiece: {fileID: 4487403208422035399}

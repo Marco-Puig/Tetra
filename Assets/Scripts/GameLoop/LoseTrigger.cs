@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -9,6 +7,9 @@ public class LoseTrigger : MonoBehaviour
     {
         if (other.gameObject.tag == "Shape")
         {
+            // reset panel side to 0
+            other.gameObject.GetComponent<Shape>().ResetPanelSide();
+
             // restart the scene for now
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }

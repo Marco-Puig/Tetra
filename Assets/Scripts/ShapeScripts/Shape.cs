@@ -105,49 +105,26 @@ public class Shape : MonoBehaviour
     // Collison detection for shape to ensure it can or cannot move on the x/z axis
     public bool CheckCollision(Vector3 direction)
     {
-        // make sure raycast isnt hitting the cube within the shape itself
-        int[] cubesInShape = FetchAllCubesInShape();
-
-        // iterate through all children of the shape
+        // We can do this by looking for the child cubes of the shape and checking if they are colliding with anything
         foreach (Transform child in transform)
         {
-            // We can do this by looking for the child cubes of the shape and checking if they are colliding with anything
-            if (child.CompareTag("Shape"))
+            // check if the cube is colliding with anything
+            RaycastHit hit;
+
+            if (Physics.Raycast(child.position, direction, out hit, 1, layerMask))
             {
-                // check if the cube is colliding with anything
-                RaycastHit hit;
-                if (Physics.Raycast(child.position, direction, out hit, 1, layerMask))
+                // Check if the object hit by the raycast is not part of the same shape
+                if (hit.transform != transform && hit.transform.parent != transform)
                 {
-                    // check if cube is colliding with another cube
-
-                    return false;
+                    // If the cube is colliding with something else, return true - shape is not allowed to move
+                    return true;
                 }
+                //HELLO, I HOPE YOU HAD A GREAT DAY! LOVE YA, NIGHT NIGHT
             }
         }
 
-        // if no collision detected, return true
-        return true;
-    }
-
-    // Fetch all cubes in the shape
-    public int[] FetchAllCubesInShape()
-    {
-        // get all cubes in the shape
-        int[] cubesInShape = new int[transform.childCount];
-        int i = 0;
-
-        // iterate through all children of the shape
-        foreach (Transform child in transform)
-        {
-            // We can do this by looking for the child cubes of the shape and checking if they are colliding with anything
-            if (child.CompareTag("Shape"))
-            {
-                cubesInShape[i] = child.GetInstanceID();
-                i++;
-            }
-        }
-
-        return cubesInShape;
+        // if no collision detected, return false - shape is allowed to move
+        return false;
     }
 
     // Move and ensure that Shape is within bounds
@@ -182,32 +159,24 @@ public class Shape : MonoBehaviour
     {
         // you are able to move the cube while it drops
         MoveShape();
-
-        // move cube down every second
-        if (time * Time.deltaTime >= 10 * dropRate)
-        {
-            shapeTransform.localPosition += Vector3.down;
-            time = 0;
-        }
-        else
-        {
-            time++;
-        }
+        MoveDownEverySecond();
     }
 
     // Drop Shape State without Input State (for when rows are cleared and gravity needs to do it's job)
-    public void DropShapeNoInput()
+    public void DropShapeNoInput() => MoveDownEverySecond();
+
+    // Move Shape Down Every Second
+    void MoveDownEverySecond()
     {
         // move cube down every second
         if (time * Time.deltaTime >= 10 * dropRate)
         {
-            // drop cube once every second and reset timer
             shapeTransform.localPosition += Vector3.down;
             time = 0;
         }
         else
         {
-            // if timer hasnt reached 1 second, increment time - keep counting up
+            // increment time if it hasnt reached 1 second
             time++;
         }
     }
@@ -221,6 +190,12 @@ public class Shape : MonoBehaviour
         {
             shapeVisual.enabled = false;
         }
+    }
+
+    public void ResetPanelSide()
+    {
+        // reset panel side to 0 (default)
+        panelSide = 0;
     }
 
     void HandleOpacity()

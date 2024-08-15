@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using UnityEngine;
 
 // ONLY ATTACH THIS SCRIPT TO BOTTOM PIECES OF THE SHAPE
@@ -25,13 +26,22 @@ public class ShapeCollision : MonoBehaviour
             // stop cube from moving:
 
             // move up parent
-            if (transform.parent.GetComponent<Shape>() != null)
-                transform.parent.position += Vector3.up;
-            else
-                transform.position += Vector3.up;
+            MoveUpShape();
 
             // set cube to stop cube state
             shape.currentState = shape.StopShape;
         }
+    }
+
+    async void MoveUpShape()
+    {
+        // wait for 100 milliseconds to ensure collision are handled properly
+        await Task.Delay(100);
+
+        if (transform.parent.GetComponent<Shape>() != null)
+            transform.parent.position += Vector3.up;
+        else
+            transform.position += Vector3.up;
+
     }
 }
