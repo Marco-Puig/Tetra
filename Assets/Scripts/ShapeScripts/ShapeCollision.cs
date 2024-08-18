@@ -1,4 +1,3 @@
-using System.Threading.Tasks;
 using UnityEngine;
 
 // ONLY ATTACH THIS SCRIPT TO BOTTOM PIECES OF THE SHAPE
@@ -6,42 +5,31 @@ using UnityEngine;
 public class ShapeCollision : MonoBehaviour
 {
     [SerializeField] Shape shape;
-
-    // if collides with Visual object, destroy Visual object
-    private void OnTriggerEnter(Collider other)
+    private void Start()
     {
-        // destroy visual if it is hit
-        if (other.gameObject.CompareTag("Visual"))
+        // get shape component from parent or current object if current object is parent
+        shape = transform.GetComponent<Shape>() != null ? GetComponent<Shape>() : GetComponentInParent<Shape>();
+    }
+
+    private void Update()
+    {
+        // if cube is stopped, return
+        if (shape.currentState == shape.StopShape) return;
+
+        // check if cube detects shape or ground layer below it, stop cube from moving
+        if (shape.CheckCollision(Vector3.down, transform))
         {
-            Destroy(other.gameObject);
-        }
-
-        // if cube is not stopped
-        if (shape.currentState != shape.StopShape && !other.gameObject.CompareTag("Layer") && !other.gameObject.CompareTag("Visual"))
-        {
-            // destroy visual
-            GameObject visualShape = GameObject.FindGameObjectWithTag("Visual");
-            if (visualShape != null) Destroy(visualShape);
-
-            // stop cube from moving:
-
-            // move up parent
-            MoveUpShape();
-
-            // set cube to stop cube state
+            // stop cube from moving - switch to stop state
             shape.currentState = shape.StopShape;
         }
     }
 
-    async void MoveUpShape()
+    private void OnTriggerEnter(Collider other)
     {
-        // wait for 100 milliseconds to ensure collision are handled properly
-        await Task.Delay(100);
-
-        if (transform.parent.GetComponent<Shape>() != null)
-            transform.parent.position += Vector3.up;
-        else
-            transform.position += Vector3.up;
-
+        // destroy visual object if shape collides with it
+        if (other.gameObject.CompareTag("Visual"))
+        {
+            Destroy(other.gameObject);
+        }
     }
 }

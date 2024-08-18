@@ -8,6 +8,7 @@ public class Shape : MonoBehaviour
     private static int panelSide = 0;
     private float time = 0;
     private float dropRate = 0.3f;
+    private float range = 1.0f;
 
     // Public:
     public delegate void State();
@@ -16,7 +17,6 @@ public class Shape : MonoBehaviour
 
     // Inspector Variables:
     public LayerMask layerMask;
-    public bool usesVisual = true;
     [SerializeField] shapeVisual shapeVisual;
 
 
@@ -60,22 +60,22 @@ public class Shape : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.RightArrow))
         {
             // Check if shape can move in that direction, return direction if no collision
-            if (!CheckCollision(directions[panelSide][0])) return directions[panelSide][0];
+            if (!CheckCollision(directions[0][0])) return directions[panelSide][0];
         }
 
         if (Input.GetKeyUp(KeyCode.LeftArrow))
         {
-            if (!CheckCollision(directions[panelSide][1])) return directions[panelSide][1];
+            if (!CheckCollision(directions[0][1])) return directions[panelSide][1];
         }
 
         if (Input.GetKeyUp(KeyCode.UpArrow))
         {
-            if (!CheckCollision(directions[panelSide][2])) return directions[panelSide][2];
+            if (!CheckCollision(directions[0][2])) return directions[panelSide][2];
         }
 
         if (Input.GetKeyUp(KeyCode.DownArrow))
         {
-            if (!CheckCollision(directions[panelSide][3])) return directions[panelSide][3];
+            if (!CheckCollision(directions[0][3])) return directions[panelSide][3];
         }
 
         return Vector3.zero;
@@ -105,13 +105,24 @@ public class Shape : MonoBehaviour
     // Collison detection for shape to ensure it can or cannot move on the x/z axis
     public bool CheckCollision(Vector3 direction)
     {
-        // We can do this by looking for the child cubes of the shape and checking if they are colliding with anything
+        // check if the cube is colliding with anything
+        RaycastHit hit;
+
+        // Detect collision with the object condition of parent
+        if (Physics.Raycast(shapeTransform.position, direction, out hit, range, layerMask))
+        {
+            // Check if the object hit by the raycast is not part of the same shape
+            if (hit.transform != transform && hit.transform.parent != transform)
+            {
+                // If the cube is colliding with something else, return true - shape is not allowed to move
+                return true;
+            }
+        }
+
+        // Next, detect collisions for the child cubes of the shape and checking if they are colliding with anything
         foreach (Transform child in transform)
         {
-            // check if the cube is colliding with anything
-            RaycastHit hit;
-
-            if (Physics.Raycast(child.position, direction, out hit, 1, layerMask))
+            if (Physics.Raycast(child.position, direction, out hit, range, layerMask))
             {
                 // Check if the object hit by the raycast is not part of the same shape
                 if (hit.transform != transform && hit.transform.parent != transform)
@@ -127,20 +138,29 @@ public class Shape : MonoBehaviour
         return false;
     }
 
+    // Overloaded CheckCollision method to allow for custom range of detection and with a basic condition
+    public bool CheckCollision(Vector3 direction, Transform objectTransform, float range = 1.0f)
+    {
+        // check if the cube is colliding with anything
+        RaycastHit hit;
+
+        // Detect collision with the object condition
+        if (Physics.Raycast(objectTransform.position, direction, out hit, range, layerMask))
+        {
+            return true;
+        }
+
+        // if no collision detected, return false - shape is allowed to move
+        return false;
+    }
+
     // Move and ensure that Shape is within bounds
     void MoveAndClamp(Vector3 direction)
     {
         // move cube
         shapeTransform.localPosition += direction;
 
-        // ensure cube is within bounds
-        shapeTransform.localPosition = new Vector3(
-            Mathf.Clamp(shapeTransform.localPosition.x, -3.0f, 1.0f), // TEMPORARY FIX for clamping x
-            shapeTransform.localPosition.y,
-            Mathf.Clamp(shapeTransform.localPosition.z, -3.0f, 2.0f)
-        );
-
-        // check if cube is at the edge of the bounds on all sides
+        // check if cube is at the edge of the bounds on all sides - im not a fan of this code snippet
         edgeOfBounds = (shapeTransform.localPosition.x == -3.0f ||
         shapeTransform.localPosition.z == -3.0f ||
         shapeTransform.localPosition.z == 2.0f ||
@@ -174,19 +194,17 @@ public class Shape : MonoBehaviour
             shapeTransform.localPosition += Vector3.down;
             time = 0;
         }
-        else
-        {
-            // increment time if it hasnt reached 1 second
-            time++;
-        }
+
+        // increment time if it hasnt reached 1 second
+        time++;
+
     }
 
+    // stop cube from moving
     public void StopShape()
     {
-        // stop cube from moving
-
         // stop spawning visual cube for it
-        if (usesVisual && shapeVisual != null)
+        if (shapeVisual != null)
         {
             shapeVisual.enabled = false;
         }
@@ -200,7 +218,14 @@ public class Shape : MonoBehaviour
 
     void HandleOpacity()
     {
-        // REDO HANDLING OPACITY BASED ON DISTANCE OF CUBE TOWARDS THE CAMERA
+        // get distance of cube from camera
+        float distance = Vector3.Distance(Camera.main.transform.position, shapeTransform.position);
+
+        // get opacity based on distance
+        float opacity = 1 - (distance / 60);
+
+        // set opacity of cube material
+        cubeMat.color = new Color(cubeMat.color.r, cubeMat.color.g, cubeMat.color.b, opacity);
 
         // update all cube sides to match the main cube 
         foreach (Transform child in transform)
