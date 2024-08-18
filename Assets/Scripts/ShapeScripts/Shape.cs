@@ -222,7 +222,7 @@ public class Shape : MonoBehaviour
         float distance = Vector3.Distance(Camera.main.transform.position, shapeTransform.position);
 
         // get opacity based on distance
-        float opacity = 1 - (distance / 60);
+        float opacity = distance * 0.08f;
 
         // set opacity of cube material
         cubeMat.color = new Color(cubeMat.color.r, cubeMat.color.g, cubeMat.color.b, opacity);

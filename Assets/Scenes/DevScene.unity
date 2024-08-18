@@ -54403,7 +54403,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1193947555
 Transform:
   m_ObjectHideFlags: 0
@@ -99928,7 +99928,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shapes:
-  - {fileID: 3827242381564538449, guid: 22c8452dd834a5b4db74a1fe2cd35eb7, type: 3}
+  - {fileID: 3827242381564538449, guid: 776294d543d0dc94abc8fa448c1c2b82, type: 3}
   panelManager: {fileID: 225871417}
 --- !u!1 &2056938467
 GameObject:
