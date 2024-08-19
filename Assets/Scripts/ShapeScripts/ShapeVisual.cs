@@ -1,5 +1,6 @@
 using System;
 using System.Threading.Tasks;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class shapeVisual : MonoBehaviour
@@ -39,12 +40,17 @@ public class shapeVisual : MonoBehaviour
         }
     }
 
+    // NEEDS REWORK TO BE MORE ROBUST - CURRENTLY A BRUTE FORCE METHOD
     async void CalculateVisualPosition()
     {
         if (start)
         {
             await Task.Delay(100); // wait for old visual to be destroyed before creating new one
             start = false; // set start to false so this block of code only runs once
+        }
+        else
+        {
+            await Task.Delay(1); // wait for old visual to be destroyed before creating new one
         }
 
         // use raycast to spawn visual on cube the visual is on
@@ -62,7 +68,7 @@ public class shapeVisual : MonoBehaviour
                 // if the visual cube is not on the same level as the main shape piece, move it up
                 if (hit1.point.y < hit2.point.y)
                 {
-                    CreateVisualshape(new Vector3(transform.position.x, (float)Math.Ceiling(hit2.point.y), transform.position.z));
+                    CreateVisualshape(new Vector3(transform.position.x, (float)Math.Ceiling(hit2.point.y - (rightPiece.transform.position.y - transform.position.y)), transform.position.z));
                 }
                 else
                 {

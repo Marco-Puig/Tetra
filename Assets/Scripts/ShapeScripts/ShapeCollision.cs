@@ -5,6 +5,7 @@ using UnityEngine;
 public class ShapeCollision : MonoBehaviour
 {
     [SerializeField] Shape shape;
+
     private void Start()
     {
         // get shape component from parent or current object if current object is parent
@@ -19,6 +20,10 @@ public class ShapeCollision : MonoBehaviour
         // check if cube detects shape or ground layer below it, stop cube from moving
         if (shape.CheckCollision(Vector3.down, transform))
         {
+            // find Visual object and destroy it - ensuring cleanup
+            GameObject visual = GameObject.Find("Visual");
+            if (visual != null) Destroy(visual);
+
             // stop cube from moving - switch to stop state
             shape.currentState = shape.StopShape;
         }

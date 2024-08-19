@@ -147,7 +147,12 @@ public class Shape : MonoBehaviour
         // Detect collision with the object condition
         if (Physics.Raycast(objectTransform.position, direction, out hit, range, layerMask))
         {
-            return true;
+            // Check if the object hit by the raycast is not part of the same shape
+            if (hit.transform != transform && hit.transform.parent != transform)
+            {
+                // If the cube is colliding with something else, return true - shape is not allowed to move
+                return true;
+            }
         }
 
         // if no collision detected, return false - shape is allowed to move
