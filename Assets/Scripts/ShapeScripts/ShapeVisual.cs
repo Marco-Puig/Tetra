@@ -9,6 +9,7 @@ public class shapeVisual : MonoBehaviour
     [SerializeField] LayerMask layerMask;
     [SerializeField] bool hasRightPiece = true;
     [SerializeField] bool hasLeftPiece = false;
+    [SerializeField] bool hasHigherRightPiece = false;
     [SerializeField] GameObject rightPiece;
     [SerializeField] GameObject leftPiece;
     private GameObject visualshape;
@@ -40,7 +41,7 @@ public class shapeVisual : MonoBehaviour
         }
     }
 
-    // NEEDS REWORK TO BE MORE ROBUST - CURRENTLY A BRUTE FORCE METHOD
+    // NEEDS REWORKED TO BE MORE ROBUST - CURRENTLY A BRUTE FORCE METHOD
     async void CalculateVisualPosition()
     {
         if (start)
@@ -59,19 +60,18 @@ public class shapeVisual : MonoBehaviour
         if (Physics.Raycast(transform.position, Vector3.down, out hit1, 7, layerMask)) // ignore visual and layer
         {
             // ensure that right stuck out piece of visual cube is on the same level as the main shape piece
-            if (Physics.Raycast(new Vector3(rightPiece.transform.position.x, rightPiece.transform.position.y, rightPiece.transform.position.z), Vector3.down, out hit2, 7, layerMask) && hasRightPiece) // ignore visual and layer
+            if (Physics.Raycast(new Vector3(rightPiece.transform.position.x, rightPiece.transform.position.y - Convert.ToInt32(hasHigherRightPiece), rightPiece.transform.position.z), Vector3.down, out hit2, 7, layerMask) && hasRightPiece) // ignore visual and layer
             {
                 // if the visual cube is not on the same level as the main shape piece, move it up
                 if (hit1.point.y < hit2.point.y)
                 {
-                    CreateVisualshape(new Vector3(transform.position.x, (float)Math.Ceiling(hit2.point.y - (rightPiece.transform.position.y - transform.position.y)), transform.position.z));
+                    CreateVisualshape(new Vector3(transform.position.x, (float)Math.Ceiling(hit2.point.y - Convert.ToInt32(hasHigherRightPiece)), transform.position.z));
                 }
                 else
                 {
                     // spawn visual cube if we are leveled correctly :)
                     CreateVisualshape(new Vector3(transform.position.x, (float)Math.Ceiling(hit1.point.y), transform.position.z));
                 }
-
             }
             // ensure that left stuck out piece of visual cube is on the same level as the main shape piece
             if (Physics.Raycast(new Vector3(leftPiece.transform.position.x, leftPiece.transform.position.y, leftPiece.transform.position.z), Vector3.down, out hit2, 7, layerMask) && hasLeftPiece) // ignore visual and layer
@@ -96,7 +96,7 @@ public class shapeVisual : MonoBehaviour
 
             // draw debug lines in scene view
             Debug.DrawLine(transform.position, hit1.point, Color.red, 7);
-            Debug.DrawLine(transform.position, hit2.point, Color.green, 7);
+            Debug.DrawLine(rightPiece.transform.position, hit2.point, Color.green, 7);
         }
     }
 

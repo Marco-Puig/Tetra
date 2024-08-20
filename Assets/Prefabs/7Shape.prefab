@@ -362,6 +362,7 @@ MonoBehaviour:
     m_Bits: 375
   hasRightPiece: 1
   hasLeftPiece: 0
+  hasHigherRightPiece: 1
   rightPiece: {fileID: 4487403208422035399}
   leftPiece: {fileID: 3827242381564538449}
 --- !u!114 &5725007959904316700
