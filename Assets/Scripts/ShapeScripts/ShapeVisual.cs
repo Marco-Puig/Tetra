@@ -48,10 +48,6 @@ public class shapeVisual : MonoBehaviour
             await Task.Delay(100); // wait for old visual to be destroyed before creating new one
             start = false; // set start to false so this block of code only runs once
         }
-        else
-        {
-            await Task.Delay(1); // wait for old visual to be destroyed before creating new one
-        }
 
         // use raycast to spawn visual on cube the visual is on
         RaycastHit hit1;
@@ -75,6 +71,7 @@ public class shapeVisual : MonoBehaviour
                     // spawn visual cube if we are leveled correctly :)
                     CreateVisualshape(new Vector3(transform.position.x, (float)Math.Ceiling(hit1.point.y), transform.position.z));
                 }
+
             }
             // ensure that left stuck out piece of visual cube is on the same level as the main shape piece
             if (Physics.Raycast(new Vector3(leftPiece.transform.position.x, leftPiece.transform.position.y, leftPiece.transform.position.z), Vector3.down, out hit2, 7, layerMask) && hasLeftPiece) // ignore visual and layer
