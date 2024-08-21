@@ -20,9 +20,20 @@ public class LayerPiece : MonoBehaviour
             shapeInPiece = other.gameObject; // reference to shape in piece for move down case if row under is cleared
             if (clearingRow)
             {
-                // set shape to stop cube state and destroy it
-                other.gameObject.GetComponent<Shape>().currentState = other.gameObject.GetComponent<Shape>().StopShape;
-                Destroy(other.gameObject);
+
+                // get parent of shape if it doesnt have Shape script
+                if (shapeInPiece.GetComponent<Shape>() == null)
+                {
+                    // set shape to stop cube state and destroy it
+                    other.gameObject.transform.parent.gameObject.GetComponent<Shape>().currentState = other.gameObject.transform.parent.gameObject.GetComponent<Shape>().StopShape;
+                    Destroy(other.gameObject.transform.parent.gameObject);
+                }
+                else
+                {
+                    // set shape to stop cube state and destroy it
+                    other.gameObject.GetComponent<Shape>().currentState = other.gameObject.GetComponent<Shape>().StopShape;
+                    Destroy(other.gameObject);
+                }
 
                 // once cleared, stop clear action
                 clearingRow = false;
@@ -47,6 +58,12 @@ public class LayerPiece : MonoBehaviour
         if (shapeInPiece == null)
         {
             return;
+        }
+
+        // get parent of shape if it doesnt have Shape script
+        if (shapeInPiece.GetComponent<Shape>() == null)
+        {
+            shapeInPiece = shapeInPiece.transform.parent.gameObject;
         }
 
         // if cube is already dropping, dont do anything
