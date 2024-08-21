@@ -8,32 +8,43 @@ public class LayerPiece : MonoBehaviour
 
     void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.tag == "Shape" && other.gameObject.GetComponent<Shape>() != null)
+        if (other.gameObject.tag == "Shape" && (other.gameObject.GetComponent<Shape>() != null || other.gameObject.transform.parent.gameObject.GetComponent<Shape>() != null))
         {
-            // dont do anything if shape is dropping cube
-            if (other.gameObject.GetComponent<Shape>().currentState == other.gameObject.GetComponent<Shape>().DropShape)
+            if (other.gameObject.GetComponent<Shape>() != null) // so unity doesnt throw null reference exception
             {
-                return;
+                // dont do anything if shape is dropping cube
+                if (other.gameObject.GetComponent<Shape>().currentState == other.gameObject.GetComponent<Shape>().DropShape)
+                {
+                    return;
+                }
+            }
+            else
+            {
+                // dont do anything if shape is dropping cube - parent shape
+                if (other.gameObject.transform.parent.gameObject.GetComponent<Shape>().currentState == other.gameObject.transform.parent.gameObject.GetComponent<Shape>().DropShape)
+                {
+                    return;
+                }
             }
 
             isInPiece = true;
             shapeInPiece = other.gameObject; // reference to shape in piece for move down case if row under is cleared
             if (clearingRow)
             {
-
                 // get parent of shape if it doesnt have Shape script
                 if (shapeInPiece.GetComponent<Shape>() == null)
                 {
-                    // set shape to stop cube state and destroy it
+                    // set shape to stop cube state to parent shape
                     other.gameObject.transform.parent.gameObject.GetComponent<Shape>().currentState = other.gameObject.transform.parent.gameObject.GetComponent<Shape>().StopShape;
-                    Destroy(other.gameObject.transform.parent.gameObject);
                 }
                 else
                 {
-                    // set shape to stop cube state and destroy it
+                    // set shape to stop cube state 
                     other.gameObject.GetComponent<Shape>().currentState = other.gameObject.GetComponent<Shape>().StopShape;
-                    Destroy(other.gameObject);
                 }
+
+                // destroy shape/cube in piece
+                Destroy(other.gameObject);
 
                 // once cleared, stop clear action
                 clearingRow = false;

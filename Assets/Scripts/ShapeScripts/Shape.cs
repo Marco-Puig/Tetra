@@ -176,7 +176,18 @@ public class Shape : MonoBehaviour
     public void HandleShapeSides(int direction)
     {
         panelSide += 1 * direction; // direction is either 1 or -1, so -1 if rotating left, 1 if right rotating right
-        Mathf.Clamp(panelSide, 0, 3); // ensure panelSide is within bounds (there are 4 sides)
+
+        // if panel side is greater than 3, reset to 0
+        if (panelSide > 3)
+        {
+            panelSide = 0;
+        }
+
+        // if panel side is less than 0, reset to 3
+        if (panelSide < 0)
+        {
+            panelSide = 3;
+        }
     }
 
     // Drop Shape State
