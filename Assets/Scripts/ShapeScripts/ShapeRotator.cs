@@ -28,6 +28,7 @@ public class ShapeRotator : MonoBehaviour
                 // skip incrementing rotationSide that would go out of bounds
                 rotationSide++;
             }
+            // TODO : need to account for all 4 sides
 
             // NORMAL CASE:
             // increment rotationSide

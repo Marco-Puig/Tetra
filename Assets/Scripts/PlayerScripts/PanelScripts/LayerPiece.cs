@@ -84,13 +84,4 @@ public class LayerPiece : MonoBehaviour
             shapeInPiece.GetComponent<Shape>().currentState = shapeInPiece.GetComponent<Shape>().DropShapeNoInput;
         }
     }
-
-    // public method to ensure shape abides by grid
-    public void AdjustShape()
-    {
-        if (shapeInPiece == null)
-        {
-            return;
-        }
-    }
 }
