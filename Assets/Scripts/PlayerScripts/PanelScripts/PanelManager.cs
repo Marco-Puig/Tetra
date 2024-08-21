@@ -51,11 +51,10 @@ public class PanelManager : MonoBehaviour // panel manager is a game manager but
         foreach (GameObject cube in cubes)
         {
             // if cube isnt the main part of shape, skip
-            if (cube.GetComponent<Shape>() == null || cube.transform.parent.GetComponent<Shape>() != null)
+            if (cube.GetComponent<Shape>() == null)
                 continue;
 
-            if (cube.GetComponent<Shape>().currentState == cube.GetComponent<Shape>().DropShape || 
-            cube.transform.parent.GetComponent<Shape>().currentState == cube.transform.parent.GetComponent<Shape>().DropShape)
+            if (cube.GetComponent<Shape>().currentState == cube.GetComponent<Shape>().DropShape)
             {
                 fallingShape = cube;
                 break;

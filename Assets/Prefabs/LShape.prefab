@@ -64,7 +64,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 5de0aa73cbb1d904d833c0d74252321a, type: 2}
+  - {fileID: 2100000, guid: f240d25a67af3c546be3c5297323b1a8, type: 2}
   - {fileID: 2100000, guid: 106f3ff43a17d4967a2b64c7a92e49ec, type: 2}
   - {fileID: 2100000, guid: 311313efa011949e98b6761d652ad13c, type: 2}
   m_StaticBatchInfo:
@@ -224,7 +224,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 5de0aa73cbb1d904d833c0d74252321a, type: 2}
+  - {fileID: 2100000, guid: f240d25a67af3c546be3c5297323b1a8, type: 2}
   - {fileID: 2100000, guid: 106f3ff43a17d4967a2b64c7a92e49ec, type: 2}
   - {fileID: 2100000, guid: 311313efa011949e98b6761d652ad13c, type: 2}
   m_StaticBatchInfo:
@@ -344,9 +344,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shape: {fileID: 3827242381564538454}
-  layerMask:
-    serializedVersion: 2
-    m_Bits: 320
 --- !u!114 &4520818368126188351
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -365,6 +362,7 @@ MonoBehaviour:
     m_Bits: 375
   hasRightPiece: 1
   hasLeftPiece: 0
+  hasHigherRightPiece: 0
   rightPiece: {fileID: 4487403208422035399}
   leftPiece: {fileID: 3827242381564538449}
 --- !u!114 &5725007959904316700
@@ -444,7 +442,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 5de0aa73cbb1d904d833c0d74252321a, type: 2}
+  - {fileID: 2100000, guid: f240d25a67af3c546be3c5297323b1a8, type: 2}
   - {fileID: 2100000, guid: 106f3ff43a17d4967a2b64c7a92e49ec, type: 2}
   - {fileID: 2100000, guid: 311313efa011949e98b6761d652ad13c, type: 2}
   m_StaticBatchInfo:
@@ -547,6 +545,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shape: {fileID: 3827242381564538454}
-  layerMask:
-    serializedVersion: 2
-    m_Bits: 320
