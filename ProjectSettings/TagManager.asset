@@ -9,6 +9,7 @@ TagManager:
   - Shape
   - Layer
   - Spawner
+  - Bounds
   layers:
   - Default
   - TransparentFX
@@ -19,7 +20,7 @@ TagManager:
   - Shape
   - Visual
   - Ground
-  - 
+  - Bounds
   - 
   - 
   - 

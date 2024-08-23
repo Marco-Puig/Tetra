@@ -13,11 +13,10 @@ public class Shape : MonoBehaviour
     // Public:
     public delegate void State();
     public State currentState;
-    [HideInInspector] public bool edgeOfBounds = false;
 
     // Inspector Variables:
     public LayerMask layerMask;
-    [SerializeField] shapeVisual shapeVisual;
+    [SerializeField] ShapeVisual shapeVisual;
 
 
     // Get Cube Position
@@ -43,7 +42,7 @@ public class Shape : MonoBehaviour
         // if direction isnt default, move and clamp
         if (direction != Vector3.zero)
         {
-            MoveAndClamp(direction);
+            Move(direction);
         }
     }
 
@@ -160,16 +159,10 @@ public class Shape : MonoBehaviour
     }
 
     // Move and ensure that Shape is within bounds
-    void MoveAndClamp(Vector3 direction)
+    void Move(Vector3 direction)
     {
         // move cube
         shapeTransform.localPosition += direction;
-
-        // check if cube is at the edge of the bounds on all sides - im not a fan of this code snippet
-        edgeOfBounds = (shapeTransform.localPosition.x == -3.0f ||
-        shapeTransform.localPosition.z == -3.0f ||
-        shapeTransform.localPosition.z == 2.0f ||
-        shapeTransform.localPosition.x == 1.0f) ? true : false;
     }
 
     // Handle Shape Sides

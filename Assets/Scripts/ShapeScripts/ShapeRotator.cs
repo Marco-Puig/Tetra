@@ -7,7 +7,6 @@ public class ShapeRotator : MonoBehaviour
     void Update()
     {
         RotateShape();
-        CheckClipping();
     }
 
     void RotateShape()
@@ -22,12 +21,12 @@ public class ShapeRotator : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             // EDGE CASE (literally lol):
-            // if shape is on edge of bounds and rotationSide is 1, skip. This is to prevent rotating the shape when it is on the edge of the bounds
-            if (GetComponent<Shape>().edgeOfBounds && rotationSide == 1)
+            // if shape is on edge of bounds, skip. This is to prevent rotating the shape when it is on the edge of the bounds
+            if (Clipping())
             {
-                // skip incrementing rotationSide that would go out of bounds
                 rotationSide++;
             }
+
             // TODO : need to account for all 4 sides
 
             // NORMAL CASE:
@@ -46,29 +45,17 @@ public class ShapeRotator : MonoBehaviour
     }
 
     // check the possibility that if shape rotates, it doesn't collide with any other shapes
-    void CheckClipping()
+    bool Clipping()
     {
-        // Get all colliders attached to the shape
-        Collider[] colliders = GetComponentsInChildren<Collider>();
+        RaycastHit hit;
 
-        // Check if any of the colliders are overlapping with other colliders
-        foreach (Collider collider in colliders)
+        if (Physics.Raycast(GetComponent<ShapeVisual>().rightPiece.transform, Vector3.forward, out hit, 1f, LayerMask.GetMask("Bounds")))
         {
-            // Check for collisions with other colliders and if the tag is not "Shape"
-            if (collider.bounds.Intersects(GetComponent<Collider>().bounds) && collider.tag != "Shape")
-            {
-                // Shape is colliding with another shape, so undo the rotation
-                rotationSide--;
-
-                // If rotationSide is less than 0, set it to 3 since we only have 4 sides
-                rotationSide = rotationSide < 0 ? 3 : rotationSide;
-
-                // Reset the rotation of the shape
-                transform.rotation = Quaternion.Euler(transform.rotation.x, 90f * rotationSide, transform.rotation.z);
-
-                // Exit the loop since we found a collision
-                break;
-            }
+            // Vector3.right || Vector3.left - not Vector3.forward
+            // do vecot 3 right or left from the right piece so it doesnt clip into shpes as well
+            return true;
         }
+
+        return false;
     }
 }

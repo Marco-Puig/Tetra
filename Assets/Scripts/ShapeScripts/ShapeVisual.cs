@@ -3,15 +3,15 @@ using System.Threading.Tasks;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class shapeVisual : MonoBehaviour
+public class ShapeVisual : MonoBehaviour
 {
     [SerializeField] GameObject visualShapePrefab;
     [SerializeField] LayerMask layerMask;
     [SerializeField] bool hasRightPiece = true;
     [SerializeField] bool hasLeftPiece = false;
     [SerializeField] bool hasHigherRightPiece = false;
-    [SerializeField] GameObject rightPiece;
-    [SerializeField] GameObject leftPiece;
+    [SerializeField] public GameObject rightPiece;
+    [SerializeField] public GameObject leftPiece;
     private GameObject visualshape;
     bool start = true;
 
