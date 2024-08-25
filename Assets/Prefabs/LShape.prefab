@@ -343,6 +343,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shape: {fileID: 3827242381564538454}
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 320
 --- !u!114 &4520818368126188351
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -544,3 +547,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shape: {fileID: 3827242381564538454}
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 320

@@ -208,6 +208,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shape: {fileID: 3827242381564538454}
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 320
 --- !u!1 &4487403208422035399
 GameObject:
   m_ObjectHideFlags: 0

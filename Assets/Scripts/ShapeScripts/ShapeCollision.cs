@@ -1,11 +1,11 @@
 using UnityEngine;
-using System.Threading.Tasks;
 
 // ONLY ATTACH THIS SCRIPT TO BOTTOM PIECES OF THE SHAPE
 
 public class ShapeCollision : MonoBehaviour
 {
     [SerializeField] Shape shape;
+    [SerializeField] LayerMask layerMask;
 
     private void Start()
     {
@@ -13,13 +13,14 @@ public class ShapeCollision : MonoBehaviour
         shape = transform.GetComponent<Shape>() != null ? GetComponent<Shape>() : GetComponentInParent<Shape>();
     }
 
+
     private void Update()
     {
         // if shape is stopped, return
         if (shape.currentState == shape.StopShape) return;
 
         // check if shape detects shape or ground layer below it, stop shape from moving
-        if (shape.CheckCollision(Vector3.down, transform))
+        if (shape.CheckCollision(Vector3.down, transform, layerMask))
         {
             // find Visual object and destroy it - ensuring cleanup
             GameObject visual = GameObject.Find("Visual");
@@ -36,6 +37,13 @@ public class ShapeCollision : MonoBehaviour
         if (other.gameObject.CompareTag("Visual"))
         {
             Destroy(other.gameObject);
+        }
+
+        if (other.gameObject.CompareTag("Bounds"))
+        {
+            // EDGE CASE (literally lol):
+            // if shape is on edge of bounds, skip. This is to prevent rotating the shape when it is on the edge of the bounds
+            transform.parent.GetComponent<ShapeRotator>().IncrementRotationSide();
         }
     }
 }

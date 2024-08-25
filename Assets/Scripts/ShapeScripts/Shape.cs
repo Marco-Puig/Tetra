@@ -158,6 +158,27 @@ public class Shape : MonoBehaviour
         return false;
     }
 
+    // Overloaded CheckCollision method to allow for custom range of detection and with a basic condition
+    public bool CheckCollision(Vector3 direction, Transform objectTransform, LayerMask layers, float range = 1.0f)
+    {
+        // check if the cube is colliding with anything
+        RaycastHit hit;
+
+        // Detect collision with the object condition
+        if (Physics.Raycast(objectTransform.position, direction, out hit, range, layers))
+        {
+            // Check if the object hit by the raycast is not part of the same shape
+            if (hit.transform != transform && hit.transform.parent != transform)
+            {
+                // If the cube is colliding with something else, return true - shape is not allowed to move
+                return true;
+            }
+        }
+
+        // if no collision detected, return false - shape is allowed to move
+        return false;
+    }
+
     // Move and ensure that Shape is within bounds
     void Move(Vector3 direction)
     {
