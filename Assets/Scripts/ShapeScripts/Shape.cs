@@ -30,7 +30,7 @@ public class Shape : MonoBehaviour
     // Move Cube
     void Update()
     {
-        currentState.Invoke();
+        if (currentState != null) currentState.Invoke();
         HandleOpacity();
     }
 

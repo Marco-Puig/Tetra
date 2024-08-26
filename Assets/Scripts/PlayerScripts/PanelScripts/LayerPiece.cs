@@ -34,8 +34,8 @@ public class LayerPiece : MonoBehaviour
             shapeInPiece = other.gameObject; // reference to shape in piece for move down case if row under is cleared
             if (clearingRow)
             {
-                // destroy shape/cube in piece
-                Destroy(other.gameObject);
+                // 'destroy' shape/cube in piece
+                ClearPiece(other.gameObject);
 
                 // once cleared, stop clear action
                 clearingRow = false;
@@ -62,6 +62,17 @@ public class LayerPiece : MonoBehaviour
         }
     }
 
+    // private method to clear shape in piece
+    private void ClearPiece(GameObject piece)
+    {
+        piece.GetComponent<MeshRenderer>().enabled = false;
+        piece.GetComponent<BoxCollider>().enabled = false;
+
+        if (piece.GetComponent<Shape>() != null) piece.GetComponent<Shape>().currentState = null;
+        else piece.transform.parent.GetComponent<Shape>().currentState = null;
+
+    }
+
     // public method to move shape in piece down
     public void MoveDownShape()
     {
@@ -73,11 +84,15 @@ public class LayerPiece : MonoBehaviour
         moveDownShape = ShapeDownState;
     }
 
-    void ShapeDownState()
+    bool once = false;
+    async void ShapeDownState()
     {
+        await Task.Delay(500);
+        if (once) { once = false; return; }
         if (shapeInPiece == null) return; // if shape is destroyed, return
         // move shape in piece down and make sure that it has move down once by check the previous pos of shape
         shapeInPiece.transform.localPosition += Vector3.down;
         moveDownShape = null;
+        once = true;
     }
 }
