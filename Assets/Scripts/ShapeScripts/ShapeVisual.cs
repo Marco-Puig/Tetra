@@ -56,10 +56,8 @@ public class ShapeVisual : MonoBehaviour
         // use raycast to spawn visual on cube the visual is on (right stuck out piece)
         RaycastHit hit2;
 
-        if (this == null)
-        {
-            return;
-        }
+        // if this is null, return - this is to prevent null reference exceptions
+        if (this == null) return;
 
         // calculate visual position of where to spawn visual by raycasting down
         if (Physics.Raycast(transform.position, Vector3.down, out hit1, 7, layerMask)) // ignore visual and layer

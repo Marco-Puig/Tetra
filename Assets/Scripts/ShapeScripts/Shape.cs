@@ -227,7 +227,6 @@ public class Shape : MonoBehaviour
 
         // increment time if it hasnt reached 1 second
         time++;
-
     }
 
     // stop cube from moving

@@ -26,6 +26,8 @@ public class ShapeCollision : MonoBehaviour
             GameObject visual = GameObject.Find("Visual");
             if (visual != null) Destroy(visual);
 
+            // TODO: ADD AN AWAIT HERE TO ALLOW PLAYERS TO MAKE CORRECTIONS
+
             // stop shape from moving - switch to stop state
             shape.currentState = shape.StopShape;
         }
@@ -39,8 +41,10 @@ public class ShapeCollision : MonoBehaviour
             Destroy(other.gameObject);
         }
 
-        if (other.gameObject.CompareTag("Bounds"))
+        if (other.gameObject.CompareTag("Bounds") || other.gameObject.CompareTag("Shape"))
         {
+            if (transform.parent.GetComponent<ShapeRotator>() == null) return;
+
             // EDGE CASE (literally lol):
             // if shape is on edge of bounds, skip. This is to prevent rotating the shape when it is on the edge of the bounds
             transform.parent.GetComponent<ShapeRotator>().IncrementRotationSide();

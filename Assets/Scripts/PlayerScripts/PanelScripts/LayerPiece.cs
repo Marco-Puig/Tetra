@@ -1,10 +1,13 @@
+using System;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class LayerPiece : MonoBehaviour
 {
     public bool isInPiece = false;
     [HideInInspector] public bool clearingRow = false;
-    GameObject shapeInPiece;
+    private GameObject shapeInPiece;
+    Action moveDownShape;
 
     void OnTriggerStay(Collider other)
     {
@@ -31,18 +34,6 @@ public class LayerPiece : MonoBehaviour
             shapeInPiece = other.gameObject; // reference to shape in piece for move down case if row under is cleared
             if (clearingRow)
             {
-                // get parent of shape if it doesnt have Shape script
-                if (shapeInPiece.GetComponent<Shape>() == null)
-                {
-                    // set shape to stop cube state to parent shape
-                    other.gameObject.transform.parent.gameObject.GetComponent<Shape>().currentState = other.gameObject.transform.parent.gameObject.GetComponent<Shape>().StopShape;
-                }
-                else
-                {
-                    // set shape to stop cube state 
-                    other.gameObject.GetComponent<Shape>().currentState = other.gameObject.GetComponent<Shape>().StopShape;
-                }
-
                 // destroy shape/cube in piece
                 Destroy(other.gameObject);
 
@@ -63,25 +54,30 @@ public class LayerPiece : MonoBehaviour
         }
     }
 
-    // public method to move shape in piece down        
+    void Update()
+    {
+        if (moveDownShape != null)
+        {
+            moveDownShape.Invoke();
+        }
+    }
+
+    // public method to move shape in piece down
     public void MoveDownShape()
     {
         if (shapeInPiece == null)
         {
+            Debug.LogError("Shape in piece is null");
             return;
         }
+        moveDownShape = ShapeDownState;
+    }
 
-        // get parent of shape if it doesnt have Shape script
-        if (shapeInPiece.GetComponent<Shape>() == null)
-        {
-            shapeInPiece = shapeInPiece.transform.parent.gameObject;
-        }
-
-        // if cube is already dropping, dont do anything
-        if (shapeInPiece.GetComponent<Shape>().currentState != shapeInPiece.GetComponent<Shape>().DropShapeNoInput)
-        {
-            // drop cube state so it moves down
-            shapeInPiece.GetComponent<Shape>().currentState = shapeInPiece.GetComponent<Shape>().DropShapeNoInput;
-        }
+    void ShapeDownState()
+    {
+        if (shapeInPiece == null) return; // if shape is destroyed, return
+        // move shape in piece down and make sure that it has move down once by check the previous pos of shape
+        shapeInPiece.transform.localPosition += Vector3.down;
+        moveDownShape = null;
     }
 }
