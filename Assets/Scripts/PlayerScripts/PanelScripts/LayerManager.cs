@@ -16,7 +16,7 @@ public class LayerManager : MonoBehaviour
     {
         foreach (GameObject piece in piecesInLayer)
         {
-            if (!piece.GetComponent<LayerPiece>().isInPiece)
+            if (!piece.GetComponent<LayerPiece>().isInPiece || piece.GetComponent<LayerPiece>().clearingRow)
             {
                 // if a piece is not in the layer, dont continue on to clear the row
                 return;

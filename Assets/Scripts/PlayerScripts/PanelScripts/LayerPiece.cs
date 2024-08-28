@@ -81,20 +81,6 @@ public class LayerPiece : MonoBehaviour
             Debug.LogError("Shape in piece is null");
             return;
         }
-        // moveDownShape = ShapeDownState;
+        shapeInPiece.transform.localPosition += Vector3.down;
     }
-
-    /* 
-        bool once = false;
-        async void ShapeDownState()
-        {
-            await Task.Delay(500);
-            if (once) { once = false; return; }
-            if (shapeInPiece == null) return; // if shape is destroyed, return
-            // move shape in piece down and make sure that it has move down once by check the previous pos of shape
-            shapeInPiece.transform.localPosition += Vector3.down;
-            moveDownShape = null;
-            once = true;
-        }
-    */
 }
