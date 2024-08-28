@@ -212,9 +212,6 @@ public class Shape : MonoBehaviour
         MoveDownEverySecond();
     }
 
-    // Drop Shape State without Input State (for when rows are cleared and gravity needs to do it's job)
-    public void DropShapeNoInput() => MoveDownEverySecond();
-
     // Move Shape Down Every Second
     void MoveDownEverySecond()
     {
