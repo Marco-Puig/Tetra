@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using UnityEngine;
 
 // ONLY ATTACH THIS SCRIPT TO BOTTOM PIECES OF THE SHAPE
@@ -26,10 +27,8 @@ public class ShapeCollision : MonoBehaviour
             GameObject visual = GameObject.Find("Visual");
             if (visual != null) Destroy(visual);
 
-            // TODO: ADD AN AWAIT HERE TO ALLOW PLAYERS TO MAKE CORRECTIONS
-
-            // stop shape from moving - switch to stop state
-            shape.currentState = shape.StopShape;
+            // stop shape
+            StopShape();
         }
     }
 
@@ -49,5 +48,14 @@ public class ShapeCollision : MonoBehaviour
             // if shape is on edge of bounds, skip. This is to prevent rotating the shape when it is on the edge of the bounds
             transform.parent.GetComponent<ShapeRotator>().IncrementRotationSide();
         }
+    }
+
+    async void StopShape()
+    {
+        // wait for 500ms to allow player to make corrections
+        await Task.Delay(500);
+
+        // stop shape from moving - switch to stop state
+        shape.currentState = shape.StopShape;
     }
 }
