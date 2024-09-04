@@ -81,6 +81,9 @@ public class LayerPiece : MonoBehaviour
             Debug.LogError("Shape in piece is null");
             return;
         }
-        shapeInPiece.transform.localPosition += Vector3.down;
+
+        // no longer do parents and children since they served there purpose already and now we can just move the pieces down consistently
+        shapeInPiece.transform.parent = GameObject.Find("Spawner").transform;
+        shapeInPiece.transform.localPosition += Vector3.down; // move shape down
     }
 }

@@ -87,7 +87,7 @@ public class PanelManager : MonoBehaviour // panel manager is a game manager but
         {
             score++;
             scoreText.text = "Score " + score.ToString();
-            await Task.Delay(5 * (int)(1 + Time.deltaTime));
+            await Task.Delay(2 * (int)(1 + Time.deltaTime));
         }
     }
 
