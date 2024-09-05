@@ -55,7 +55,12 @@ public class ShapeCollision : MonoBehaviour
         // wait for 500ms to allow player to make corrections
         await Task.Delay(500);
 
-        // stop shape from moving - switch to stop state
-        shape.currentState = shape.StopShape;
+        // CHECK IF THERE IS STILL A COLLISION AFTER 500MS - idk why past me did caps lol, ig i was angry
+        if (shape.CheckCollision(Vector3.down, transform, layerMask))
+        {
+            // if there is still a collision, stop shape
+            shape.currentState = shape.StopShape; // stop shape from moving - switch to stop state
+            return;
+        }
     }
 }
