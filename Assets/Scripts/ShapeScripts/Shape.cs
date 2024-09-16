@@ -7,7 +7,7 @@ public class Shape : MonoBehaviour
     private Material cubeMat;
     private static int panelSide = 0;
     private float time = 0;
-    private float dropRate = 0.3f;
+    private float dropRate = 0.2f;
     private float range = 1.0f;
 
     // Public:
