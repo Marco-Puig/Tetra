@@ -16,7 +16,7 @@ public class PanelManager : MonoBehaviour // panel manager is a game manager but
     Transform panelTransform;
     delegate void State();
     State currentState;
-    private int rotatedAmount;
+    private float rotatedAmount;
     GameObject fallingShape;
 
     void Start()
@@ -66,7 +66,7 @@ public class PanelManager : MonoBehaviour // panel manager is a game manager but
     void RotatePanel(Vector3 direction)
     {
         // increment the rotation amount
-        rotatedAmount += (int)rotationRate;
+        rotatedAmount += rotationRate;
 
         // if it has rotated 90 degrees, reset the rotation amount and switch out of this state
         if (rotatedAmount >= 90)

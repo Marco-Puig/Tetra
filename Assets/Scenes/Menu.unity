@@ -133,10 +133,9 @@ GameObject:
   - component: {fileID: 200746753}
   - component: {fileID: 200746754}
   - component: {fileID: 200746755}
-  - component: {fileID: 200746756}
   m_Layer: 0
-  m_Name: MenuSys
-  m_TagString: Untagged
+  m_Name: AudioManager
+  m_TagString: Music
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -166,9 +165,9 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 45d087662993cbd4299ea03c0b2c91af, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 7f8eaa7ae0a9ce74c90cb05bdb9f9de0, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.4
+  m_Volume: 0.2
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -261,20 +260,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 200746752}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 14a273517028be24398b704e5646d327, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rotateSpeed: 0.5
---- !u!114 &200746756
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 200746752}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 15b6d7a81fbc2bb48945c2835dbea6c1, type: 3}
+  m_Script: {fileID: 11500000, guid: 3c705832dbe9d3c45b05a90e9315b117, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &209064134
@@ -381,7 +367,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -191.5}
+  m_AnchoredPosition: {x: 0, y: -113.9}
   m_SizeDelta: {x: 160, y: 48.4023}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &214863897
@@ -428,7 +414,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 200746756}
+      - m_Target: {fileID: 1130978700}
         m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
         m_MethodName: QuitGame
         m_Mode: 1
@@ -514,7 +500,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 60.5}
+  m_AnchoredPosition: {x: 0, y: 31}
   m_SizeDelta: {x: 160, y: 48.4023}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &219757889
@@ -561,7 +547,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 200746756}
+      - m_Target: {fileID: 1130978700}
         m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
         m_MethodName: StartGame
         m_Mode: 1
@@ -897,7 +883,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &713738929
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1106,6 +1092,8 @@ GameObject:
   - component: {fileID: 1130978697}
   - component: {fileID: 1130978696}
   - component: {fileID: 1130978695}
+  - component: {fileID: 1130978700}
+  - component: {fileID: 1130978699}
   m_Layer: 5
   m_Name: Menu
   m_TagString: Untagged
@@ -1199,6 +1187,31 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1130978699
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1130978694}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14a273517028be24398b704e5646d327, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotateSpeed: 0.5
+--- !u!114 &1130978700
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1130978694}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15b6d7a81fbc2bb48945c2835dbea6c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1254379840
 GameObject:
   m_ObjectHideFlags: 0
