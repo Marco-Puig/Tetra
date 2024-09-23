@@ -7,8 +7,8 @@ public class Shape : MonoBehaviour
     private Material cubeMat;
     private static int panelSide = 0;
     private float time = 0;
-    private float dropRate = 0.2f;
-    private float range = 1.0f;
+    private float range = 1.0f; // for collision detection
+    private static float dropRate;
 
     // Public:
     public delegate void State();
@@ -216,7 +216,7 @@ public class Shape : MonoBehaviour
     void MoveDownEverySecond()
     {
         // move cube down every second
-        if (time * Time.deltaTime >= 10 * dropRate)
+        if (time * Time.deltaTime >= CalculateDropRate())
         {
             shapeTransform.localPosition += Vector3.down;
             time = 0;
@@ -224,6 +224,14 @@ public class Shape : MonoBehaviour
 
         // increment time if it hasnt reached 1 second
         time++;
+    }
+
+    float CalculateDropRate()
+    {
+        // calculate drop rate based on amount of shapes in the scene
+        GameObject[] shapesInScene = GameObject.FindGameObjectsWithTag("Shape");
+        dropRate = 2f + (shapesInScene.Length * 0.03f);
+        return dropRate;
     }
 
     // stop cube from moving
