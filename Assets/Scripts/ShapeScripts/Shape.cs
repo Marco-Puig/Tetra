@@ -8,7 +8,7 @@ public class Shape : MonoBehaviour
     private static int panelSide = 0;
     private float time = 0;
     private float range = 1.0f; // for collision detection
-    private static float dropRate;
+    private static float dropRate = 2.0f;
 
     // Public:
     public delegate void State();
@@ -230,8 +230,7 @@ public class Shape : MonoBehaviour
     {
         // calculate drop rate based on amount of shapes in the scene
         GameObject[] shapesInScene = GameObject.FindGameObjectsWithTag("Shape");
-        dropRate = 2f + (shapesInScene.Length * 0.03f);
-        return dropRate;
+        return dropRate + (shapesInScene.Length * 0.1f);
     }
 
     // stop cube from moving

@@ -3,7 +3,6 @@ using UnityEngine;
 public class ShapeRotator : MonoBehaviour
 {
     private int rotationSide = 0;
-
     void Update()
     {
         RotateShape();
@@ -11,6 +10,12 @@ public class ShapeRotator : MonoBehaviour
 
     void RotateShape()
     {
+        // if panel manager is rotating the panel, return
+        if (PanelManager.instance.currentState != PanelManager.instance.RotateOnInput)
+        {
+            return;
+        }
+
         // if this isnt the active shape, return
         if (GetComponent<Shape>().currentState == GetComponent<Shape>().StopShape)
         {

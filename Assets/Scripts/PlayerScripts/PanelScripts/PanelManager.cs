@@ -14,36 +14,36 @@ public class PanelManager : MonoBehaviour // panel manager is a game manager but
     [SerializeField] GameObject[] layers;
 
     Transform panelTransform;
-    delegate void State();
-    State currentState;
+    public delegate void State();
+    public State currentState;
     private float rotatedAmount;
     GameObject fallingShape;
 
-    void Start()
+    public static PanelManager instance;
+
+    private void Start()
     {
+        // singleton pattern - manger should be unique
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+
         panelTransform = GetComponent<Transform>();
         currentState = RotateOnInput;
     }
 
-    void Update()
+    private void Update()
     {
         currentState.Invoke();
         FindFallingShape();
     }
 
-    void RotateOnInput()
-    {
-        if (Input.GetKeyUp(KeyCode.A))
-        {
-            currentState = () => RotatePanel(new Vector3(0, -rotationRate, 0));
-        }
-        else if (Input.GetKeyUp(KeyCode.D))
-        {
-            currentState = () => RotatePanel(new Vector3(0, rotationRate, 0));
-        }
-    }
-
-    void FindFallingShape()
+    private void FindFallingShape()
     {
         // find the falling cube
         GameObject[] cubes = GameObject.FindGameObjectsWithTag("Shape");
@@ -62,8 +62,20 @@ public class PanelManager : MonoBehaviour // panel manager is a game manager but
         }
     }
 
+    public void RotateOnInput()
+    {
+        if (Input.GetKeyUp(KeyCode.A))
+        {
+            currentState = () => RotatePanel(new Vector3(0, -rotationRate, 0));
+        }
+        else if (Input.GetKeyUp(KeyCode.D))
+        {
+            currentState = () => RotatePanel(new Vector3(0, rotationRate, 0));
+        }
+    }
+
     // smooth rotation
-    void RotatePanel(Vector3 direction)
+    public void RotatePanel(Vector3 direction)
     {
         // increment the rotation amount
         rotatedAmount += rotationRate;
