@@ -11,6 +11,7 @@ TagManager:
   - Spawner
   - Bounds
   - Music
+  - Panel
   layers:
   - Default
   - TransparentFX
