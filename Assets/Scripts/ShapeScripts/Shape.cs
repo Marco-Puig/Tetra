@@ -213,7 +213,7 @@ public class Shape : MonoBehaviour
     }
 
     // Move Shape Down Every Second
-    void MoveDownEverySecond()
+    public void MoveDownEverySecond()
     {
         // move cube down every second
         if (time * Time.deltaTime >= CalculateDropRate())

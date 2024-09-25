@@ -56,7 +56,7 @@ public class ShapeCollision : MonoBehaviour
         await Task.Delay(500);
 
         // CHECK IF THERE IS STILL A COLLISION AFTER 500MS - idk why past me did caps lol, ig i was angry
-        if (shape.CheckCollision(Vector3.down, transform, layerMask))
+        if (shape != null && shape.CheckCollision(Vector3.down, transform, layerMask))
         {
             // if there is still a collision, stop shape
             shape.currentState = shape.StopShape; // stop shape from moving - switch to stop state

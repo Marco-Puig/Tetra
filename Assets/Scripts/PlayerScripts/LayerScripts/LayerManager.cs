@@ -5,7 +5,6 @@ public class LayerManager : MonoBehaviour
 {
     [SerializeField] GameObject[] piecesInLayer;
     [SerializeField] PanelManager panelManager;
-    [SerializeField] int layerIndex = 0;
 
     void Update()
     {
@@ -35,19 +34,6 @@ public class LayerManager : MonoBehaviour
         foreach (GameObject piece in piecesInLayer)
         {
             piece.GetComponent<LayerPiece>().clearingRow = true;
-        }
-
-        panelManager.HandleClearedRow(layerIndex); // move all layers above down, but have panel manager handle it since it tracks all layers
-    }
-
-    public void MoveDownPieces() // move all pieces in the layer down
-    {
-        foreach (GameObject piece in piecesInLayer)
-        {
-            if (piece.GetComponent<LayerPiece>().isInPiece)
-            {
-                piece.GetComponent<LayerPiece>().MoveDownShape();
-            }
         }
     }
 }

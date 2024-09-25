@@ -56,10 +56,7 @@ public class LayerPiece : MonoBehaviour
 
     void Update()
     {
-        if (moveDownShape != null)
-        {
-            moveDownShape.Invoke();
-        }
+        CheckBelow(shapeInPiece);
     }
 
     // private method to clear shape in piece
@@ -70,20 +67,21 @@ public class LayerPiece : MonoBehaviour
 
         if (piece.GetComponent<Shape>() != null) piece.GetComponent<Shape>().currentState = null;
         else piece.transform.parent.GetComponent<Shape>().currentState = null;
-
     }
 
-    // public method to move shape in piece down
-    public void MoveDownShape()
+    // if a row below is cleared, check if shape is still on top of a shape or floor
+    void CheckBelow(GameObject piece)
     {
-        if (shapeInPiece == null)
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, Vector3.down, out hit, 1f))
         {
-            Debug.LogError("Shape in piece is null");
-            return;
+            if (hit.collider.gameObject.tag != "Shape" || hit.collider.gameObject.tag != "Ground" || hit.collider.gameObject.tag != "Layer")
+            {
+                // if shape is on top of another shape, move down
+                // no longer do parents and children since they served there purpose already and now we can just move the pieces down consistently
+                piece.transform.parent = GameObject.Find("Spawner").transform;
+                piece.transform.localPosition += Vector3.down; // move shape down
+            }
         }
-
-        // no longer do parents and children since they served there purpose already and now we can just move the pieces down consistently
-        shapeInPiece.transform.parent = GameObject.Find("Spawner").transform;
-        shapeInPiece.transform.localPosition += Vector3.down; // move shape down
     }
 }

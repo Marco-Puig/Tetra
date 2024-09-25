@@ -102,13 +102,4 @@ public class PanelManager : MonoBehaviour // panel manager is a game manager but
             await Task.Delay(2 * (int)(1 + Time.deltaTime));
         }
     }
-
-    public void HandleClearedRow(int layerAffectedIndex)
-    {
-        // move all pieces in layers above the cleared row down
-        for (int i = layerAffectedIndex + 1; i < layers.Length; i++)
-        {
-            layers[i].GetComponent<LayerManager>().MoveDownPieces();
-        }
-    }
 }
