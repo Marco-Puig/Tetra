@@ -3,7 +3,7 @@ using UnityEngine;
 public class Spawner : MonoBehaviour
 {
     public GameObject[] shapes;
-    int shapeIndex;
+    int shapeIndex, lastRoll;
     [SerializeField] PanelManager panelManager;
 
     private void Update()
@@ -29,7 +29,20 @@ public class Spawner : MonoBehaviour
         }
 
         // spawn shape at spawner position
+        lastRoll = shapeIndex;
         shapeIndex = Random.Range(0, shapes.Length);
+
+        // if random roll is same as last time, do a coin toss to determine if we should roll again
+        if (shapeIndex == lastRoll)
+        {
+            // 50% chance to roll again
+            if (Random.Range(0, 1) == 0)
+            {
+                shapeIndex = Random.Range(0, shapes.Length);
+            }
+        }
+
+        // spawn shape
         GameObject currentShape = Instantiate(shapes[shapeIndex], transform.position, Quaternion.identity);
         currentShape.transform.SetParent(transform);
 
