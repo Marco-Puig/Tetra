@@ -1,10 +1,10 @@
 using System;
-using System.Threading.Tasks;
 using UnityEngine;
 
 public class LayerPiece : MonoBehaviour
 {
     public bool isInPiece = false;
+    [SerializeField] LayerMask layerMask;
     [HideInInspector] public bool clearingRow = false;
     private GameObject shapeInPiece;
     Action moveDownShape;
@@ -56,7 +56,7 @@ public class LayerPiece : MonoBehaviour
 
     void Update()
     {
-        CheckBelow(shapeInPiece);
+        // CheckBelow(shapeInPiece);
     }
 
     // private method to clear shape in piece
@@ -72,16 +72,19 @@ public class LayerPiece : MonoBehaviour
     // if a row below is cleared, check if shape is still on top of a shape or floor
     void CheckBelow(GameObject piece)
     {
+        // if shape is null, return
+        if (piece == null) return;
+
+        // if piece is on the floor, return
+        if (piece.transform.position.y <= 1f) return;
+
+        // if shape isnt on top of another shape, move down
         RaycastHit hit;
-        if (Physics.Raycast(transform.position, Vector3.down, out hit, 1f))
+        if (!Physics.Raycast(transform.position, Vector3.down, out hit, 1f, layerMask)) // layerMask to to check for ground or shape below
         {
-            if (hit.collider.gameObject.tag != "Shape" || hit.collider.gameObject.tag != "Ground" || hit.collider.gameObject.tag != "Layer")
-            {
-                // if shape is on top of another shape, move down
-                // no longer do parents and children since they served there purpose already and now we can just move the pieces down consistently
-                piece.transform.parent = GameObject.Find("Spawner").transform;
-                piece.transform.localPosition += Vector3.down; // move shape down
-            }
+            // if there is no hit, move shape down
+            piece.transform.parent = GameObject.Find("Spawner").transform;
+            piece.transform.localPosition += Vector3.down; // move shape down
         }
     }
 }
