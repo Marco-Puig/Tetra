@@ -1,5 +1,5 @@
 using System;
-using TMPro;
+using UnityEditor;
 using UnityEngine;
 
 // script for when you press any key, you are transitioned to the main menu
@@ -27,24 +27,24 @@ public class PressStart : MonoBehaviour
     {
         if (Input.anyKey)
         {
-            state = ShowMenu;
+            state = MenuAnimation;
+
+            // hide and show elements respectively
+            foreach (GameObject element in showElements)
+            {
+                element.SetActive(true);
+                element.transform.position = Vector3.Lerp(element.transform.position, new Vector3(element.transform.position.x, 900f, element.transform.position.z), 1.25f * Time.deltaTime);
+            }
+            foreach (GameObject element in hideElements)
+            {
+                element.SetActive(false);
+            }
         }
     }
 
     // play menu animation to show the full main menu screen / buttons
-    void ShowMenu()
+    void MenuAnimation()
     {
-        // hide and show elements respectively
-        foreach (GameObject element in showElements)
-        {
-            element.SetActive(true);
-            element.transform.position = Vector3.Lerp(element.transform.position, new Vector3(element.transform.position.x, 900f, element.transform.position.z), 1.25f * Time.deltaTime);
-        }
-        foreach (GameObject element in hideElements)
-        {
-            element.SetActive(false);
-        }
-
         // move camera up to the main menu slowly and play ui animations
         // TODO: UI ANIMATIONS HERE
         cam.transform.rotation = Quaternion.Lerp(cam.transform.rotation, Quaternion.Euler(17f, 0, 0), 1.25f * Time.deltaTime);

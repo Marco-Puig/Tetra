@@ -230,7 +230,7 @@ public class Shape : MonoBehaviour
     {
         // calculate drop rate based on amount of shapes in the scene
         GameObject[] shapesInScene = GameObject.FindGameObjectsWithTag("Shape");
-        return dropRate + (shapesInScene.Length * 0.1f);
+        return dropRate + (shapesInScene.Length * 0.025f);
     }
 
     // stop cube from moving
