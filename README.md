@@ -1,7 +1,7 @@
 # Tetra
 ![Untitled](https://github.com/user-attachments/assets/13047131-d761-4fb8-9844-9f36d70bc80c)
 
-## Preview - 9/20/2024
+## Preview - 9/4/2024
 [https://www.youtube.com/watch?v=5s-3cXFcePE](https://www.youtube.com/watch?v=5s-3cXFcePE)
 
 ## Features
