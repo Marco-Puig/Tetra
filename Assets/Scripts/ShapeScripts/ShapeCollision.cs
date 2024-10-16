@@ -52,8 +52,11 @@ public class ShapeCollision : MonoBehaviour
 
     async void StopShape()
     {
+        //  set shape to standard drop
+        shape.ClearDropRate();
         // wait for 500ms to allow player to make corrections
         await Task.Delay(500);
+        shape.ResetDropRate(); // once 500ms is up, reset back to original drop rate
 
         // CHECK IF THERE IS STILL A COLLISION AFTER 500MS - idk why past me did caps lol, ig i was angry
         if (shape != null && shape.CheckCollision(Vector3.down, transform, layerMask))

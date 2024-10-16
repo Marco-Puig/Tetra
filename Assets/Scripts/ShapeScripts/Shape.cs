@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Threading.Tasks;
 
 public class Shape : MonoBehaviour
 {
@@ -230,7 +231,7 @@ public class Shape : MonoBehaviour
     {
         // calculate drop rate based on amount of shapes in the scene
         GameObject[] shapesInScene = GameObject.FindGameObjectsWithTag("Shape");
-        return dropRate + (shapesInScene.Length * 0.025f);
+        return dropRate - (shapesInScene.Length * 0.025f);
     }
 
     // stop cube from moving
@@ -265,5 +266,17 @@ public class Shape : MonoBehaviour
         {
             child.GetComponent<Renderer>().material.color = new Color(child.GetComponent<Renderer>().material.color.r, child.GetComponent<Renderer>().material.color.g, child.GetComponent<Renderer>().material.color.b, cubeMat.color.a);
         }
+    }
+
+    // Temporary Reset Drop Rate and wait for 500ms and put it back
+    float tempDropRate;
+    public void ClearDropRate()
+    {
+        tempDropRate = dropRate;
+        dropRate = 2.0f;
+    }
+    public void ResetDropRate()
+    {
+        dropRate = tempDropRate;
     }
 }

@@ -1,2 +1,0 @@
-fix layer clears only once issue - like ever
-

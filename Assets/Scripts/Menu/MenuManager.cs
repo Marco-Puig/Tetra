@@ -19,7 +19,7 @@ public class MenuManager : MonoBehaviour
             element.SetActive(false);
         }
         loadingIndicator.SetActive(true);
-        await Task.Delay(900); // await scene loading
+        await Task.Delay(1000); // await scene loading
         SceneManager.LoadScene("DevScene");
     }
 
