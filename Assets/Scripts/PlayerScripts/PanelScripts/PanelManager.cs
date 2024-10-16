@@ -92,14 +92,14 @@ public class PanelManager : MonoBehaviour // panel manager is a game manager but
         panelTransform.Rotate(direction);
     }
 
-    public async void UpdateScore()
+    public async void UpdateScore(int totalScore = 2000)
     {
         // score count up animation
-        for (int i = 0; i < 1000; i++)
+        for (int i = 0; i < totalScore; i++)
         {
             score++;
             scoreText.text = "Score " + score.ToString();
-            await Task.Delay(2 * (int)(1 + Time.deltaTime));
+            await Task.Delay((int)(1 + Time.deltaTime));
         }
     }
 }

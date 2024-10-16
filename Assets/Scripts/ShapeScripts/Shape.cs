@@ -211,6 +211,7 @@ public class Shape : MonoBehaviour
         // you are able to move the cube while it drops
         MoveShape();
         MoveDownEverySecond();
+        CheckSlam();
     }
 
     // Move Shape Down Every Second
@@ -278,5 +279,19 @@ public class Shape : MonoBehaviour
     public void ResetDropRate()
     {
         dropRate = tempDropRate;
+    }
+
+    // Check if Shape can Slam
+    void CheckSlam()
+    {
+        // if S key is pressed, slam the piece down
+        if (Input.GetKey(KeyCode.S))
+        {
+            if (!CheckCollision(Vector3.down))
+            {
+                Time.timeScale = 15; // 'slam' aka speed up the piece (game)
+                PanelManager.instance.UpdateScore(1); // update score
+            }
+        }
     }
 }
