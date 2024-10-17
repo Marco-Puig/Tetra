@@ -19,7 +19,6 @@ public class Shape : MonoBehaviour
     public LayerMask layerMask;
     [SerializeField] ShapeVisual shapeVisual;
 
-
     // Get Cube Position
     void Start()
     {
@@ -50,6 +49,10 @@ public class Shape : MonoBehaviour
     // Get Move Direction based on Panel Side
     Vector3 GetMoveDirection()
     {
+        // if paused, return default direction
+        if (PauseMenu.isPaused) return Vector3.zero;
+
+        // Get all possible directions based on panel side
         Vector3[][] directions = new Vector3[4][];
         directions[0] = GetFrontSideDirection();
         directions[1] = GetRightSideDirection();
@@ -217,8 +220,11 @@ public class Shape : MonoBehaviour
     // Move Shape Down Every Second
     public void MoveDownEverySecond()
     {
+        // calculate drop rate based on amount of shapes in the scene
+        dropRate = CalculateDropRate();
+
         // move cube down every second
-        if (time * Time.deltaTime >= CalculateDropRate())
+        if ((time * Time.deltaTime) >= dropRate)
         {
             shapeTransform.localPosition += Vector3.down;
             time = 0;
@@ -232,7 +238,9 @@ public class Shape : MonoBehaviour
     {
         // calculate drop rate based on amount of shapes in the scene
         GameObject[] shapesInScene = GameObject.FindGameObjectsWithTag("Shape");
-        return dropRate - (shapesInScene.Length * 0.025f);
+        // calculate drop rate based on amount of shapes in the scene
+        if (shapesInScene.Length >= 24) return dropRate - (24 * 0.00003f);
+        return dropRate - (shapesInScene.Length * 0.00003f);
     }
 
     // stop cube from moving
