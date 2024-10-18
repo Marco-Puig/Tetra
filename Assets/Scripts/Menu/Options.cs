@@ -5,10 +5,7 @@ public class Options : MonoBehaviour
     // windowed mode
     public void isFullscreen(bool toggle)
     {
-        if (toggle)
-        {
-            Screen.fullScreen = !Screen.fullScreen;
-        }
+        Screen.fullScreen = !toggle;
     }
 
     // set framerate
