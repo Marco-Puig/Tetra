@@ -48,7 +48,7 @@ public class PressStart : MonoBehaviour
         // move camera up to the main menu slowly and play ui animations
         // TODO: UI ANIMATIONS HERE
         cam.transform.rotation = Quaternion.Lerp(cam.transform.rotation, Quaternion.Euler(17f, 0, 0), 1.25f * Time.deltaTime);
-        title.transform.position = Vector3.Lerp(title.transform.position, new Vector3(title.transform.position.x, 1450f, title.transform.position.z), 1.25f * Time.deltaTime);
+        // title.transform.position = Vector3.Lerp(title.transform.position, new Vector3(title.transform.position.x, 1450f, title.transform.position.z), 1.25f * Time.deltaTime);
         if (cam.transform.rotation.x == 17f) state = null; // once camera is at the right angle, stop the script
     }
 }
