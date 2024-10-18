@@ -4,6 +4,9 @@
 ## Preview - 9/4/2024
 [https://www.youtube.com/watch?v=5s-3cXFcePE](https://www.youtube.com/watch?v=5s-3cXFcePE)
 
+## Early Version Build
+[https://gamejolt.com/games/tetris3d/923684](https://gamejolt.com/games/tetris3d/923684)
+
 ## Features
 - Scoring through Row Clearing
 - Losing by Reaching the Top
