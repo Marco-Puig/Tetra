@@ -6,6 +6,8 @@ public class MenuManager : MonoBehaviour
 {
     [SerializeField] GameObject loadingIndicator;
     [SerializeField] GameObject[] elementsToHide;
+    [SerializeField] GameObject[] optionsElements;
+    [SerializeField] GameObject title;
 
     void Start()
     {
@@ -23,6 +25,37 @@ public class MenuManager : MonoBehaviour
         SceneManager.LoadScene("DevScene");
     }
 
+    public async void ShowOptions()
+    {
+        foreach (GameObject element in elementsToHide)
+        {
+            element.SetActive(false);
+        }
+        loadingIndicator.SetActive(true);
+        await Task.Delay(250); // await scene loading
+        loadingIndicator.SetActive(false);
+        foreach (GameObject element in optionsElements)
+        {
+            element.SetActive(true);
+        }
+        title.SetActive(false);
+    }
+
+    public async void HideOptions()
+    {
+        foreach (GameObject element in optionsElements)
+        {
+            element.SetActive(false);
+        }
+        title.SetActive(true);
+        loadingIndicator.SetActive(true);
+        await Task.Delay(250); // await scene loading
+        loadingIndicator.SetActive(false);
+        foreach (GameObject element in elementsToHide)
+        {
+            element.SetActive(true);
+        }
+    }
     public void QuitGame()
     {
         Application.Quit();
