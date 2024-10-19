@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Threading.Tasks;
+using System.Collections;
 
 public class Shape : MonoBehaviour
 {
@@ -243,14 +244,43 @@ public class Shape : MonoBehaviour
         return dropRate - (shapesInScene.Length * 0.00003f);
     }
 
+
+    bool once = false;
+
     // stop cube from moving
     public void StopShape()
     {
-        // stop spawning visual cube for it
+        // Stop spawning visual cube for it
         if (shapeVisual != null)
         {
             shapeVisual.enabled = false;
         }
+
+        // Do camera shake effect to show that the cube has stopped
+        if (once) return;
+        Camera camera = Camera.main;
+        StartCoroutine(CameraShake(camera, 0.08f, 1f));
+        once = true;
+    }
+
+    private IEnumerator CameraShake(Camera camera, float duration, float magnitude)
+    {
+        Vector3 originalPos = camera.transform.localPosition;
+        float elapsed = 0.0f;
+
+        while (elapsed < duration)
+        {
+            float x = -0.02f * Random.Range(-2f, 2f) * magnitude;
+            float y = 3.66f * Random.Range(0.999f, 1f) * magnitude;
+
+            camera.transform.localPosition = new Vector3(x, y, originalPos.z);
+
+            elapsed += Time.deltaTime;
+
+            yield return null;
+        }
+
+        camera.transform.localPosition = originalPos;
     }
 
     public void ResetPanelSide()
