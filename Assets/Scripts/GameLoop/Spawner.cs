@@ -1,18 +1,27 @@
 using UnityEngine;
+using TMPro;
 
 public class Spawner : MonoBehaviour
 {
     public GameObject[] shapes;
-    int shapeIndex, lastRoll;
+    int shapeIndex, nextShapeIndex;
     [SerializeField] PanelManager panelManager;
+    [SerializeField] GameObject[] shapeIcons;
 
+    private void Start()
+    {
+        // set next shape index to random value
+        nextShapeIndex = Random.Range(0, shapes.Length); // <-- techinically this is the first shape to spawn
+    }
     private void Update()
     {
         SpawnShape();
+        DisplayNextShape();
     }
 
     void SpawnShape()
     {
+        // check if allowed to spawn shape
         // get all shapes that are currently dropping
         GameObject[] spawnedShapes = GameObject.FindGameObjectsWithTag("Shape");
 
@@ -29,16 +38,16 @@ public class Spawner : MonoBehaviour
         }
 
         // spawn shape at spawner position
-        lastRoll = shapeIndex;
-        shapeIndex = Random.Range(0, shapes.Length);
+        shapeIndex = nextShapeIndex; // set current shape index to next shape index from prior spawn
+        nextShapeIndex = Random.Range(0, shapes.Length); // create the new next shape
 
         // if random roll is same as last time, do a coin toss to determine if we should roll again
-        if (shapeIndex == lastRoll)
+        if (shapeIndex == nextShapeIndex)
         {
             // 50% chance to roll again
             if (Random.Range(0, 1) == 0)
             {
-                shapeIndex = Random.Range(0, shapes.Length);
+                nextShapeIndex = Random.Range(0, shapes.Length);
             }
         }
 
@@ -48,5 +57,17 @@ public class Spawner : MonoBehaviour
 
         // ensure shape is facing forward initially
         currentShape.transform.localRotation = Quaternion.Euler(0, 0, 0);
+    }
+
+    void DisplayNextShape()
+    {
+        // make sure all shape icons arent showing at once
+        foreach (GameObject icon in shapeIcons)
+        {
+            icon.SetActive(false);
+        }
+
+        // display next shape icon
+        shapeIcons[nextShapeIndex].SetActive(true);
     }
 }
