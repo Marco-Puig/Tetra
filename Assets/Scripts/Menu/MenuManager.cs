@@ -12,6 +12,7 @@ public class MenuManager : MonoBehaviour
     void Start()
     {
         loadingIndicator.SetActive(false);
+        PlayerPrefs.DeleteAll(); // remove with full release
     }
     public async void StartGame()
     {

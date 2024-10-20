@@ -32,4 +32,16 @@ public class Options : MonoBehaviour
         }
     }
 
+    // set quality
+    public void setQuality(int quality)
+    {
+        QualitySettings.SetQualityLevel(quality);
+    }
+
+    // set audio volume
+    public void setVolume(float volume)
+    {
+        AudioListener.volume = volume;
+    }
+
 }
