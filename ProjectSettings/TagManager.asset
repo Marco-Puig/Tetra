@@ -13,6 +13,7 @@ TagManager:
   - Music
   - Panel
   - SFX
+  - SFXScore
   layers:
   - Default
   - TransparentFX

@@ -603,7 +603,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0.6627451, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2145,7 +2145,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.87058824, g: 0, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -7565,6 +7565,7 @@ MonoBehaviour:
   - {fileID: 1631767408}
   - {fileID: 55762492}
   panelManager: {fileID: 225871417}
+  layerClearSFX: {fileID: 8300000, guid: 060a4aa6e340f8642afa14beafa3a2cd, type: 3}
 --- !u!1 &164021790
 GameObject:
   m_ObjectHideFlags: 0
@@ -9786,6 +9787,7 @@ MonoBehaviour:
   - {fileID: 911893082}
   - {fileID: 455318016}
   panelManager: {fileID: 225871417}
+  layerClearSFX: {fileID: 8300000, guid: 060a4aa6e340f8642afa14beafa3a2cd, type: 3}
 --- !u!1 &214808299
 GameObject:
   m_ObjectHideFlags: 0
@@ -9977,6 +9979,7 @@ MonoBehaviour:
   - {fileID: 841784316}
   - {fileID: 1614107338}
   panelManager: {fileID: 225871417}
+  layerClearSFX: {fileID: 8300000, guid: 060a4aa6e340f8642afa14beafa3a2cd, type: 3}
 --- !u!1 &221420968
 GameObject:
   m_ObjectHideFlags: 0
@@ -10733,6 +10736,7 @@ MonoBehaviour:
   - {fileID: 1237613374}
   - {fileID: 569288319}
   panelManager: {fileID: 225871417}
+  layerClearSFX: {fileID: 8300000, guid: 060a4aa6e340f8642afa14beafa3a2cd, type: 3}
 --- !u!1 &231632190
 GameObject:
   m_ObjectHideFlags: 0
@@ -11555,6 +11559,7 @@ MonoBehaviour:
   - {fileID: 1742023286}
   - {fileID: 199091396}
   panelManager: {fileID: 225871417}
+  layerClearSFX: {fileID: 8300000, guid: 060a4aa6e340f8642afa14beafa3a2cd, type: 3}
 --- !u!1 &242257595
 GameObject:
   m_ObjectHideFlags: 0
@@ -11746,6 +11751,7 @@ MonoBehaviour:
   - {fileID: 1456543173}
   - {fileID: 808290582}
   panelManager: {fileID: 225871417}
+  layerClearSFX: {fileID: 8300000, guid: 060a4aa6e340f8642afa14beafa3a2cd, type: 3}
 --- !u!1 &244914313
 GameObject:
   m_ObjectHideFlags: 0
@@ -11804,6 +11810,7 @@ MonoBehaviour:
   - {fileID: 327707066}
   - {fileID: 1819950306}
   panelManager: {fileID: 225871417}
+  layerClearSFX: {fileID: 8300000, guid: 060a4aa6e340f8642afa14beafa3a2cd, type: 3}
 --- !u!1 &251480200
 GameObject:
   m_ObjectHideFlags: 0
@@ -15909,6 +15916,7 @@ MonoBehaviour:
   - {fileID: 348048039}
   - {fileID: 735851164}
   panelManager: {fileID: 225871417}
+  layerClearSFX: {fileID: 8300000, guid: 060a4aa6e340f8642afa14beafa3a2cd, type: 3}
 --- !u!1 &344986939
 GameObject:
   m_ObjectHideFlags: 0
@@ -20735,7 +20743,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0.6627451, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -21050,6 +21058,7 @@ MonoBehaviour:
   - {fileID: 1708740101}
   - {fileID: 155204022}
   panelManager: {fileID: 225871417}
+  layerClearSFX: {fileID: 8300000, guid: 060a4aa6e340f8642afa14beafa3a2cd, type: 3}
 --- !u!1 &470105215
 GameObject:
   m_ObjectHideFlags: 0
@@ -21439,6 +21448,7 @@ MonoBehaviour:
   - {fileID: 1735362959}
   - {fileID: 1583107930}
   panelManager: {fileID: 225871417}
+  layerClearSFX: {fileID: 8300000, guid: 060a4aa6e340f8642afa14beafa3a2cd, type: 3}
 --- !u!1 &481813387
 GameObject:
   m_ObjectHideFlags: 0
@@ -21828,6 +21838,7 @@ MonoBehaviour:
   - {fileID: 2093450709}
   - {fileID: 858054732}
   panelManager: {fileID: 225871417}
+  layerClearSFX: {fileID: 8300000, guid: 060a4aa6e340f8642afa14beafa3a2cd, type: 3}
 --- !u!1 &490354077
 GameObject:
   m_ObjectHideFlags: 0
@@ -22251,6 +22262,7 @@ MonoBehaviour:
   - {fileID: 361384418}
   - {fileID: 1157582082}
   panelManager: {fileID: 225871417}
+  layerClearSFX: {fileID: 8300000, guid: 060a4aa6e340f8642afa14beafa3a2cd, type: 3}
 --- !u!1 &500768494
 GameObject:
   m_ObjectHideFlags: 0
@@ -23231,7 +23243,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 1, b: 0.078431375, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -24168,7 +24180,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 1, b: 0.078431375, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -24897,6 +24909,7 @@ MonoBehaviour:
   - {fileID: 121659341}
   - {fileID: 957193818}
   panelManager: {fileID: 225871417}
+  layerClearSFX: {fileID: 8300000, guid: 060a4aa6e340f8642afa14beafa3a2cd, type: 3}
 --- !u!1 &556082190
 GameObject:
   m_ObjectHideFlags: 0
@@ -25153,6 +25166,7 @@ MonoBehaviour:
   - {fileID: 17633696}
   - {fileID: 400190841}
   panelManager: {fileID: 225871417}
+  layerClearSFX: {fileID: 8300000, guid: 060a4aa6e340f8642afa14beafa3a2cd, type: 3}
 --- !u!1 &563548826
 GameObject:
   m_ObjectHideFlags: 0
@@ -25443,6 +25457,7 @@ MonoBehaviour:
   - {fileID: 1305803084}
   - {fileID: 447182681}
   panelManager: {fileID: 225871417}
+  layerClearSFX: {fileID: 8300000, guid: 060a4aa6e340f8642afa14beafa3a2cd, type: 3}
 --- !u!1 &565580045
 GameObject:
   m_ObjectHideFlags: 0
@@ -25965,6 +25980,7 @@ MonoBehaviour:
   - {fileID: 566749990}
   - {fileID: 1966677787}
   panelManager: {fileID: 225871417}
+  layerClearSFX: {fileID: 8300000, guid: 060a4aa6e340f8642afa14beafa3a2cd, type: 3}
 --- !u!1 &573203266
 GameObject:
   m_ObjectHideFlags: 0
@@ -30471,6 +30487,7 @@ MonoBehaviour:
   - {fileID: 1151054563}
   - {fileID: 85050384}
   panelManager: {fileID: 225871417}
+  layerClearSFX: {fileID: 8300000, guid: 060a4aa6e340f8642afa14beafa3a2cd, type: 3}
 --- !u!1 &655046729
 GameObject:
   m_ObjectHideFlags: 0
@@ -30894,6 +30911,7 @@ MonoBehaviour:
   - {fileID: 673822521}
   - {fileID: 1519129783}
   panelManager: {fileID: 225871417}
+  layerClearSFX: {fileID: 8300000, guid: 060a4aa6e340f8642afa14beafa3a2cd, type: 3}
 --- !u!1 &660613601
 GameObject:
   m_ObjectHideFlags: 0
@@ -32013,6 +32031,7 @@ MonoBehaviour:
   - {fileID: 2139393346}
   - {fileID: 1897949656}
   panelManager: {fileID: 225871417}
+  layerClearSFX: {fileID: 8300000, guid: 060a4aa6e340f8642afa14beafa3a2cd, type: 3}
 --- !u!1 &686888504
 GameObject:
   m_ObjectHideFlags: 0
@@ -32929,6 +32948,7 @@ MonoBehaviour:
   - {fileID: 2093305451}
   - {fileID: 359816079}
   panelManager: {fileID: 225871417}
+  layerClearSFX: {fileID: 8300000, guid: 060a4aa6e340f8642afa14beafa3a2cd, type: 3}
 --- !u!1 &718312545
 GameObject:
   m_ObjectHideFlags: 0
@@ -32987,6 +33007,7 @@ MonoBehaviour:
   - {fileID: 1250842003}
   - {fileID: 481813387}
   panelManager: {fileID: 225871417}
+  layerClearSFX: {fileID: 8300000, guid: 060a4aa6e340f8642afa14beafa3a2cd, type: 3}
 --- !u!1 &725459880
 GameObject:
   m_ObjectHideFlags: 0
@@ -35133,6 +35154,7 @@ MonoBehaviour:
   - {fileID: 1836471852}
   - {fileID: 1379823947}
   panelManager: {fileID: 225871417}
+  layerClearSFX: {fileID: 8300000, guid: 060a4aa6e340f8642afa14beafa3a2cd, type: 3}
 --- !u!1 &767151924
 GameObject:
   m_ObjectHideFlags: 0
@@ -35556,6 +35578,7 @@ MonoBehaviour:
   - {fileID: 1566008091}
   - {fileID: 319625855}
   panelManager: {fileID: 225871417}
+  layerClearSFX: {fileID: 8300000, guid: 060a4aa6e340f8642afa14beafa3a2cd, type: 3}
 --- !u!1 &793221359
 GameObject:
   m_ObjectHideFlags: 0
@@ -38641,6 +38664,7 @@ MonoBehaviour:
   - {fileID: 685448838}
   - {fileID: 303509611}
   panelManager: {fileID: 225871417}
+  layerClearSFX: {fileID: 8300000, guid: 060a4aa6e340f8642afa14beafa3a2cd, type: 3}
 --- !u!1 &872780891
 GameObject:
   m_ObjectHideFlags: 0
@@ -41769,6 +41793,7 @@ MonoBehaviour:
   - {fileID: 1964345417}
   - {fileID: 1616984345}
   panelManager: {fileID: 225871417}
+  layerClearSFX: {fileID: 8300000, guid: 060a4aa6e340f8642afa14beafa3a2cd, type: 3}
 --- !u!1 &925506876
 GameObject:
   m_ObjectHideFlags: 0
@@ -42557,6 +42582,7 @@ MonoBehaviour:
   - {fileID: 728162470}
   - {fileID: 344986939}
   panelManager: {fileID: 225871417}
+  layerClearSFX: {fileID: 8300000, guid: 060a4aa6e340f8642afa14beafa3a2cd, type: 3}
 --- !u!1 &938426218
 GameObject:
   m_ObjectHideFlags: 0
@@ -44869,7 +44895,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0.6627451, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -47230,6 +47256,147 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &1044994601
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1044994604}
+  - component: {fileID: 1044994603}
+  - component: {fileID: 1044994602}
+  m_Layer: 0
+  m_Name: ScoreSFXManager
+  m_TagString: SFXScore
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1044994602
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1044994601}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c705832dbe9d3c45b05a90e9315b117, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!82 &1044994603
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1044994601}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 0.8
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!4 &1044994604
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1044994601}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2311.1965, y: 1316.1136, z: -7.6634526}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1048590689
 GameObject:
   m_ObjectHideFlags: 0
@@ -47619,6 +47786,7 @@ MonoBehaviour:
   - {fileID: 997443242}
   - {fileID: 1503758705}
   panelManager: {fileID: 225871417}
+  layerClearSFX: {fileID: 8300000, guid: 060a4aa6e340f8642afa14beafa3a2cd, type: 3}
 --- !u!1 &1057757234
 GameObject:
   m_ObjectHideFlags: 0
@@ -50138,7 +50306,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.87058824, g: 0, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -51050,6 +51218,7 @@ MonoBehaviour:
   - {fileID: 1809420168}
   - {fileID: 763434418}
   panelManager: {fileID: 225871417}
+  layerClearSFX: {fileID: 8300000, guid: 060a4aa6e340f8642afa14beafa3a2cd, type: 3}
 --- !u!1 &1125489999
 GameObject:
   m_ObjectHideFlags: 0
@@ -53788,7 +53957,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.50980395, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -56175,6 +56344,7 @@ MonoBehaviour:
   - {fileID: 172218108}
   - {fileID: 1170329269}
   panelManager: {fileID: 225871417}
+  layerClearSFX: {fileID: 8300000, guid: 060a4aa6e340f8642afa14beafa3a2cd, type: 3}
 --- !u!1 &1229558844
 GameObject:
   m_ObjectHideFlags: 0
@@ -58986,6 +59156,7 @@ MonoBehaviour:
   - {fileID: 825170424}
   - {fileID: 1483699690}
   panelManager: {fileID: 225871417}
+  layerClearSFX: {fileID: 8300000, guid: 060a4aa6e340f8642afa14beafa3a2cd, type: 3}
 --- !u!1 &1290461173
 GameObject:
   m_ObjectHideFlags: 0
@@ -60637,6 +60808,7 @@ MonoBehaviour:
   - {fileID: 1302468206}
   - {fileID: 330917041}
   panelManager: {fileID: 225871417}
+  layerClearSFX: {fileID: 8300000, guid: 060a4aa6e340f8642afa14beafa3a2cd, type: 3}
 --- !u!1 &1323180128
 GameObject:
   m_ObjectHideFlags: 0
@@ -64744,6 +64916,7 @@ MonoBehaviour:
   - {fileID: 2141418400}
   - {fileID: 1182957755}
   panelManager: {fileID: 225871417}
+  layerClearSFX: {fileID: 8300000, guid: 060a4aa6e340f8642afa14beafa3a2cd, type: 3}
 --- !u!1 &1420956898
 GameObject:
   m_ObjectHideFlags: 0
@@ -65525,7 +65698,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.87058824, g: 0, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -74742,6 +74915,7 @@ MonoBehaviour:
   - {fileID: 540873070}
   - {fileID: 1063049325}
   panelManager: {fileID: 225871417}
+  layerClearSFX: {fileID: 8300000, guid: 060a4aa6e340f8642afa14beafa3a2cd, type: 3}
 --- !u!1 &1628122422
 GameObject:
   m_ObjectHideFlags: 0
@@ -75993,6 +76167,7 @@ MonoBehaviour:
   - {fileID: 2029703724}
   - {fileID: 601519129}
   panelManager: {fileID: 225871417}
+  layerClearSFX: {fileID: 8300000, guid: 060a4aa6e340f8642afa14beafa3a2cd, type: 3}
 --- !u!1 &1649782391
 GameObject:
   m_ObjectHideFlags: 0
@@ -79040,6 +79215,7 @@ MonoBehaviour:
   - {fileID: 1895358352}
   - {fileID: 1288902376}
   panelManager: {fileID: 225871417}
+  layerClearSFX: {fileID: 8300000, guid: 060a4aa6e340f8642afa14beafa3a2cd, type: 3}
 --- !u!1 &1718589078
 GameObject:
   m_ObjectHideFlags: 0
@@ -84785,6 +84961,7 @@ MonoBehaviour:
   - {fileID: 477486956}
   - {fileID: 1722540289}
   panelManager: {fileID: 225871417}
+  layerClearSFX: {fileID: 8300000, guid: 060a4aa6e340f8642afa14beafa3a2cd, type: 3}
 --- !u!1 &1814424704
 GameObject:
   m_ObjectHideFlags: 0
@@ -85242,6 +85419,7 @@ MonoBehaviour:
   - {fileID: 1334519698}
   - {fileID: 727094136}
   panelManager: {fileID: 225871417}
+  layerClearSFX: {fileID: 8300000, guid: 060a4aa6e340f8642afa14beafa3a2cd, type: 3}
 --- !u!1 &1818462726
 GameObject:
   m_ObjectHideFlags: 0
@@ -88752,6 +88930,7 @@ MonoBehaviour:
   - {fileID: 1008143886}
   - {fileID: 926665992}
   panelManager: {fileID: 225871417}
+  layerClearSFX: {fileID: 8300000, guid: 060a4aa6e340f8642afa14beafa3a2cd, type: 3}
 --- !u!1 &1916760024
 GameObject:
   m_ObjectHideFlags: 0
@@ -88810,6 +88989,7 @@ MonoBehaviour:
   - {fileID: 155338668}
   - {fileID: 309022277}
   panelManager: {fileID: 225871417}
+  layerClearSFX: {fileID: 8300000, guid: 060a4aa6e340f8642afa14beafa3a2cd, type: 3}
 --- !u!1 &1919876876
 GameObject:
   m_ObjectHideFlags: 0
@@ -90053,7 +90233,7 @@ GameObject:
   - component: {fileID: 1957881561}
   - component: {fileID: 1957881562}
   m_Layer: 0
-  m_Name: SFXManager
+  m_Name: ShapeSFXManager
   m_TagString: SFX
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -91735,6 +91915,7 @@ MonoBehaviour:
   - {fileID: 1235570891}
   - {fileID: 593339734}
   panelManager: {fileID: 225871417}
+  layerClearSFX: {fileID: 8300000, guid: 060a4aa6e340f8642afa14beafa3a2cd, type: 3}
 --- !u!1 &1987698779
 GameObject:
   m_ObjectHideFlags: 0
@@ -94701,6 +94882,7 @@ MonoBehaviour:
   - {fileID: 1508213357}
   - {fileID: 338127836}
   panelManager: {fileID: 225871417}
+  layerClearSFX: {fileID: 8300000, guid: 060a4aa6e340f8642afa14beafa3a2cd, type: 3}
 --- !u!1 &2090505515
 GameObject:
   m_ObjectHideFlags: 0
@@ -95721,6 +95903,7 @@ MonoBehaviour:
   - {fileID: 1280746273}
   - {fileID: 41100714}
   panelManager: {fileID: 225871417}
+  layerClearSFX: {fileID: 8300000, guid: 060a4aa6e340f8642afa14beafa3a2cd, type: 3}
 --- !u!1 &2103263076
 GameObject:
   m_ObjectHideFlags: 0
@@ -95772,7 +95955,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.50980395, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -96735,3 +96918,4 @@ SceneRoots:
   - {fileID: 1924414114}
   - {fileID: 1070289745}
   - {fileID: 1957881560}
+  - {fileID: 1044994604}

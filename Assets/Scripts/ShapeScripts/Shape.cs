@@ -241,8 +241,8 @@ public class Shape : MonoBehaviour
         // calculate drop rate based on amount of shapes in the scene
         GameObject[] shapesInScene = GameObject.FindGameObjectsWithTag("Shape");
         // calculate drop rate based on amount of shapes in the scene
-        if (shapesInScene.Length >= 24) return dropRate - (24 * 0.00003f);
-        return dropRate - (shapesInScene.Length * 0.00003f);
+        if (shapesInScene.Length >= 24) return dropRate - (24 * 0.00001f);
+        return dropRate - (shapesInScene.Length * 0.00001f);
     }
 
 
@@ -281,9 +281,13 @@ public class Shape : MonoBehaviour
         {
             // set material as 'glow' aka white
             child.GetComponent<Renderer>().material.color = new Color(1f, 1f, 1f, 1f);
+            // do a slight emmission effect
+            //child.GetComponent<Renderer>().material.EnableKeyword("_EMISSION");
         }
         // do this transform too
         GetComponent<Renderer>().material.color = new Color(1f, 1f, 1f, 1f);
+        // do a slight emmission effect
+        // GetComponent<Renderer>().material.EnableKeyword("_EMISSION");
 
         await Task.Delay(500); // wait for 500ms
 
@@ -292,9 +296,13 @@ public class Shape : MonoBehaviour
         {
             // set material as original color
             child.GetComponent<Renderer>().material.color = orignalColor;
+            // remove emmission effect
+            //child.GetComponent<Renderer>().material.DisableKeyword("_EMISSION");
         }
         // do this transform too
         GetComponent<Renderer>().material.color = orignalColor;
+        // remove emmission effect
+        //GetComponent<Renderer>().material.DisableKeyword("_EMISSION");
     }
 
     public void ResetPanelSide()
