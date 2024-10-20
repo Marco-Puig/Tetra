@@ -19,6 +19,7 @@ public class Shape : MonoBehaviour
     // Inspector Variables:
     public LayerMask layerMask;
     [SerializeField] ShapeVisual shapeVisual;
+    [SerializeField] AudioClip soundEffect;
 
     // Get Cube Position
     void Start()
@@ -255,11 +256,45 @@ public class Shape : MonoBehaviour
             shapeVisual.enabled = false;
         }
 
-        // Do camera shake effect to show that the cube has stopped
+        // I only want this to run once
         if (once) return;
+
+        // Play thump sound effect
+        AudioManager audioManager = GameObject.FindGameObjectWithTag("SFX").GetComponent<AudioManager>();
+        audioManager.PlaySound(soundEffect);
+
+        // Do camera shake effect to show that the cube has stopped
         Camera camera = Camera.main;
         StartCoroutine(CameraSystem.CameraShake(camera, 0.08f, 1f));
+        GlowShape();
+
+        // for the next time this runs, it will not run since it is in a statemode, so it will only run once even though it is in Update()
         once = true;
+    }
+
+    // Glow Shape
+    async void GlowShape()
+    {
+        Color orignalColor = new Color(cubeMat.color.r, cubeMat.color.g, cubeMat.color.b, cubeMat.color.a);
+        // get all child cubes of the shape
+        foreach (Transform child in transform)
+        {
+            // set material as 'glow' aka white
+            child.GetComponent<Renderer>().material.color = new Color(1f, 1f, 1f, 1f);
+        }
+        // do this transform too
+        GetComponent<Renderer>().material.color = new Color(1f, 1f, 1f, 1f);
+
+        await Task.Delay(500); // wait for 500ms
+
+        // unglow the shape
+        foreach (Transform child in transform)
+        {
+            // set material as original color
+            child.GetComponent<Renderer>().material.color = orignalColor;
+        }
+        // do this transform too
+        GetComponent<Renderer>().material.color = orignalColor;
     }
 
     public void ResetPanelSide()

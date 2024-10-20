@@ -78,7 +78,7 @@ public class PanelManager : MonoBehaviour // panel manager is a game manager but
     public void RotatePanel(Vector3 direction)
     {
         // increment the rotation amount
-        rotatedAmount += rotationRate;
+        rotatedAmount = rotatedAmount + rotationRate; //* Time.deltaTime; <-- todo: fix rotation rate
 
         // if it has rotated 90 degrees, reset the rotation amount and switch out of this state
         if (rotatedAmount >= 90)

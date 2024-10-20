@@ -26,7 +26,7 @@ public class CameraSystem : MonoBehaviour
 
         while (elapsed < duration)
         {
-            float x = -0.02f * Random.Range(-2f, 2f) * magnitude;
+            float x = -0.02f * UnityEngine.Random.Range(-2f, 2f) * magnitude;
 
             camera.transform.localPosition = new Vector3(x, originalPos.y, originalPos.z);
 

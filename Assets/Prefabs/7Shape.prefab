@@ -312,6 +312,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 832
   shapeVisual: {fileID: 4520818368126188351}
+  soundEffect: {fileID: 8300000, guid: e0b5b199048ef04418490711499ebe84, type: 3}
 --- !u!114 &3827242382085708539
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -12,6 +12,7 @@ TagManager:
   - Bounds
   - Music
   - Panel
+  - SFX
   layers:
   - Default
   - TransparentFX
