@@ -241,8 +241,8 @@ public class Shape : MonoBehaviour
         // calculate drop rate based on amount of shapes in the scene
         GameObject[] shapesInScene = GameObject.FindGameObjectsWithTag("Shape");
         // calculate drop rate based on amount of shapes in the scene
-        if (shapesInScene.Length >= 24) return dropRate - (24 * 0.00001f);
-        return dropRate - (shapesInScene.Length * 0.00001f);
+        if (shapesInScene.Length >= 24) return dropRate - (24 * 0.000005f);
+        return dropRate - (shapesInScene.Length * 0.000005f);
     }
 
 
