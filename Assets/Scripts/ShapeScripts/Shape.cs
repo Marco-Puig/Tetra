@@ -343,7 +343,7 @@ public class Shape : MonoBehaviour
     void CheckSlam()
     {
         // if S key is pressed, slam the piece down
-        if (Input.GetKey(KeyCode.S))
+        if (Input.GetKey(KeyCode.S) && !PauseMenu.isPaused)
         {
             if (!CheckCollision(Vector3.down))
             {
