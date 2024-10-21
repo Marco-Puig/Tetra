@@ -2697,7 +2697,7 @@ MonoBehaviour:
     Space - Rotates Shape
 
 
-    S - Slams Shapes'
+    S - Slams Shape'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 30138e2fd72fff5438bf23680736f777, type: 2}
   m_sharedMaterial: {fileID: -8986528728582727268, guid: 30138e2fd72fff5438bf23680736f777, type: 2}

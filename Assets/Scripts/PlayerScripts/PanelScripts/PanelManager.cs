@@ -78,7 +78,7 @@ public class PanelManager : MonoBehaviour // panel manager is a game manager but
     public void RotatePanel(Vector3 direction)
     {
         // increment the rotation amount
-        rotatedAmount = rotatedAmount + rotationRate; //* Time.deltaTime; <-- todo: fix rotation rate
+        rotatedAmount += rotationRate; //* Time.deltaTime; <-- todo: fix rotation rate
 
         // if it has rotated 90 degrees, reset the rotation amount and switch out of this state
         if (rotatedAmount >= 90)
@@ -101,5 +101,9 @@ public class PanelManager : MonoBehaviour // panel manager is a game manager but
             scoreText.text = "Score " + score.ToString();
             await Task.Delay((int)(1 + Time.deltaTime));
         }
+
+        // update best score if reached a new high score
+        if (score > PlayerPrefs.GetInt("Best Score", 0))
+            PlayerPrefs.SetInt("Best Score", score);
     }
 }

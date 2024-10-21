@@ -54,6 +54,7 @@ public class ShapeCollision : MonoBehaviour
     {
         //  set shape to standard drop
         shape.ClearDropRate();
+        shape.currentState = shape.MoveOnly;
         // wait for 500ms to allow player to make corrections
         await Task.Delay(500);
         shape.ResetDropRate(); // once 500ms is up, reset back to original drop rate
@@ -63,7 +64,11 @@ public class ShapeCollision : MonoBehaviour
         {
             // if there is still a collision, stop shape
             shape.currentState = shape.StopShape; // stop shape from moving - switch to stop state
-            return;
+        }
+        else
+        {
+            // if there is no collision, continue moving shape
+            shape.currentState = shape.DropShape; // continue moving shape - switch to drop state
         }
     }
 }

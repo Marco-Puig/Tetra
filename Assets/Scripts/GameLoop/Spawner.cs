@@ -35,6 +35,10 @@ public class Spawner : MonoBehaviour
             // if a shape is still dropping and isnt in the process of being destroyed via roll clear, return
             if (shape.GetComponent<Shape>().currentState == shape.GetComponent<Shape>().DropShape)
                 return;
+
+            // if a shape is still dropping and isnt in the process of being destroyed via roll clear, return
+            if (shape.GetComponent<Shape>().currentState == shape.GetComponent<Shape>().MoveOnly)
+                return;
         }
 
         // spawn shape at spawner position
