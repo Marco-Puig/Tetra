@@ -11,6 +11,7 @@ public class Shape : MonoBehaviour
     private float time = 0;
     private float range = 1.0f; // for collision detection
     private static float dropRate = 2.0f;
+    private float glowDuration = 1.0f; // Total time to glow and return to original
 
     // Public:
     public delegate void State();
@@ -251,7 +252,6 @@ public class Shape : MonoBehaviour
         MoveShape();
     }
 
-
     bool once = false;
     // stop cube from moving
     public void StopShape()
@@ -272,35 +272,61 @@ public class Shape : MonoBehaviour
         // Do camera shake effect to show that the cube has stopped
         Camera camera = Camera.main;
         StartCoroutine(CameraSystem.CameraShake(camera, 0.08f, 1f));
-        GlowShape();
+        StartCoroutine(GlowShape());
 
         // for the next time this runs, it will not run since it is in a statemode, so it will only run once even though it is in Update()
         once = true;
     }
 
-    // Glow Shape
-    async void GlowShape()
+    IEnumerator GlowShape()
     {
-        Color orignalColor = new Color(cubeMat.color.r, cubeMat.color.g, cubeMat.color.b, cubeMat.color.a);
-        // get all child cubes of the shape
+        Color originalColor = cubeMat.color;
+        float elapsedTime = 0f;
+
+        // Glow effect (increase emission)
+        while (elapsedTime < glowDuration / 2f)
+        {
+            float t = elapsedTime / (glowDuration / 2f);
+            Color glowColor = Color.Lerp(originalColor, Color.white, t);
+
+            foreach (Transform child in transform)
+            {
+                child.GetComponent<Renderer>().material.SetColor("_EmissionColor", glowColor * Mathf.LinearToGammaSpace(1.0f));
+            }
+
+            GetComponent<Renderer>().material.SetColor("_EmissionColor", glowColor * Mathf.LinearToGammaSpace(1.0f));
+
+            elapsedTime += Time.deltaTime;
+            yield return null; // Wait for the next frame
+        }
+
+        yield return new WaitForSeconds(0.25f); // Keep glowing for a moment
+
+        // Un-glow effect (fade emission back)
+        elapsedTime = 0f;
+        while (elapsedTime < glowDuration / 2f)
+        {
+            float t = elapsedTime / (glowDuration / 2f);
+            Color unGlowColor = Color.Lerp(Color.white, originalColor, t);
+
+            foreach (Transform child in transform)
+            {
+                child.GetComponent<Renderer>().material.SetColor("_EmissionColor", unGlowColor * Mathf.LinearToGammaSpace(1.0f));
+            }
+
+            GetComponent<Renderer>().material.SetColor("_EmissionColor", unGlowColor * Mathf.LinearToGammaSpace(1.0f));
+
+            elapsedTime += Time.deltaTime;
+            yield return null; // Wait for the next frame
+        }
+
+        // Finally, set the original color to make sure it’s accurate
         foreach (Transform child in transform)
         {
-            // set material as 'glow' aka white
-            child.GetComponent<Renderer>().material.color = new Color(1f, 1f, 1f, 1f);
+            child.GetComponent<Renderer>().material.SetColor("_EmissionColor", originalColor * Mathf.LinearToGammaSpace(1.0f));
         }
-        // do this transform too
-        GetComponent<Renderer>().material.color = new Color(1f, 1f, 1f, 1f);
 
-        await Task.Delay(500); // wait for 500ms
-
-        // unglow the shape
-        foreach (Transform child in transform)
-        {
-            // set material as original color
-            child.GetComponent<Renderer>().material.color = orignalColor;
-        }
-        // do this transform too
-        GetComponent<Renderer>().material.color = orignalColor;
+        GetComponent<Renderer>().material.SetColor("_EmissionColor", originalColor * Mathf.LinearToGammaSpace(1.0f));
     }
 
     public void ResetPanelSide()
