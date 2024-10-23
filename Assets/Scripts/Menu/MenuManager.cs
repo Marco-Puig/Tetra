@@ -13,6 +13,7 @@ public class MenuManager : MonoBehaviour
     {
         loadingIndicator.SetActive(false);
         PlayerPrefs.DeleteAll(); // remove with full release
+        Application.targetFrameRate = 120; // remove with full release
     }
     public async void StartGame()
     {

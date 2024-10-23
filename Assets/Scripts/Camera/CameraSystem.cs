@@ -12,10 +12,15 @@ public class CameraSystem : MonoBehaviour
 
     void Update()
     {
-        // adjust camera's height based on shape count
+        DynamicHeight();
+    }
+
+    // adjust camera's height based on shape count
+    void DynamicHeight()
+    {
+        float height = 3.66f; // starting height
         GameObject[] shapes = GameObject.FindGameObjectsWithTag("Shape");
-        float height = 3.66f;
-        height += shapes.Length / 90f;
+        height += shapes.Length / 180f;
         cam.transform.position = new Vector3(cam.transform.position.x, height, cam.transform.position.z);
     }
 
@@ -26,7 +31,7 @@ public class CameraSystem : MonoBehaviour
 
         while (elapsed < duration)
         {
-            float x = -0.02f * UnityEngine.Random.Range(-2f, 2f) * magnitude;
+            float x = -0.02f * Random.Range(-2f, 2f) * magnitude;
 
             camera.transform.localPosition = new Vector3(x, originalPos.y, originalPos.z);
 

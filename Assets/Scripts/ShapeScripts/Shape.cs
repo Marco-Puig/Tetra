@@ -1,10 +1,9 @@
 using UnityEngine;
-using System.Threading.Tasks;
 using System.Collections;
 
 public class Shape : MonoBehaviour
 {
-    // Private:
+    // Private: - some of these will be moved to public once code is more finialized
     private Transform shapeTransform;
     private Material cubeMat;
     private static int panelSide = 0;
@@ -280,7 +279,7 @@ public class Shape : MonoBehaviour
 
     IEnumerator GlowShape()
     {
-        Color originalColor = cubeMat.color;
+        Color originalColor = cubeMat.GetColor("_EmissionColor");
         float elapsedTime = 0f;
 
         // Glow effect (increase emission)
@@ -319,14 +318,6 @@ public class Shape : MonoBehaviour
             elapsedTime += Time.deltaTime;
             yield return null; // Wait for the next frame
         }
-
-        // Finally, set the original color to make sure it’s accurate
-        foreach (Transform child in transform)
-        {
-            child.GetComponent<Renderer>().material.SetColor("_EmissionColor", originalColor * Mathf.LinearToGammaSpace(1.0f));
-        }
-
-        GetComponent<Renderer>().material.SetColor("_EmissionColor", originalColor * Mathf.LinearToGammaSpace(1.0f));
     }
 
     public void ResetPanelSide()
