@@ -20,7 +20,7 @@ public class CameraSystem : MonoBehaviour
     {
         float height = 3.66f; // starting height
         GameObject[] shapes = GameObject.FindGameObjectsWithTag("Shape");
-        height += shapes.Length / 180f;
+        height += shapes.Length / 120f;
         cam.transform.position = new Vector3(cam.transform.position.x, height, cam.transform.position.z);
     }
 
@@ -29,7 +29,7 @@ public class CameraSystem : MonoBehaviour
         Vector3 originalPos = camera.transform.localPosition;
         float elapsed = 0.0f;
 
-        while (elapsed < duration)
+        while (elapsed < duration && Time.timeScale != 0)
         {
             float x = -0.02f * Random.Range(-2f, 2f) * magnitude;
 
