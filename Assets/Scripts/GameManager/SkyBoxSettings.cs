@@ -15,7 +15,7 @@ public class SkyBoxSettings : MonoBehaviour
     void RotateSkybox()
     {
         // use unscale time to keep the rotation consistent even on speed up or slow down
-        RenderSettings.skybox.SetFloat("_Rotation", Time.unscaledTime * rotateSpeed);
+        RenderSettings.skybox.SetFloat("_Rotation", Time.unscaledTime * rotateSpeed * 1.25f);
     }
 
     // on exit, reset the skybox rotation
