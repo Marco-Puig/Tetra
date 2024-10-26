@@ -14,7 +14,8 @@ public class SkyBoxSettings : MonoBehaviour
     // rotate the skybox asynchronously (get it.. like multithreading... async... nevermind)
     void RotateSkybox()
     {
-        RenderSettings.skybox.SetFloat("_Rotation", Time.time * rotateSpeed * Time.timeScale);
+        // use unscale time to keep the rotation consistent even on speed up or slow down
+        RenderSettings.skybox.SetFloat("_Rotation", Time.unscaledTime * rotateSpeed);
     }
 
     // on exit, reset the skybox rotation

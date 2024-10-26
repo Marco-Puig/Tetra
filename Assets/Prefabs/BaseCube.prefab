@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 3827242381564538450}
   - component: {fileID: 406810510930221594}
   - component: {fileID: 3827242381564538454}
-  - component: {fileID: 2554622281131852766}
   - component: {fileID: 3827242382085708539}
   m_Layer: 6
   m_Name: BaseCube
@@ -63,6 +62,9 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -153,22 +155,8 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 64
---- !u!114 &2554622281131852766
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3827242381564538449}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 41d416bc3edf7534793439327e7f603b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  visualCubePrefab: {fileID: 2493405104913831159, guid: cfcda6da71e059e49b99523065eaf933, type: 3}
-  layerMask:
-    serializedVersion: 2
-    m_Bits: 119
+  shapeVisual: {fileID: 0}
+  soundEffect: {fileID: 0}
 --- !u!114 &3827242382085708539
 MonoBehaviour:
   m_ObjectHideFlags: 0
