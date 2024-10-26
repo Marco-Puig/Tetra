@@ -6,7 +6,6 @@ public class Shape : MonoBehaviour
     // Private: - some of these will be moved to public once code is more finialized
     private Transform shapeTransform;
     private Material cubeMat;
-    private static int panelSide = 0;
     private float time = 0;
     private float range = 1.0f; // for collision detection
     private static float dropRate = 2.0f;
@@ -15,6 +14,7 @@ public class Shape : MonoBehaviour
     // Public:
     public delegate void State();
     public State currentState;
+    public static int panelSide = 0; // 0 = front, 1 = right, 2 = back, 3 = left
 
     // Inspector Variables:
     public LayerMask layerMask;

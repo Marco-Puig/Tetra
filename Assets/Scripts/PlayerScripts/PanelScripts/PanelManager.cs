@@ -1,17 +1,15 @@
 using UnityEngine;
 using TMPro;
 using System.Threading.Tasks;
+using Unity.VisualScripting;
 public class PanelManager : MonoBehaviour // panel manager is a game manager but for a player instance
 {
     [Header("Panel Manager")]
     [SerializeField]
-    float rotationRate = 1.0f;
+    float rotationRate = 120.0f;
 
     [HideInInspector] int score = 0;
     [SerializeField] TMP_Text scoreText;
-
-    [Header("Layer Manager")]
-    [SerializeField] GameObject[] layers;
 
     Transform panelTransform;
     public delegate void State();
@@ -27,10 +25,6 @@ public class PanelManager : MonoBehaviour // panel manager is a game manager but
         if (instance == null)
         {
             instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
         }
 
         panelTransform = GetComponent<Transform>();
@@ -66,11 +60,11 @@ public class PanelManager : MonoBehaviour // panel manager is a game manager but
     {
         if (Input.GetKeyUp(KeyCode.A))
         {
-            currentState = () => RotatePanel(new Vector3(0, -rotationRate, 0));
+            currentState = () => RotatePanel(Vector3.down);
         }
         else if (Input.GetKeyUp(KeyCode.D))
         {
-            currentState = () => RotatePanel(new Vector3(0, rotationRate, 0));
+            currentState = () => RotatePanel(Vector3.up);
         }
     }
 
@@ -78,10 +72,10 @@ public class PanelManager : MonoBehaviour // panel manager is a game manager but
     public void RotatePanel(Vector3 direction)
     {
         // increment the rotation amount
-        rotatedAmount += rotationRate; //* Time.deltaTime; <-- todo: fix rotation rate
+        rotatedAmount += Mathf.Abs(direction.y * Time.deltaTime * rotationRate);
 
         // if it has rotated 90 degrees, reset the rotation amount and switch out of this state
-        if (rotatedAmount >= 90)
+        if ((int)rotatedAmount >= 90) // <1% error margin
         {
             rotatedAmount = 0;
             currentState = RotateOnInput;
@@ -89,7 +83,7 @@ public class PanelManager : MonoBehaviour // panel manager is a game manager but
         }
 
         // if it hasnt rotated 90 degrees, rotate the panel
-        panelTransform.Rotate(direction);
+        panelTransform.Rotate(direction * Time.deltaTime * rotationRate);
     }
 
     public async void UpdateScore(int totalScore = 2000)
@@ -99,11 +93,16 @@ public class PanelManager : MonoBehaviour // panel manager is a game manager but
         {
             score++;
             scoreText.text = "Score " + score.ToString();
-            await Task.Delay((int)(1 + Time.deltaTime));
+            await Task.Delay(1);
         }
 
         // update best score if reached a new high score
         if (score > PlayerPrefs.GetInt("Best Score", 0))
+        {
             PlayerPrefs.SetInt("Best Score", score);
+            // Leaderboard Logic here - use MongoDB
+            // https://www.mongodb.com/developer/code-examples/csharp/saving-data-in-unity3d-using-sqlite/
+        }
+
     }
 }

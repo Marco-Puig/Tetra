@@ -10540,7 +10540,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0517d0cd325ba81468b7dcef37738be7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationRate: 1
+  rotationRate: 120
   scoreText: {fileID: 638742736}
   layers:
   - {fileID: 0}
