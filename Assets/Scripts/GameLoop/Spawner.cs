@@ -7,6 +7,7 @@ public class Spawner : MonoBehaviour
     int shapeIndex, nextShapeIndex;
     [SerializeField] PanelManager panelManager;
     [SerializeField] GameObject[] shapeIcons;
+    public static bool stopSpawning = false; // force stop override
 
     private void Start()
     {
@@ -15,6 +16,7 @@ public class Spawner : MonoBehaviour
     }
     private void Update()
     {
+        if (stopSpawning) return;
         SpawnShape();
         DisplayNextShape();
     }
@@ -73,5 +75,17 @@ public class Spawner : MonoBehaviour
 
         // display next shape icon
         shapeIcons[nextShapeIndex].SetActive(true);
+    }
+
+    // stop spawner
+    public void StopSpawning()
+    {
+        stopSpawning = true;
+    }
+
+    // cleanup
+    void OnDisable()
+    {
+        stopSpawning = false;
     }
 }

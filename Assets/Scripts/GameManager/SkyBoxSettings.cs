@@ -1,5 +1,4 @@
 // CREDIT FOR IDEA - JIMMY VEGAS: https://www.youtube.com/watch?v=cqGq__JjhMM
-
 using UnityEngine;
 
 public class SkyBoxSettings : MonoBehaviour
