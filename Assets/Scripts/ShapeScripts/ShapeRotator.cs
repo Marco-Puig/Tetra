@@ -54,5 +54,4 @@ public class ShapeRotator : MonoBehaviour
         transform.rotation = Quaternion.Euler(transform.rotation.x, 90f * rotationSide, transform.rotation.z);
         once = true;
     }
-
 }

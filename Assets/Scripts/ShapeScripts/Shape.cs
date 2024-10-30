@@ -295,7 +295,7 @@ public class Shape : MonoBehaviour
 
             GetComponent<Renderer>().material.SetColor("_EmissionColor", glowColor * Mathf.LinearToGammaSpace(1.0f));
 
-            elapsedTime += Time.deltaTime;
+            elapsedTime += Time.unscaledDeltaTime;
             yield return null; // Wait for the next frame
         }
 
@@ -315,7 +315,7 @@ public class Shape : MonoBehaviour
 
             GetComponent<Renderer>().material.SetColor("_EmissionColor", unGlowColor * Mathf.LinearToGammaSpace(1.0f));
 
-            elapsedTime += Time.deltaTime;
+            elapsedTime += Time.unscaledDeltaTime;
             yield return null; // Wait for the next frame
         }
     }
