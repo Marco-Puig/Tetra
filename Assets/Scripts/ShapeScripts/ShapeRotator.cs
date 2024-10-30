@@ -43,6 +43,11 @@ public class ShapeRotator : MonoBehaviour
     // check the possibility that if shape rotates, it doesn't collide with any other shapes
     public void IncrementRotationSide()
     {
+        if (GetComponent<Shape>().currentState == GetComponent<Shape>().StopShape)
+        {
+            return;
+        }
+
         // make sure the collision check runs this code once, not multiple times
         if (once)
         {

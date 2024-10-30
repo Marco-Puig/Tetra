@@ -40,7 +40,6 @@ public class ShapeCollision : MonoBehaviour
             Destroy(other.gameObject);
         }
 
-        // TODO: THERE MAY BE AN ISSUE WHERE IT IS COLLIDING WITH LAYER FIRST BEFORE SHAPE SO IT GETS STUCK IN SHAPE ANYWAYS
         if (other.gameObject.CompareTag("Bounds") || other.gameObject.CompareTag("Shape"))
         {
             if (transform.parent.GetComponent<ShapeRotator>() == null) return;
