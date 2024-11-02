@@ -18,7 +18,7 @@ public class CameraSystem : MonoBehaviour
     // adjust camera's height based on shape count
     void DynamicHeight()
     {
-        float height = 3.66f; // starting height
+        float height = 5.51f; // starting height
         GameObject[] shapes = GameObject.FindGameObjectsWithTag("Shape");
         height += shapes.Length / 120f;
         cam.transform.position = new Vector3(cam.transform.position.x, height, cam.transform.position.z);
