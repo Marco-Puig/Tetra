@@ -1,7 +1,7 @@
 using UnityEngine;
 using TMPro;
 using System.Threading.Tasks;
-using Unity.VisualScripting;
+
 public class PanelManager : MonoBehaviour // panel manager is a game manager but for a player instance
 {
     [Header("Panel Manager")]
