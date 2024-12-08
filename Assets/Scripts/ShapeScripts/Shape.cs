@@ -15,6 +15,7 @@ public class Shape : MonoBehaviour
     public delegate void State();
     public State currentState;
     public static int panelSide = 0; // 0 = front, 1 = right, 2 = back, 3 = left
+    [HideInInspector] public bool[] directionsBool = new bool[4];
 
     // Inspector Variables:
     public LayerMask layerMask;
@@ -62,25 +63,38 @@ public class Shape : MonoBehaviour
         directions[3] = GetLeftSideDirection();
 
         // Check for Input
-        if (Input.GetKeyUp(KeyCode.RightArrow))
+        if (directionsBool[0])
         {
             // Check if shape can move in that direction, return direction if no collision
-            if (!CheckCollision(directions[0][0])) return directions[panelSide][0];
+            if (!CheckCollision(directions[0][0])) 
+            {
+                directionsBool[0] = false;
+                return directions[panelSide][0];
+            }
         }
-
-        if (Input.GetKeyUp(KeyCode.LeftArrow))
+        if (directionsBool[1])
         {
-            if (!CheckCollision(directions[0][1])) return directions[panelSide][1];
+            if (!CheckCollision(directions[0][1])) 
+            { 
+                directionsBool[1] = false;
+                return directions[panelSide][1];
+            }
         }
-
-        if (Input.GetKeyUp(KeyCode.UpArrow))
+        if (directionsBool[2])
         {
-            if (!CheckCollision(directions[0][2])) return directions[panelSide][2];
+            if (!CheckCollision(directions[0][2])) 
+            { 
+                directionsBool[2] = false;
+                return directions[panelSide][2];
+            }
         }
-
-        if (Input.GetKeyUp(KeyCode.DownArrow))
+        if (directionsBool[3])
         {
-            if (!CheckCollision(directions[0][3])) return directions[panelSide][3];
+            if (!CheckCollision(directions[0][3])) 
+            { 
+                directionsBool[3] = false;
+                return directions[panelSide][3];
+            }
         }
 
         return Vector3.zero;

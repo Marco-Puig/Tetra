@@ -5,10 +5,10 @@ public class ShapeRotator : MonoBehaviour
     private int rotationSide = 0;
     void Update()
     {
-        RotateShape();
+       // RotateShape();
     }
 
-    void RotateShape()
+    public void RotateShape()
     {
         // if panel manager is rotating the panel, return
         if (PanelManager.instance.currentState != PanelManager.instance.RotateOnInput)
@@ -22,9 +22,9 @@ public class ShapeRotator : MonoBehaviour
             return;
         }
 
-        // Rotate shape + 90 degrees on Y axis by pressing space
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
+       // // Rotate shape + 90 degrees on Y axis by pressing space
+      //  if (Input.GetKeyDown(KeyCode.Space))
+      //  {
             // increment rotationSide
             rotationSide++;
 
@@ -36,11 +36,11 @@ public class ShapeRotator : MonoBehaviour
 
             // Check rotationSide and update the rotation of the shape accordingly
             transform.rotation = Quaternion.Euler(transform.rotation.x, 90f * rotationSide, transform.rotation.z);
-        }
+      //  }
     }
 
     bool once = false;
-    // check the possibility that if shape rotates, it doesn't collide with any other shapes
+    // check the possibility that if shape rotates, it doesn't collide with any other shapes / bounds checks too
     public void IncrementRotationSide()
     {
         if (GetComponent<Shape>().currentState == GetComponent<Shape>().StopShape)
