@@ -383,4 +383,14 @@ public class Shape : MonoBehaviour
             }
         }
     }
+
+    // Force Slam
+    public void ForceSlam()
+    {
+        if (!CheckCollision(Vector3.down) && !PauseMenu.isPaused)
+        {
+            Time.timeScale = 15; // 'slam' aka speed up the piece (game)
+            PanelManager.instance.UpdateScore(1); // update score
+        }
+    }
 }
