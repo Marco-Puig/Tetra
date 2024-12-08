@@ -7,6 +7,7 @@ public class ShapeMobileInput : MonoBehaviour
     void Update()
     {
         FindActiveShape();
+        UpdateVisualPosition();
     }
 
     // Find the active shape (the shape that is currently falling aka in the drop state)
@@ -57,5 +58,13 @@ public class ShapeMobileInput : MonoBehaviour
     public void TriggerRotateInput()
     {
         activeShape.GetComponent<ShapeRotator>().RotateShape();
+    }    
+    
+    // Update Visual Position based on input
+    public void UpdateVisualPosition()
+    {
+        if (activeShape == null) return;
+        if (activeShape.currentState == activeShape.MoveOnly) return;
+        activeShape.GetComponent<ShapeVisual>().CalculateVisualPosition();
     }
 }

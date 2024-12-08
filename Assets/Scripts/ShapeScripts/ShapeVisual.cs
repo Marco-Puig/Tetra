@@ -42,7 +42,7 @@ public class ShapeVisual : MonoBehaviour
     }
 
     // NEEDS REWORKED TO BE MORE ROBUST - CURRENTLY A BRUTE FORCE METHOD
-    async void CalculateVisualPosition()
+    public async void CalculateVisualPosition()
     {
         if (start)
         {
