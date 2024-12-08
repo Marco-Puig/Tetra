@@ -77,7 +77,7 @@ public class ShapeMobileInput : MonoBehaviour
             return;
         }
         // if the slam action is not in progress, then clicking will start the slam action
-        activeShape.ForceSlam();
+        slamAction = activeShape.ForceSlam;
     }
     
     // Update Visual Position based on input
