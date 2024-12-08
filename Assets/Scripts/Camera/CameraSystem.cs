@@ -4,10 +4,13 @@ using System.Collections;
 public class CameraSystem : MonoBehaviour
 {
     Camera cam;
+    float startingHeight;
+    float height = 0;
 
     void Start()
     {
         cam = GetComponent<Camera>();
+        startingHeight = cam.transform.position.y;
     }
 
     void Update()
@@ -18,9 +21,8 @@ public class CameraSystem : MonoBehaviour
     // adjust camera's height based on shape count
     void DynamicHeight()
     {
-        float height = 5.51f; // starting height
         GameObject[] shapes = GameObject.FindGameObjectsWithTag("Shape");
-        height += shapes.Length / 120f;
+        height = startingHeight + (shapes.Length / 120f);
         cam.transform.position = new Vector3(cam.transform.position.x, height, cam.transform.position.z);
     }
 

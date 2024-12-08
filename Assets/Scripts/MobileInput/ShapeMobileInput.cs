@@ -26,7 +26,7 @@ public class ShapeMobileInput : MonoBehaviour
                 activeShape = shape.GetComponent<Shape>();
             }
         }
-
+        if (activeShape == null) return;
         if (activeShape.currentState == activeShape.StopShape)
         {
             activeShape = null;
@@ -57,6 +57,7 @@ public class ShapeMobileInput : MonoBehaviour
     // Mobile UI button rotate input method
     public void TriggerRotateInput()
     {
+        if (activeShape.GetComponent<ShapeRotator>() == null) return;
         activeShape.GetComponent<ShapeRotator>().RotateShape();
     }    
     
