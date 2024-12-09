@@ -75,4 +75,15 @@ public class MenuManager : MonoBehaviour
     {
         Application.Quit();
     }
+
+    public void hideControls(bool hide)
+    {
+        if (hide)
+        {
+            PlayerPrefs.SetInt("hideControls", 1);
+            return;
+        }
+
+        PlayerPrefs.SetInt("hideControls", 0);
+    }
 }

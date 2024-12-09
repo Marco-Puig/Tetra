@@ -1,11 +1,16 @@
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ShapeMobileInput : MonoBehaviour
 {
+    [SerializeField] GameObject[] controlButtons;
     Shape activeShape;
     Action slamAction;
-    
+    void Start()
+    {
+        SyncSettings();
+    }
     void Update()
     {
         FindActiveShape();
@@ -90,5 +95,18 @@ public class ShapeMobileInput : MonoBehaviour
         if (activeShape == null) return;
         if (activeShape.currentState == activeShape.MoveOnly) return;
         activeShape.GetComponent<ShapeVisual>().CalculateVisualPosition();
+    }
+
+    // Sync the settings of the mobile input
+    public void SyncSettings()
+    {
+        if (PlayerPrefs.GetInt("hideControls") == 1)
+        {
+            foreach (GameObject button in controlButtons)
+            {
+                // set alpha to zero
+                button.GetComponent<Image>().color = new Color(1, 1, 1, 0);
+            }
+        }
     }
 }
