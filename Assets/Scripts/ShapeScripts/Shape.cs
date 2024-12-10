@@ -32,10 +32,10 @@ public class Shape : MonoBehaviour
 
     // Move Cube
     void Update()
-    {
+    {        
+        HandleOpacity();
         if (PanelManager.instance.currentState != PanelManager.instance.RotateOnInput) return;
         if (currentState != null) currentState.Invoke();
-        HandleOpacity();
     }
 
     // Command Pattern for Handing Shape Movement - Emulating DPad GB-Like Movement
@@ -347,7 +347,7 @@ public class Shape : MonoBehaviour
         float distance = Vector3.Distance(Camera.main.transform.position, shapeTransform.position);
 
         // get opacity based on distance
-        float opacity = distance * 0.08f;
+        float opacity = distance * 0.045f;
 
         // set opacity of cube material
         cubeMat.color = new Color(cubeMat.color.r, cubeMat.color.g, cubeMat.color.b, opacity);

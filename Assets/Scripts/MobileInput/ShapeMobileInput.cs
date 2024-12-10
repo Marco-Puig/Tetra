@@ -45,32 +45,27 @@ public class ShapeMobileInput : MonoBehaviour
     // Mobile UI button input methods
     public void TriggerRightInput()
     {
-        if (PanelManager.instance.currentState != PanelManager.instance.RotateOnInput) return;
         activeShape.directionsBool[0] = true;
     }
 
     public void TriggerLeftInput()
     {
-        if (PanelManager.instance.currentState != PanelManager.instance.RotateOnInput) return;
         activeShape.directionsBool[1] = true;
     }
 
     public void TriggerUpInput()
     {
-        if (PanelManager.instance.currentState != PanelManager.instance.RotateOnInput) return;
         activeShape.directionsBool[2] = true;
     }
 
     public void TriggerDownInput()
     {
-        if (PanelManager.instance.currentState != PanelManager.instance.RotateOnInput) return;
         activeShape.directionsBool[3] = true;
     }
 
     // Mobile UI button rotate input method
     public void TriggerRotateInput()
     {
-        if (PanelManager.instance.currentState != PanelManager.instance.RotateOnInput) return;
         if (activeShape.GetComponent<ShapeRotator>() == null) return;
         activeShape.GetComponent<ShapeRotator>().RotateShape();
     }    
@@ -78,7 +73,6 @@ public class ShapeMobileInput : MonoBehaviour
     // Mobile UI button slam input method
     public void TriggerSlamInput()
     {
-        if (PanelManager.instance.currentState != PanelManager.instance.RotateOnInput) return;
         // if the slam action is already in progress, then clicking again will cancel the slam action
         if (slamAction != null)
         {
