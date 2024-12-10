@@ -1,6 +1,5 @@
 using System;
 using System.Threading.Tasks;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class ShapeVisual : MonoBehaviour
@@ -38,6 +37,12 @@ public class ShapeVisual : MonoBehaviour
             {
                 visualshape.transform.rotation = transform.rotation;
             }
+        }
+
+        // ensure proper cleanup of visual cube when shape is no longer active
+        if (GetComponent<Shape>().currentState == GetComponent<Shape>().MoveOnly)
+        {
+            Destroy(visualshape);
         }
     }
 

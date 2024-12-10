@@ -109,4 +109,22 @@ public class ShapeMobileInput : MonoBehaviour
             }
         }
     }
+
+    // Disable the mobile input
+    public void DisableMobileInput()
+    {
+        foreach (GameObject button in controlButtons)
+        {
+            button.SetActive(false);
+        }
+    }
+
+    // Enable the mobile input
+    public void EnableMobileInput()
+    {
+        foreach (GameObject button in controlButtons)
+        {
+            button.SetActive(true);
+        }
+    }
 }

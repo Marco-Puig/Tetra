@@ -33,6 +33,7 @@ public class Shape : MonoBehaviour
     // Move Cube
     void Update()
     {
+        if (PanelManager.instance.currentState != PanelManager.instance.RotateOnInput) return;
         if (currentState != null) currentState.Invoke();
         HandleOpacity();
     }
@@ -242,7 +243,7 @@ public class Shape : MonoBehaviour
         // move cube down every second
         if ((time * Time.deltaTime) >= dropRate)
         {
-            shapeTransform.localPosition += Vector3.down;
+            shapeTransform.position += Vector3.down;
             time = 0;
         }
 

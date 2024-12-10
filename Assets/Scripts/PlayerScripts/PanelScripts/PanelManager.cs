@@ -5,15 +5,18 @@ using System.Threading.Tasks;
 public class PanelManager : MonoBehaviour // panel manager is a game manager but for a player instance
 {
     [Header("Panel Manager")]
-    [SerializeField]
-    float rotationRate = 120.0f;
+    [SerializeField] float rotationRate = 120.0f;
 
     [HideInInspector] int score = 0;
-    [SerializeField] TMP_Text scoreText;
+    [SerializeField] TMP_Text scoreText;   
+
+    [Header("Dependencies")] 
+    [SerializeField] ShapeMobileInput shapeMobileInput;
 
     Transform panelTransform;
     public delegate void State();
-    public State currentState;
+    public State currentState; // binary state machine - either rotating or not rotating
+
     private float rotatedAmount;
     GameObject fallingShape;
 
@@ -71,6 +74,8 @@ public class PanelManager : MonoBehaviour // panel manager is a game manager but
     // smooth rotation
     public void RotatePanel(Vector3 direction)
     {
+        // disable controls while rotating
+        shapeMobileInput.DisableMobileInput();
         // increment the rotation amount
         rotatedAmount += Mathf.Abs(direction.y * Time.deltaTime * rotationRate);
 
@@ -80,6 +85,7 @@ public class PanelManager : MonoBehaviour // panel manager is a game manager but
             rotatedAmount = 0;
             currentState = RotateOnInput;
             fallingShape.GetComponent<Shape>().HandleShapeSides((int)direction.y);  // handle shape sides
+            shapeMobileInput.EnableMobileInput(); // re-enable controls
         }
 
         // if it hasnt rotated 90 degrees, rotate the panel
@@ -92,7 +98,8 @@ public class PanelManager : MonoBehaviour // panel manager is a game manager but
         for (int i = 0; i < totalScore; i++)
         {
             score++;
-            scoreText.text = "Score " + score.ToString();
+            //scoreText.text = "Score " + score.ToString();
+            scoreText.text = score.ToString();
             await Task.Delay(1);
         }
 

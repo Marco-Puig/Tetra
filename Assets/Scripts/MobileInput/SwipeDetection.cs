@@ -25,7 +25,7 @@ public class Swipe_Controller : MonoBehaviour
             endTouchPos = Input.GetTouch(0).position;
 
 			// ensure that the swipe is long enough to be considered a swipe
-			if (Vector2.Distance(startTouchPos, endTouchPos) < 50)
+			if (Vector2.Distance(startTouchPos, endTouchPos) < 50f)
 			{
 				return;
 			}
