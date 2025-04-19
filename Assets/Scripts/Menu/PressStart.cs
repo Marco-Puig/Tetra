@@ -28,11 +28,12 @@ public class PressStart : MonoBehaviour
         if (Input.anyKey)
         {
             state = MenuAnimation;
+            GetComponent<MenuManager>().StartGame();
 
             // hide and show elements respectively
             foreach (GameObject element in showElements)
             {
-                element.SetActive(true);
+                //element.SetActive(true);
                 element.transform.position = Vector3.Lerp(element.transform.position, new Vector3(element.transform.position.x, 900f, element.transform.position.z), 1.25f * Time.deltaTime);
             }
             foreach (GameObject element in hideElements)
